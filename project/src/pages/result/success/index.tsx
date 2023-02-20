@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { AppRoute } from '../../../settings';
+
 
 const SuccessScreen = () => (
   <section className="result">
     <div className="result-logout__wrapper">
-      <a className="result-logout__link" href="#">Выход</a>
+      <Link className="result-logout__link" to={AppRoute.ROOT}>Выход</Link>
     </div>
     <div className="result__logo">
       <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
