@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import App from './components/app/app';
+
+import { AuthorizationStatus } from './settings';
 
 const ERRORS_COUNT = 3;
 
@@ -12,6 +15,7 @@ root.render(
   <React.StrictMode>
     <App
       errorsCount={ERRORS_COUNT}
+      authorizationStatus={AuthorizationStatus.AUTH}
     />
   </React.StrictMode>,
 );
