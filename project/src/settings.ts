@@ -3,9 +3,7 @@ export enum AppRoute {
   LOSE = '/lose',
   RESULT = '/result',
   ROOT = '/',
-  // NOTE: Temporary routes
-  ARTIST = '/artist',
-  GENRE = '/genre'
+  GAME = '/game',
 }
 
 export enum AuthorizationStatus {
@@ -13,3 +11,10 @@ export enum AuthorizationStatus {
   NO_AUTH = 'no-auth',
   UNKNOWN = 'unknown'
 }
+
+export enum GameType {
+  ARTIST = 'artist',
+  GENRE = 'genre'
+}
+
+export const MAX_ERRORS_COUNT = 3;
