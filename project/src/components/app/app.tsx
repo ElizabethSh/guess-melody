@@ -5,35 +5,35 @@ import {
   Routes
 } from 'react-router-dom';
 
-import ArtistQuestion from '../../pages/question/artist';
-import GenreQuestion from '../../pages/question/genre';
+import GameScreen from '../../pages/game';
 import Login from '../../pages/login';
 import LoseScreen from '../../pages/result/lose';
 import NotFoundPage from '../../pages/not-found';
-import SuccessScreen from '../../pages/result/success';
 import WelcomeScreen from '../../pages/welcome-screen';
+import WinScreen from '../../pages/result/win';
 
 import { AppRoute, AuthorizationStatus } from '../../settings';
+import { Questions } from '../../types/question';
 
 
 type AppProps = {
-  errorsCount: number,
-  authorizationStatus: AuthorizationStatus
+  authorizationStatus: AuthorizationStatus;
+  errorsCount: number;
+  questions: Questions;
 };
 
 
-function App({errorsCount, authorizationStatus}: AppProps): JSX.Element {
+function App({errorsCount, authorizationStatus, questions}: AppProps): JSX.Element {
   let routes = [
     <Route path={AppRoute.ROOT} key='root' element={<WelcomeScreen errorsCount={errorsCount} />} />,
-    <Route path={AppRoute.ARTIST} key='artist-question' element={<ArtistQuestion />} />,
-    <Route path={AppRoute.GENRE} key='genre-question' element={<GenreQuestion />} />,
+    <Route path={AppRoute.GAME} key='game' element={<GameScreen questions={questions} />} />,
     <Route path={AppRoute.LOSE} key='result-lose' element={<LoseScreen />} />,
     <Route path="*" key='not-found' element={<NotFoundPage />} />
   ];
 
   if (authorizationStatus === AuthorizationStatus.AUTH) {
     routes = routes.concat([
-      <Route path={AppRoute.RESULT} key='result-win' element={<SuccessScreen />} />,
+      <Route path={AppRoute.RESULT} key='result-win' element={<WinScreen />} />,
       <Route path={AppRoute.LOGIN} key='login-navigate' element={<Navigate replace to={AppRoute.ROOT} />} />,
     ]);
   } else {
