@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 
 import App from './components/app/app';
 
-import { AuthorizationStatus } from './settings';
+import { AuthorizationStatus, MAX_ERRORS_COUNT } from './settings';
+import {questions} from './mocks/questions';
 
-const ERRORS_COUNT = 3;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,8 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      errorsCount={ERRORS_COUNT}
       authorizationStatus={AuthorizationStatus.AUTH}
+      errorsCount={MAX_ERRORS_COUNT}
+      questions={questions}
     />
   </React.StrictMode>,
 );
