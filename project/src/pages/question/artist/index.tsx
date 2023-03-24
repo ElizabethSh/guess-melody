@@ -1,62 +1,78 @@
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
 
 import Logo from '../../../components/logo/logo';
 
-const ArtistQuestion = () => (
-  <section className="game game--artist">
-    <header className="game__header">
-      <Logo />
-      <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-        <circle className="timer__line" cx="390" cy="390" r="370"
-          style={{ filter: 'url(#blur)', transform: 'rotate(-90deg) scaleY(-1)', transformOrigin: 'center' }}
-        />
-      </svg>
+import { ArtistQuestion, UserArtistQuestionAnswer } from '../../../types/question';
 
-      <div className="game__mistakes">
-        <div className="wrong"></div>
-        <div className="wrong"></div>
-        <div className="wrong"></div>
-      </div>
-    </header>
 
-    <section className="game__screen">
-      <h2 className="game__title">Кто исполняет эту песню?</h2>
-      <div className="game__track">
-        <div className="track">
-          <button className="track__button track__button--play" type="button"></button>
-          <div className="track__status">
-            <audio></audio>
+type ArtistQuestionScreenProps = {
+  question: ArtistQuestion;
+  onAnswerClick: (question: ArtistQuestion, userAnswer: UserArtistQuestionAnswer) => void;
+}
+
+
+const ArtistQuestionScreen = ({question, onAnswerClick}: ArtistQuestionScreenProps): JSX.Element => {
+  const {answers, song} = question;
+  const [userAnswer, setUserAnswer] = useState('');
+
+  return (
+    <section className="game game--artist">
+      <header className="game__header">
+        <Logo />
+        <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
+          <circle className="timer__line" cx="390" cy="390" r="370"
+            style={{ filter: 'url(#blur)', transform: 'rotate(-90deg) scaleY(-1)', transformOrigin: 'center' }}
+          />
+        </svg>
+
+        <div className="game__mistakes">
+          <div className="wrong"></div>
+          <div className="wrong"></div>
+          <div className="wrong"></div>
+        </div>
+      </header>
+
+      <section className="game__screen">
+        <h2 className="game__title">Кто исполняет эту песню?</h2>
+        <div className="game__track">
+          <div className="track">
+            <button className="track__button track__button--play" type="button"></button>
+            <div className="track__status">
+              <audio src={song.src} />
+            </div>
           </div>
         </div>
-      </div>
 
-      <form className="game__artist">
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1" />
-          <label className="artist__name" htmlFor="answer-1">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-            Пелагея
-          </label>
-        </div>
-
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-2" id="answer-2" />
-          <label className="artist__name" htmlFor="answer-2">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-            Краснознаменная дивизия имени моей бабушки
-          </label>
-        </div>
-
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-3" id="answer-3" />
-          <label className="artist__name" htmlFor="answer-3">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-            Lorde
-          </label>
-        </div>
-      </form>
+        <form className="game__artist">
+          {
+            answers.map((answer, index) => {
+              const {artist, picture} = answer;
+              const key = `${artist}-${index}`; // TODO: change it after getting data from server
+              return (
+                <div className="artist" key={key}>
+                  <input
+                    className="artist__input visually-hidden"
+                    id="answer-1"
+                    name="answer"
+                    onChange={(evt: FormEvent<HTMLInputElement>) => {
+                      evt.preventDefault();
+                      onAnswerClick(question, userAnswer);
+                    }}
+                    type="radio"
+                    value="artist-1"
+                  />
+                  <label className="artist__name" htmlFor="answer-1">
+                    <img className="artist__picture" src={picture} alt={artist} />
+                    {artist}
+                  </label>
+                </div>
+              );
+            })
+          }
+        </form>
+      </section>
     </section>
-  </section>
-);
+  );
+};
 
-export default ArtistQuestion;
+export default ArtistQuestionScreen;
