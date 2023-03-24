@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../settings';
 
 
-const SuccessScreen = () => (
+const WinScreen = (): JSX.Element => (
   <section className="result">
     <div className="result-logout__wrapper">
       <Link className="result-logout__link" to={AppRoute.ROOT}>Выход</Link>
@@ -20,4 +20,4 @@ const SuccessScreen = () => (
   </section>
 );
 
-export default SuccessScreen;
+export default WinScreen;
