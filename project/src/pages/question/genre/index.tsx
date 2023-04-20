@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from 'react';
+import AudioPlayer from '../../../components/audio-player';
 
 import Logo from '../../../components/logo/logo';
 
@@ -48,13 +49,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
               const key = `${answer.genre}-${idx}`; // TODO: change it after getting data from server
               return (
                 <div className="track" key={key}>
-                  <button className="track__button track__button--play" type="button" />
-                  <div className="track__status">
-                    {/* TODO: audio doesn't work yet */}
-                    <audio
-                      src={answer.src}
-                    />
-                  </div>
+                  <AudioPlayer src={answer.src} />
                   <div className="game__answer">
                     <input
                       className="game__input visually-hidden"
