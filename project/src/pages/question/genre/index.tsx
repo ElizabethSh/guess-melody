@@ -16,6 +16,9 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
   const {question, onAnswerClick} = props;
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
 
+  // TODO: the first melody should play automatically but browser don't allow that
+  const [activePlayer, setActivePlayer] = useState(-1);
+
   const {answers, genre } = question;
   return (
     <section className="game game--genre">
@@ -49,7 +52,11 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
               const key = `${answer.genre}-${idx}`; // TODO: change it after getting data from server
               return (
                 <div className="track" key={key}>
-                  <AudioPlayer src={answer.src} />
+                  <AudioPlayer
+                    isPlaying={activePlayer === idx}
+                    onPlayAudioClick={() => setActivePlayer(idx === activePlayer ? -1 : idx)}
+                    src={answer.src}
+                  />
                   <div className="game__answer">
                     <input
                       className="game__input visually-hidden"
@@ -57,7 +64,6 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
                       name="answer"
                       type="checkbox"
                       value={answer.genre}
-                      // onChange={}
                     />
                     <label className="game__check" htmlFor={`answer-${idx}`}>Отметить</label>
                   </div>

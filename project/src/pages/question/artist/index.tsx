@@ -15,6 +15,11 @@ type ArtistQuestionScreenProps = {
 const ArtistQuestionScreen = ({question, onAnswerClick}: ArtistQuestionScreenProps): JSX.Element => {
   const {answers, song} = question;
   const [userAnswer, setUserAnswer] = useState('');
+  const [isPlaying, setIsPlaing] = useState(false);
+
+  const playAudioHandler = () => {
+    setIsPlaing((prev) => !prev);
+  };
 
   return (
     <section className="game game--artist">
@@ -37,7 +42,11 @@ const ArtistQuestionScreen = ({question, onAnswerClick}: ArtistQuestionScreenPro
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <AudioPlayer src={song.src} autoplay />
+            <AudioPlayer
+              isPlaying={isPlaying}
+              src={song.src}
+              onPlayAudioClick={playAudioHandler}
+            />
           </div>
         </div>
 
