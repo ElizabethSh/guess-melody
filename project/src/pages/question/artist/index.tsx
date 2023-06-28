@@ -1,25 +1,20 @@
 import React, { FormEvent, useState } from 'react';
 
-import AudioPlayer from '../../../components/audio-player';
 import Logo from '../../../components/logo/logo';
 
 import { ArtistQuestion, UserArtistQuestionAnswer } from '../../../types/question';
 
 
 type ArtistQuestionScreenProps = {
-  question: ArtistQuestion;
   onAnswerClick: (question: ArtistQuestion, userAnswer: UserArtistQuestionAnswer) => void;
+  question: ArtistQuestion;
+  renderPlayer: (src: string, idx: number) => JSX.Element;
 }
 
 
-const ArtistQuestionScreen = ({question, onAnswerClick}: ArtistQuestionScreenProps): JSX.Element => {
+const ArtistQuestionScreen = ({question, onAnswerClick, renderPlayer}: ArtistQuestionScreenProps): JSX.Element => {
   const {answers, song} = question;
   const [userAnswer, setUserAnswer] = useState('');
-  const [isPlaying, setIsPlaing] = useState(false);
-
-  const playAudioHandler = () => {
-    setIsPlaing((prev) => !prev);
-  };
 
   return (
     <section className="game game--artist">
@@ -42,11 +37,8 @@ const ArtistQuestionScreen = ({question, onAnswerClick}: ArtistQuestionScreenPro
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <AudioPlayer
-              isPlaying={isPlaying}
-              src={song.src}
-              onPlayAudioClick={playAudioHandler}
-            />
+            {/* TODO: browser doesn't allow to play song automatically */}
+            {renderPlayer(song.src, -1)}
           </div>
         </div>
 

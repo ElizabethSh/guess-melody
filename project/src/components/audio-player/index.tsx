@@ -9,7 +9,7 @@ type AudioPlayerProps = {
 
 const AudioPlayer = ({src, isPlaying, onPlayAudioClick}: AudioPlayerProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (!audioRef.current) {
