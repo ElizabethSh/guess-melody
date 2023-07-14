@@ -7,6 +7,11 @@ import GenreQuestionScreen from '../question/genre';
 import { ArtistQuestion, GenreQuestion, Questions } from '../../types/question';
 import { AppRoute, GameType } from '../../settings';
 
+import withAudioPlayer from '../../hocs/with-audio-player';
+
+const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
+const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
+
 
 type GameScreenProps = {
   questions: Questions;
@@ -34,7 +39,7 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
 
     case GameType.ARTIST:
       return (
-        <ArtistQuestionScreen
+        <ArtistQuestionScreenWrapped
           question={question as ArtistQuestion}
           onAnswerClick={() => answerClickHandler(step)}
         />
@@ -42,7 +47,7 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
 
     case GameType.GENRE:
       return (
-        <GenreQuestionScreen
+        <GenreQuestionScreenWrapped
           question={question as GenreQuestion}
           onAnswerClick={() => answerClickHandler(step)}
         />

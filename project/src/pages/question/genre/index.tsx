@@ -8,14 +8,15 @@ import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question'
 type GenreQuestionProps = {
   question: GenreQuestion;
   onAnswerClick: (question: GenreQuestion, userAnswers: UserGenreQuestionAnswer ) => void;
+  renderPlayer: (src: string, idx: number) => JSX.Element;
 };
 
 
 const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
-  const {question, onAnswerClick} = props;
+  const {question, onAnswerClick, renderPlayer} = props;
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
-
   const {answers, genre } = question;
+
   return (
     <section className="game game--genre">
       <header className="game__header">
@@ -48,13 +49,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
               const key = `${answer.genre}-${idx}`; // TODO: change it after getting data from server
               return (
                 <div className="track" key={key}>
-                  <button className="track__button track__button--play" type="button" />
-                  <div className="track__status">
-                    {/* TODO: audio doesn't work yet */}
-                    <audio
-                      src={answer.src}
-                    />
-                  </div>
+                  {renderPlayer(answer.src, idx)}
                   <div className="game__answer">
                     <input
                       className="game__input visually-hidden"
@@ -62,7 +57,6 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
                       name="answer"
                       type="checkbox"
                       value={answer.genre}
-                      // onChange={}
                     />
                     <label className="game__check" htmlFor={`answer-${idx}`}>Отметить</label>
                   </div>

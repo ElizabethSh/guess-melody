@@ -6,12 +6,13 @@ import { ArtistQuestion, UserArtistQuestionAnswer } from '../../../types/questio
 
 
 type ArtistQuestionScreenProps = {
-  question: ArtistQuestion;
   onAnswerClick: (question: ArtistQuestion, userAnswer: UserArtistQuestionAnswer) => void;
+  question: ArtistQuestion;
+  renderPlayer: (src: string, idx: number) => JSX.Element;
 }
 
 
-const ArtistQuestionScreen = ({question, onAnswerClick}: ArtistQuestionScreenProps): JSX.Element => {
+const ArtistQuestionScreen = ({question, onAnswerClick, renderPlayer}: ArtistQuestionScreenProps): JSX.Element => {
   const {answers, song} = question;
   const [userAnswer, setUserAnswer] = useState('');
 
@@ -36,10 +37,8 @@ const ArtistQuestionScreen = ({question, onAnswerClick}: ArtistQuestionScreenPro
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <button className="track__button track__button--play" type="button"></button>
-            <div className="track__status">
-              <audio src={song.src} />
-            </div>
+            {/* NOTE: browser doesn't allow to play a song automatically */}
+            {renderPlayer(song.src, -1)}
           </div>
         </div>
 
