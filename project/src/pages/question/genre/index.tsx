@@ -1,5 +1,4 @@
 import React, { FormEvent, useState } from 'react';
-import AudioPlayer from '../../../components/audio-player';
 
 import Logo from '../../../components/logo/logo';
 
@@ -9,17 +8,15 @@ import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question'
 type GenreQuestionProps = {
   question: GenreQuestion;
   onAnswerClick: (question: GenreQuestion, userAnswers: UserGenreQuestionAnswer ) => void;
+  renderPlayer: (src: string, idx: number) => JSX.Element;
 };
 
 
 const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
-  const {question, onAnswerClick} = props;
+  const {question, onAnswerClick, renderPlayer} = props;
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
-
-  // TODO: the first melody should play automatically but browser don't allow that
-  const [activePlayer, setActivePlayer] = useState(-1);
-
   const {answers, genre } = question;
+
   return (
     <section className="game game--genre">
       <header className="game__header">
@@ -52,11 +49,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
               const key = `${answer.genre}-${idx}`; // TODO: change it after getting data from server
               return (
                 <div className="track" key={key}>
-                  <AudioPlayer
-                    isPlaying={activePlayer === idx}
-                    onPlayAudioClick={() => setActivePlayer(idx === activePlayer ? -1 : idx)}
-                    src={answer.src}
-                  />
+                  {renderPlayer(answer.src, idx)}
                   <div className="game__answer">
                     <input
                       className="game__input visually-hidden"
