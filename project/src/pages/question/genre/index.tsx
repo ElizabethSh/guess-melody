@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 
 import Logo from '../../../components/logo/logo';
+import Mistakes from '../../../components/mistakes/mistakes';
 
 import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question';
 
@@ -28,11 +29,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
           />
         </svg>
 
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Mistakes />
       </header>
 
       <section className="game__screen">

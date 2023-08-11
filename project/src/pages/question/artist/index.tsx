@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 
 import Logo from '../../../components/logo/logo';
+import Mistakes from '../../../components/mistakes/mistakes';
 
 import { ArtistQuestion, UserArtistQuestionAnswer } from '../../../types/question';
 
@@ -26,11 +27,7 @@ const ArtistQuestionScreen = ({question, onAnswerClick, renderPlayer}: ArtistQue
           />
         </svg>
 
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Mistakes />
       </header>
 
       <section className="game__screen">
