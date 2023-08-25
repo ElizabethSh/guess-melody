@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
 
 import { AppRoute } from '../../settings';
+import { resetGame } from '../../store/actions/game';
 
 type WelcomeScreenProps = {
   errorsCount: number
@@ -10,6 +12,7 @@ type WelcomeScreenProps = {
 
 const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <section className="welcome">
@@ -18,7 +21,10 @@ const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
       </div>
       <button
         className="welcome__button"
-        onClick={() => navigate(AppRoute.GAME)}
+        onClick={() => {
+          dispatch(resetGame);
+          navigate(AppRoute.GAME);
+        }}
       >
         <span className="visually-hidden">Начать игру</span>
       </button>

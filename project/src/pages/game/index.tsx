@@ -8,6 +8,8 @@ import { ArtistQuestion, GenreQuestion, Questions } from '../../types/question';
 import { AppRoute, GameType } from '../../settings';
 
 import withAudioPlayer from '../../hocs/with-audio-player';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { incrementStep } from '../../store/actions/game';
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
@@ -19,7 +21,9 @@ type GameScreenProps = {
 
 
 const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
-  const [step, setStep] = useState(0);
+  const step = useAppSelector((state) => state.step);
+
+  const dispatch = useAppDispatch();
 
   // NOTE: if we don't have questions we send user to the main page
   // TODO: we should check mistakes count and send user
@@ -27,11 +31,6 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
   if (!questions.length || questions.length <= step) {
     return (<Navigate to={AppRoute.ROOT} />);
   }
-
-  // TODO: should check if answer is correct
-  const answerClickHandler = (prevStep: number): void => {
-    setStep(prevStep + 1);
-  };
 
   const question = questions[step];
 
@@ -41,7 +40,7 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
       return (
         <ArtistQuestionScreenWrapped
           question={question as ArtistQuestion}
-          onAnswerClick={() => answerClickHandler(step)}
+          onAnswerClick={() => dispatch(incrementStep)}
         />
       );
 
@@ -49,7 +48,7 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
       return (
         <GenreQuestionScreenWrapped
           question={question as GenreQuestion}
-          onAnswerClick={() => answerClickHandler(step)}
+          onAnswerClick={() => dispatch(incrementStep)}
         />
       );
 
