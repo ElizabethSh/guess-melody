@@ -17,4 +17,5 @@ export enum GameType {
   GENRE = 'genre'
 }
 
+export const FIRST_GAME_STEP = 0;
 export const MAX_ERRORS_COUNT = 3;
