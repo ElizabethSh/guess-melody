@@ -40,7 +40,7 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
       return (
         <ArtistQuestionScreenWrapped
           question={question as ArtistQuestion}
-          onAnswerClick={() => dispatch(incrementStep)}
+          onAnswerClick={() => dispatch(incrementStep())}
         />
       );
 
@@ -48,7 +48,7 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
       return (
         <GenreQuestionScreenWrapped
           question={question as GenreQuestion}
-          onAnswerClick={() => dispatch(incrementStep)}
+          onAnswerClick={() => dispatch(incrementStep())}
         />
       );
 
