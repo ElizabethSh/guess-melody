@@ -1,6 +1,6 @@
-import {ComponentType} from 'react';
-import { useState } from 'react';
+import {ComponentType, useState} from 'react';
 import AudioPlayer from '../components/audio-player';
+
 
 type withAudioPlayerProps = {
   renderPlayer: (src: string, idx: number) => void;

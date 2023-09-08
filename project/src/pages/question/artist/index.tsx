@@ -34,8 +34,8 @@ const ArtistQuestionScreen = ({question, onAnswerClick, renderPlayer}: ArtistQue
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            {/* NOTE: browser doesn't allow to play a song automatically */}
-            {renderPlayer(song.src, -1)}
+            {/* NOTE: don't to play song automatically */}
+            {renderPlayer(song.src, 0)}
           </div>
         </div>
 
