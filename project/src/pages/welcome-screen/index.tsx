@@ -22,7 +22,7 @@ const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
       <button
         className="welcome__button"
         onClick={() => {
-          dispatch(resetGame);
+          dispatch(resetGame());
           navigate(AppRoute.GAME);
         }}
       >
