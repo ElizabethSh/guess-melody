@@ -7,7 +7,7 @@ import { ArtistQuestion, UserArtistQuestionAnswer } from '../../../types/questio
 
 
 type ArtistQuestionScreenProps = {
-  onAnswerClick: (question: ArtistQuestion, userAnswer: UserArtistQuestionAnswer) => void;
+  onAnswerClick: () => void;
   question: ArtistQuestion;
   renderPlayer: (src: string, idx: number) => JSX.Element;
 }
@@ -52,7 +52,7 @@ const ArtistQuestionScreen = ({question, onAnswerClick, renderPlayer}: ArtistQue
                     name="answer"
                     onChange={(evt: FormEvent<HTMLInputElement>) => {
                       evt.preventDefault();
-                      onAnswerClick(question, userAnswer);
+                      onAnswerClick();
                     }}
                     type="radio"
                     value="artist-1"

@@ -8,7 +8,7 @@ import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question'
 
 type GenreQuestionProps = {
   question: GenreQuestion;
-  onAnswerClick: (question: GenreQuestion, userAnswers: UserGenreQuestionAnswer ) => void;
+  onAnswerClick: () => void;
   renderPlayer: (src: string, idx: number) => JSX.Element;
 };
 
@@ -38,7 +38,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
           className="game__tracks"
           onSubmit={(evt: FormEvent<HTMLFormElement>) => {
             evt.preventDefault();
-            onAnswerClick(question, userAnswers);
+            onAnswerClick();
           }}
         >
           {
