@@ -32,4 +32,4 @@ export type Questions = Question[];
 
 export type UserGenreQuestionAnswer = readonly (boolean | string) [];
 
-export type UserArtistQuestionAnswer = string;
+// export type UserArtistQuestionAnswer = string;

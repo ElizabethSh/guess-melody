@@ -72,6 +72,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
                       type="checkbox"
                       value={answer.genre}
                       onChange={() => {
+                        // TODO: check if it should be evt.value instead of answer.genre
                         setUserAnswers([...userAnswers.slice(0, idx), answer.genre, ...userAnswers.slice(idx + 1)]);
                       }}
                     />
@@ -81,7 +82,11 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
               );
             })
           }
-          <button className="game__submit button" type="submit">Ответить</button>
+          {/* TODO: disable button if nothing is selected */}
+          <button
+            className="game__submit button"
+            type="submit"
+          >Ответить</button>
         </form>
       </section>
     </section>
