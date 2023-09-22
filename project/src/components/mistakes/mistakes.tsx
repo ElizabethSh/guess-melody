@@ -7,7 +7,9 @@ const Mistakes = () => {
 
   return (
     <div className="game__mistakes">
-      {!!mistakes.length && mistakes.map((mistake, index) => (<div className="wrong" key={index}></div>))}
+      {!!mistakes.length && mistakes.map((mistake, index) => (
+        <div className="wrong" key={`${index - mistake}`} />
+      ))}
     </div>
   );
 

@@ -18,9 +18,11 @@ const LoseScreen = (): JSX.Element => {
         className="replay"
         type="button"
         onClick={() => navigate(AppRoute.ROOT)}
-      >Попробовать ещё раз</button>
+      >
+        Попробовать ещё раз
+      </button>
     </section>
-  )
+  );
 };
 
 export default LoseScreen;

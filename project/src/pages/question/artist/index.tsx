@@ -13,9 +13,7 @@ type ArtistQuestionScreenProps = {
   renderPlayer: (src: string, idx: number) => JSX.Element;
 }
 
-const formatString = (string: string) => {
-  return string.toLowerCase().replace(/\s/g, "")
-}
+const formatString = (string: string) => string.toLowerCase().replace(/\s/g, '');
 
 
 const ArtistQuestionScreen = (props: ArtistQuestionScreenProps): JSX.Element => {
@@ -68,7 +66,7 @@ const ArtistQuestionScreen = (props: ArtistQuestionScreenProps): JSX.Element => 
                     name="answer"
                     onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                       evt.preventDefault();
-                      onAnswerClick(evt.target.value)
+                      onAnswerClick(evt.target.value);
                     }}
                     type="radio"
                     value={artist}
