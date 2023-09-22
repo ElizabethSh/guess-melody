@@ -2,21 +2,38 @@ import React, { FormEvent, useState } from 'react';
 
 import Logo from '../../../components/logo/logo';
 import Mistakes from '../../../components/mistakes/mistakes';
+import { useAppDispatch } from '../../../hooks';
+import { incrementMistakes, incrementStep } from '../../../store/actions/game';
 
 import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question';
 
 
 type GenreQuestionProps = {
   question: GenreQuestion;
-  onAnswerClick: () => void;
   renderPlayer: (src: string, idx: number) => JSX.Element;
 };
 
 
 const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
-  const {question, onAnswerClick, renderPlayer} = props;
-  const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
+  const {question, renderPlayer} = props;
+  const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>([false, false, false, false]);
+  const dispatch = useAppDispatch();
   const {answers, genre } = question;
+
+  const onSubmitClick = (evt: FormEvent<HTMLFormElement>, genre: string) => {
+    evt.preventDefault();
+    const is_answer_correct = userAnswers
+      .filter((answer) => typeof answer === 'string')
+      .every((answer) => answer === genre);
+
+    if (is_answer_correct) {
+      dispatch(incrementStep());
+    } else {
+      dispatch(incrementMistakes());
+      dispatch(incrementStep());
+    }
+  };
+
 
   return (
     <section className="game game--genre">
@@ -37,8 +54,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
         <form
           className="game__tracks"
           onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-            evt.preventDefault();
-            onAnswerClick();
+            onSubmitClick(evt, genre);
           }}
         >
           {
@@ -50,10 +66,14 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
                   <div className="game__answer">
                     <input
                       className="game__input visually-hidden"
+                      checked={Boolean(userAnswers[idx])}
                       id={`answer-${idx}`}
                       name="answer"
                       type="checkbox"
                       value={answer.genre}
+                      onChange={() => {
+                        setUserAnswers([...userAnswers.slice(0, idx), answer.genre, ...userAnswers.slice(idx + 1)]);
+                      }}
                     />
                     <label className="game__check" htmlFor={`answer-${idx}`}>Отметить</label>
                   </div>

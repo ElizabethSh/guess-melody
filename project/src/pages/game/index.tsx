@@ -48,7 +48,6 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
       return (
         <GenreQuestionScreenWrapped
           question={question as GenreQuestion}
-          onAnswerClick={() => dispatch(incrementStep())}
         />
       );
 
