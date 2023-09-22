@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 import ArtistQuestionScreen from '../question/artist';
 import GenreQuestionScreen from '../question/genre';
+import LoseScreen from '../result/lose';
+import WinScreen from '../result/win';
 
 import { ArtistQuestion, GenreQuestion, Questions } from '../../types/question';
-import { AppRoute, GameType } from '../../settings';
+import { AppRoute, GameType, MAX_ERRORS_COUNT } from '../../settings';
 
 import withAudioPlayer from '../../hocs/with-audio-player';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { incrementStep } from '../../store/actions/game';
+import { useAppSelector } from '../../hooks';
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
@@ -22,14 +23,19 @@ type GameScreenProps = {
 
 const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
   const step = useAppSelector((state) => state.step);
-
-  const dispatch = useAppDispatch();
+  const mistakesCount = useAppSelector((state) => state.mistakesCount);
 
   // NOTE: if we don't have questions we send user to the main page
-  // TODO: we should check mistakes count and send user
-  // to WinScreen or LoseScreen
   if (!questions.length || questions.length <= step) {
     return (<Navigate to={AppRoute.ROOT} />);
+  }
+
+  if (mistakesCount >= MAX_ERRORS_COUNT) {
+    return <LoseScreen />;
+  }
+
+  if (mistakesCount <= MAX_ERRORS_COUNT && questions.length === step) {
+    return <WinScreen />;
   }
 
   const question = questions[step];
@@ -40,7 +46,6 @@ const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
       return (
         <ArtistQuestionScreenWrapped
           question={question as ArtistQuestion}
-          onAnswerClick={() => dispatch(incrementStep())}
         />
       );
 
