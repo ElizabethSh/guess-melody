@@ -21,9 +21,10 @@ const GameScreen = () : JSX.Element => {
   const mistakesCount = useAppSelector((state) => state.mistakesCount);
   const questions = useAppSelector((state) => state.questions);
 
-  // NOTE: if we don't have questions we send user to the main page
+  // NOTE: If we don't have any questions and mistakes_count < max_mistake_count
+  // we redirect user to the win screen
   if (!questions.length || questions.length <= step) {
-    return (<Navigate to={AppRoute.ROOT} />);
+    return (<Navigate to={AppRoute.RESULT} />);
   }
 
   if (mistakesCount >= MAX_ERRORS_COUNT) {
