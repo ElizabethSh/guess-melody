@@ -9,7 +9,8 @@ export const getToken = (): Token => {
       token = JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN) || '');
     }
 
-  } catch (err) { }
+  /* eslint-disable-next-line */
+  } catch (err) {}
   return token;
 };
 
@@ -18,6 +19,6 @@ export const setToken = (token: Token) => {
     if (global.localStorage && (typeof global.localStorage.setItem) === 'function') {
       localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN, token);
     }
-
-  } catch (err) { }
+  /* eslint-disable-next-line */
+  } catch (err) {}
 };
