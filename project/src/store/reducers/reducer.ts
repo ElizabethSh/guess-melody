@@ -5,14 +5,16 @@ import {
   incrementMistakes,
   loadQuestions,
   incrementStep,
-  resetGame
+  resetGame,
+  requireAuthorisation
 } from './../actions/game';
 
-import { FIRST_GAME_STEP } from './../../settings';
+import { AuthorizationStatus, FIRST_GAME_STEP } from './../../settings';
 
 const STEP_GAP = 1;
 
 const initialState = {
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
   mistakesCount: 0,
   questions,
   step: FIRST_GAME_STEP
@@ -33,7 +35,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadQuestions, (state, action) => {
       state.questions = action.payload;
-    });
+    })
+    .addCase(requireAuthorisation, (state, action) => {
+      state.authorizationStatus = action.payload
+    })
 });
 
 export {reducer};
