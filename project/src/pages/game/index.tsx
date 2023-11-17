@@ -6,7 +6,7 @@ import GenreQuestionScreen from '../question/genre';
 import LoseScreen from '../result/lose';
 import WinScreen from '../result/win';
 
-import { ArtistQuestion, GenreQuestion, Questions } from '../../types/question';
+import { ArtistQuestion, GenreQuestion } from '../../types/question';
 import { AppRoute, GameType, MAX_ERRORS_COUNT } from '../../settings';
 
 import withAudioPlayer from '../../hocs/with-audio-player';
@@ -16,14 +16,10 @@ const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
 
 
-type GameScreenProps = {
-  questions: Questions;
-};
-
-
-const GameScreen = ({questions}: GameScreenProps) : JSX.Element => {
+const GameScreen = () : JSX.Element => {
   const step = useAppSelector((state) => state.step);
   const mistakesCount = useAppSelector((state) => state.mistakesCount);
+  const questions = useAppSelector((state) => state.questions);
 
   // NOTE: if we don't have questions we send user to the main page
   if (!questions.length || questions.length <= step) {

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import App from './components/app/app';
 
 import { AuthorizationStatus, MAX_ERRORS_COUNT } from './settings';
-import {questions} from './mocks/questions';
 import store from './store';
 
 
@@ -19,7 +18,6 @@ root.render(
       <App
         authorizationStatus={AuthorizationStatus.AUTH}
         errorsCount={MAX_ERRORS_COUNT}
-        questions={questions}
       />
     </Provider>
   </React.StrictMode>
