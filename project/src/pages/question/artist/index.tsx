@@ -1,20 +1,35 @@
-import React, { FormEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 
 import Logo from '../../../components/logo/logo';
+import Mistakes from '../../../components/mistakes/mistakes';
+import { useAppDispatch } from '../../../hooks';
+import { incrementMistakes, incrementStep } from '../../../store/actions/game';
 
-import { ArtistQuestion, UserArtistQuestionAnswer } from '../../../types/question';
+import { ArtistQuestion } from '../../../types/question';
 
 
 type ArtistQuestionScreenProps = {
-  onAnswerClick: (question: ArtistQuestion, userAnswer: UserArtistQuestionAnswer) => void;
   question: ArtistQuestion;
   renderPlayer: (src: string, idx: number) => JSX.Element;
 }
 
+const formatString = (string: string) => string.toLowerCase().replace(/\s/g, '');
 
-const ArtistQuestionScreen = ({question, onAnswerClick, renderPlayer}: ArtistQuestionScreenProps): JSX.Element => {
+
+const ArtistQuestionScreen = (props: ArtistQuestionScreenProps): JSX.Element => {
+  const {question, renderPlayer} = props;
   const {answers, song} = question;
-  const [userAnswer, setUserAnswer] = useState('');
+  const dispatch = useAppDispatch();
+
+  const onAnswerClick = (artist: string) => {
+
+    if (formatString(artist) === formatString(song.artist)) {
+      dispatch(incrementStep());
+    } else {
+      dispatch(incrementMistakes());
+      dispatch(incrementStep());
+    }
+  };
 
   return (
     <section className="game game--artist">
@@ -26,19 +41,15 @@ const ArtistQuestionScreen = ({question, onAnswerClick, renderPlayer}: ArtistQue
           />
         </svg>
 
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Mistakes />
       </header>
 
       <section className="game__screen">
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            {/* NOTE: browser doesn't allow to play a song automatically */}
-            {renderPlayer(song.src, -1)}
+            {/* NOTE: don't play song automatically */}
+            {renderPlayer(song.src, 0)}
           </div>
         </div>
 
@@ -53,12 +64,12 @@ const ArtistQuestionScreen = ({question, onAnswerClick, renderPlayer}: ArtistQue
                     className="artist__input visually-hidden"
                     id="answer-1"
                     name="answer"
-                    onChange={(evt: FormEvent<HTMLInputElement>) => {
+                    onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                       evt.preventDefault();
-                      onAnswerClick(question, userAnswer);
+                      onAnswerClick(evt.target.value);
                     }}
                     type="radio"
-                    value="artist-1"
+                    value={artist}
                   />
                   <label className="artist__name" htmlFor="answer-1">
                     <img className="artist__picture" src={picture} alt={artist} />

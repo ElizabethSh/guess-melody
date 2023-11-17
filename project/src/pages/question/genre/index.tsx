@@ -1,21 +1,39 @@
-import React, { FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 import Logo from '../../../components/logo/logo';
+import Mistakes from '../../../components/mistakes/mistakes';
+import { useAppDispatch } from '../../../hooks';
+import { incrementMistakes, incrementStep } from '../../../store/actions/game';
 
 import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question';
 
 
 type GenreQuestionProps = {
   question: GenreQuestion;
-  onAnswerClick: (question: GenreQuestion, userAnswers: UserGenreQuestionAnswer ) => void;
   renderPlayer: (src: string, idx: number) => JSX.Element;
 };
 
 
 const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
-  const {question, onAnswerClick, renderPlayer} = props;
-  const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
+  const {question, renderPlayer} = props;
+  const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>([false, false, false, false]);
+  const dispatch = useAppDispatch();
   const {answers, genre } = question;
+
+  const onSubmitClick = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const isAnswerCorrect = userAnswers
+      .filter((answer) => typeof answer === 'string')
+      .every((answer) => answer === genre);
+
+    if (isAnswerCorrect) {
+      dispatch(incrementStep());
+    } else {
+      dispatch(incrementMistakes());
+      dispatch(incrementStep());
+    }
+  };
+
 
   return (
     <section className="game game--genre">
@@ -28,11 +46,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
           />
         </svg>
 
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Mistakes />
       </header>
 
       <section className="game__screen">
@@ -40,8 +54,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
         <form
           className="game__tracks"
           onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-            evt.preventDefault();
-            onAnswerClick(question, userAnswers);
+            onSubmitClick(evt);
           }}
         >
           {
@@ -53,10 +66,14 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
                   <div className="game__answer">
                     <input
                       className="game__input visually-hidden"
+                      checked={Boolean(userAnswers[idx])}
                       id={`answer-${idx}`}
                       name="answer"
                       type="checkbox"
                       value={answer.genre}
+                      onChange={({target}: ChangeEvent<HTMLInputElement>) => {
+                        setUserAnswers([...userAnswers.slice(0, idx), target.value, ...userAnswers.slice(idx + 1)]);
+                      }}
                     />
                     <label className="game__check" htmlFor={`answer-${idx}`}>Отметить</label>
                   </div>
@@ -64,7 +81,13 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
               );
             })
           }
-          <button className="game__submit button" type="submit">Ответить</button>
+          {/* TODO: disable button if nothing is selected */}
+          <button
+            className="game__submit button"
+            type="submit"
+          >
+            Ответить
+          </button>
         </form>
       </section>
     </section>
