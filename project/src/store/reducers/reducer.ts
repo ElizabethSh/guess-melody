@@ -9,18 +9,11 @@ import {
 } from './../actions/game';
 
 import { AuthorizationStatus, FIRST_GAME_STEP } from './../../settings';
-import { Questions } from '../../types/question';
+import { state } from '../../types/state';
 
 const STEP_GAP = 1;
 
-type initialState = {
-  authorizationStatus: string
-  mistakesCount: number
-  questions: Questions,
-  step: number
-}
-
-const initialState: initialState = {
+const initialState: state = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   mistakesCount: 0,
   questions: [],
