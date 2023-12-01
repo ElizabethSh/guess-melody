@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { questions } from '../../mocks/questions';
 
 import {
   incrementMistakes,
@@ -10,13 +9,21 @@ import {
 } from './../actions/game';
 
 import { AuthorizationStatus, FIRST_GAME_STEP } from './../../settings';
+import { Questions } from '../../types/question';
 
 const STEP_GAP = 1;
 
-const initialState = {
+type initialState = {
+  authorizationStatus: string
+  mistakesCount: number
+  questions: Questions,
+  step: number
+}
+
+const initialState: initialState = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   mistakesCount: 0,
-  questions,
+  questions: [],
   step: FIRST_GAME_STEP
 };
 

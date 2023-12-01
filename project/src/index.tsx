@@ -6,6 +6,9 @@ import App from './components/app/app';
 
 import { AuthorizationStatus, MAX_ERRORS_COUNT } from './settings';
 import store from './store';
+import { fetchQuestionAction } from './store/actions/api-actions';
+
+store.dispatch(fetchQuestionAction());
 
 
 const root = ReactDOM.createRoot(
