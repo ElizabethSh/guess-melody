@@ -5,6 +5,8 @@ import {
   Routes
 } from 'react-router-dom';
 
+
+// TODO: add lazy load
 import GameScreen from '../../pages/game';
 import Login from '../../pages/login';
 import LoseScreen from '../../pages/result/lose';
@@ -13,15 +15,17 @@ import WelcomeScreen from '../../pages/welcome-screen';
 import WinScreen from '../../pages/result/win';
 
 import { AppRoute, AuthorizationStatus } from '../../settings';
+import { useAppSelector } from '../../hooks';
 
 
 type AppProps = {
-  authorizationStatus: AuthorizationStatus;
   errorsCount: number;
 };
 
 
-function App({errorsCount, authorizationStatus}: AppProps): JSX.Element {
+function App({errorsCount}: AppProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus)
+
   let routes = [
     <Route path={AppRoute.ROOT} key='root' element={<WelcomeScreen errorsCount={errorsCount} />} />,
     <Route path={AppRoute.GAME} key='game' element={<GameScreen />} />,

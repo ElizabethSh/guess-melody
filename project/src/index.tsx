@@ -20,7 +20,6 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App
-        authorizationStatus={AuthorizationStatus.AUTH}
         errorsCount={MAX_ERRORS_COUNT}
       />
     </Provider>
