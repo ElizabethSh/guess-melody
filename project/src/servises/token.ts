@@ -22,3 +22,12 @@ export const setToken = (token: Token) => {
   /* eslint-disable-next-line */
   } catch (err) {}
 };
+
+export const dropToken = () => {
+  try {
+    if (global.localStorage && (typeof global.localStorage.removeItem) === 'function') {
+      localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN);
+    }
+  /* eslint-disable-next-line */
+  } catch (err) {}
+}
