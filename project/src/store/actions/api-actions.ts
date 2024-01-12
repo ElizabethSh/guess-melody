@@ -8,7 +8,7 @@ import { Questions } from '../../types/question';
 import { AppDispatch, State } from '../../types/state';
 
 import { loadQuestions, requireAuthorisation } from './game';
-import { dropToken } from '../../servises/token';
+import { dropToken, setToken } from '../../servises/token';
 
 
 export const fetchQuestionAction = createAsyncThunk<void, undefined, {
@@ -46,8 +46,10 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({ email, password }, { dispatch, extra: api }) => {
-    const data = await api.post<UserData>(ApiRoute.LOGIN, { email, password });
-    // TODO: save token to the localStorage
+    console.log(email, password);
+
+    const { data } = await api.post<UserData>(ApiRoute.LOGIN, { email, password });
+    setToken(data.token);
     dispatch(requireAuthorisation(AuthorizationStatus.AUTH));
   }
 );
