@@ -1,9 +1,15 @@
+export enum ApiRoute {
+  LOGIN = '/login',
+  LOGOUT = '/logout',
+  QUESTIONS = '/questions',
+}
+
 export enum AppRoute {
+  GAME = '/game',
   LOGIN = '/login',
   LOSE = '/lose',
   RESULT = '/result',
   ROOT = '/',
-  GAME = '/game',
 }
 
 export enum AuthorizationStatus {

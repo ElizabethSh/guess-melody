@@ -1,13 +1,22 @@
-import { incrementMistakes } from './../actions/game';
 import { createReducer } from '@reduxjs/toolkit';
-import { incrementStep, resetGame } from '../actions/game';
 
-import { FIRST_GAME_STEP } from './../../settings';
+import {
+  incrementMistakes,
+  loadQuestions,
+  incrementStep,
+  resetGame,
+  requireAuthorisation
+} from './../actions/game';
+
+import { AuthorizationStatus, FIRST_GAME_STEP } from './../../settings';
+import { InitialState } from '../../types/state';
 
 const STEP_GAP = 1;
 
-const initialState = {
+const initialState: InitialState = {
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
   mistakesCount: 0,
+  questions: [],
   step: FIRST_GAME_STEP
 };
 
@@ -23,6 +32,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(incrementMistakes, (state) => {
       state.mistakesCount = state.mistakesCount + 1;
+    })
+    .addCase(loadQuestions, (state, action) => {
+      state.questions = action.payload;
+    })
+    .addCase(requireAuthorisation, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 

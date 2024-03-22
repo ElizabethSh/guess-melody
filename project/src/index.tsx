@@ -4,9 +4,12 @@ import { Provider } from 'react-redux';
 
 import App from './components/app/app';
 
-import { AuthorizationStatus, MAX_ERRORS_COUNT } from './settings';
-import {questions} from './mocks/questions';
+import { MAX_ERRORS_COUNT } from './settings';
 import store from './store';
+import { fetchQuestionAction, checkAuthAction } from './store/actions/api-actions';
+
+store.dispatch(fetchQuestionAction());
+store.dispatch(checkAuthAction());
 
 
 const root = ReactDOM.createRoot(
@@ -17,9 +20,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App
-        authorizationStatus={AuthorizationStatus.AUTH}
         errorsCount={MAX_ERRORS_COUNT}
-        questions={questions}
       />
     </Provider>
   </React.StrictMode>

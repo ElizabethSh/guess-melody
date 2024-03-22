@@ -1,3 +1,5 @@
+import { AuthorizationStatus as AuthStatus } from '../settings';
+
 type GenreQuestionAnswer = {
   genre: string;
   src: string;
@@ -33,3 +35,5 @@ export type Questions = Question[];
 export type UserGenreQuestionAnswer = readonly (boolean | string) [];
 
 // export type UserArtistQuestionAnswer = string;
+
+export type AuthorizationStatus = AuthStatus;

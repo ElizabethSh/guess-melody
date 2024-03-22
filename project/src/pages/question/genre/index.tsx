@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 import Logo from '../../../components/logo/logo';
 import Mistakes from '../../../components/mistakes/mistakes';
+
 import { useAppDispatch } from '../../../hooks';
 import { incrementMistakes, incrementStep } from '../../../store/actions/game';
 
@@ -16,7 +17,9 @@ type GenreQuestionProps = {
 
 const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
   const {question, renderPlayer} = props;
-  const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>([false, false, false, false]);
+  const defaultAnswers: boolean [] = [false, false, false, false];
+  const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>(defaultAnswers);
+
   const dispatch = useAppDispatch();
   const {answers, genre } = question;
 
@@ -32,6 +35,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
       dispatch(incrementMistakes());
       dispatch(incrementStep());
     }
+    setUserAnswers(defaultAnswers);
   };
 
 
@@ -50,7 +54,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
       </header>
 
       <section className="game__screen">
-        <h2 className="game__title">Выберите {genre} треки</h2>
+        <h2 className="game__title">Select {genre} tracks</h2>
         <form
           className="game__tracks"
           onSubmit={(evt: FormEvent<HTMLFormElement>) => {
@@ -59,7 +63,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
         >
           {
             answers.map((answer, idx) => {
-              const key = `${answer.genre}-${idx}`; // TODO: change it after getting data from server
+              const key = `${answer.genre}-${idx}`;
               return (
                 <div className="track" key={key}>
                   {renderPlayer(answer.src, idx)}
@@ -75,7 +79,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
                         setUserAnswers([...userAnswers.slice(0, idx), target.value, ...userAnswers.slice(idx + 1)]);
                       }}
                     />
-                    <label className="game__check" htmlFor={`answer-${idx}`}>Отметить</label>
+                    <label className="game__check" htmlFor={`answer-${idx}`}>Check</label>
                   </div>
                 </div>
               );
@@ -86,7 +90,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
             className="game__submit button"
             type="submit"
           >
-            Ответить
+            Confirm
           </button>
         </form>
       </section>
