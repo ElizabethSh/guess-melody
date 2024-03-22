@@ -14,7 +14,7 @@ const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus)
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
     <section className="welcome">

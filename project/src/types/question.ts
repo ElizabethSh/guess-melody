@@ -1,4 +1,4 @@
-import { AuthorizationStatus as AuthStatus } from "../settings";
+import { AuthorizationStatus as AuthStatus } from '../settings';
 
 type GenreQuestionAnswer = {
   genre: string;

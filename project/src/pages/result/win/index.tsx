@@ -5,25 +5,25 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../../settings';
 import { logoutAction } from '../../../store/actions/api-actions';
 import { resetGame } from '../../../store/actions/game';
-import { state } from '../../../types/state';
+import { InitialState } from '../../../types/state';
 
 
 const WinScreen = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const mistakesCount = useAppSelector((state: state) => state.mistakesCount);
-  const questions = useAppSelector((state: state) => state.questions);
-  const authorizationStatus = useAppSelector((state: state) => state.authorizationStatus);
+  const mistakesCount = useAppSelector((state: InitialState) => state.mistakesCount);
+  const questions = useAppSelector((state: InitialState) => state.questions);
+  const authorizationStatus = useAppSelector((state: InitialState) => state.authorizationStatus);
 
   const onReplyClick = () => {
-    dispatch(resetGame())
-    navigate(AppRoute.GAME)
+    dispatch(resetGame());
+    navigate(AppRoute.GAME);
   };
 
   const onLogoutClick = (evt: React.MouseEvent<HTMLElement>) => {
     evt.preventDefault();
     dispatch(logoutAction());
-  }
+  };
 
   return (
     <section className="result">
@@ -35,7 +35,9 @@ const WinScreen = (): JSX.Element => {
                 className="result-logout__link"
                 onClick={(evt: React.MouseEvent<HTMLElement>) => onLogoutClick(evt)}
                 to={AppRoute.ROOT}
-              >Log out</Link>
+              >
+                Log out
+              </Link>
             </div>
           )
       }
@@ -54,7 +56,7 @@ const WinScreen = (): JSX.Element => {
         Play again
       </button>
     </section>
-  )
+  );
 };
 
 export default WinScreen;

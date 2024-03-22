@@ -24,7 +24,7 @@ type AppProps = {
 
 
 function App({errorsCount}: AppProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus)
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   let routes = [
     <Route path={AppRoute.ROOT} key='root' element={<WelcomeScreen errorsCount={errorsCount} />} />,

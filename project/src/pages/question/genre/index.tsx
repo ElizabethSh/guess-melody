@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 import Logo from '../../../components/logo/logo';
 import Mistakes from '../../../components/mistakes/mistakes';
+
 import { useAppDispatch } from '../../../hooks';
 import { incrementMistakes, incrementStep } from '../../../store/actions/game';
 
@@ -16,8 +17,8 @@ type GenreQuestionProps = {
 
 const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
   const {question, renderPlayer} = props;
-  const default_answers: boolean [] = [false, false, false, false];
-  const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>(default_answers);
+  const defaultAnswers: boolean [] = [false, false, false, false];
+  const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>(defaultAnswers);
 
   const dispatch = useAppDispatch();
   const {answers, genre } = question;
@@ -34,7 +35,7 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
       dispatch(incrementMistakes());
       dispatch(incrementStep());
     }
-    setUserAnswers(default_answers);
+    setUserAnswers(defaultAnswers);
   };
 
 

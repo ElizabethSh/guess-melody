@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import { AppRoute } from '../../../settings';
+
 import { resetGame } from '../../../store/actions/game';
 
 
@@ -10,8 +11,8 @@ const LoseScreen = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const onReplyClick = () => {
-    dispatch(resetGame())
-    navigate(AppRoute.GAME)
+    dispatch(resetGame());
+    navigate(AppRoute.GAME);
   };
 
   return (

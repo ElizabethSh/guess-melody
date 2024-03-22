@@ -4,12 +4,12 @@ import { Provider } from 'react-redux';
 
 import App from './components/app/app';
 
-import { AuthorizationStatus, MAX_ERRORS_COUNT } from './settings';
+import { MAX_ERRORS_COUNT } from './settings';
 import store from './store';
 import { fetchQuestionAction, checkAuthAction } from './store/actions/api-actions';
 
 store.dispatch(fetchQuestionAction());
-store.dispatch(checkAuthAction())
+store.dispatch(checkAuthAction());
 
 
 const root = ReactDOM.createRoot(

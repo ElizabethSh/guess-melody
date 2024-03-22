@@ -1,7 +1,7 @@
 import store from '../store';
 import { Questions } from './question';
 
-export type state = {
+export type InitialState = {
   authorizationStatus: string
   mistakesCount: number
   questions: Questions,

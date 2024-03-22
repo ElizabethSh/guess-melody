@@ -30,4 +30,4 @@ export const dropToken = () => {
     }
   /* eslint-disable-next-line */
   } catch (err) {}
-}
+};

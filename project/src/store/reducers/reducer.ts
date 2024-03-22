@@ -9,11 +9,11 @@ import {
 } from './../actions/game';
 
 import { AuthorizationStatus, FIRST_GAME_STEP } from './../../settings';
-import { state } from '../../types/state';
+import { InitialState } from '../../types/state';
 
 const STEP_GAP = 1;
 
-const initialState: state = {
+const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   mistakesCount: 0,
   questions: [],
@@ -37,8 +37,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.questions = action.payload;
     })
     .addCase(requireAuthorisation, (state, action) => {
-      state.authorizationStatus = action.payload
-    })
+      state.authorizationStatus = action.payload;
+    });
 });
 
 export {reducer};
