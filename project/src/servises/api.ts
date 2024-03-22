@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 import { getToken } from './token';
 
-const BASE_URL = ' https://10.react.pages.academy/guess-melody';
+const BASE_URL = 'https://13.design.htmlacademy.pro./guess-melody';
 const REQUEST_TIMEOUT = 5000;
 
 interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
