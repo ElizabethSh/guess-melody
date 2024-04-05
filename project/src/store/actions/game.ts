@@ -6,3 +6,5 @@ export const incrementStep = createAction('game/incrementStep');
 export const loadQuestions = createAction<Questions>('data/loadQuestions');
 export const requireAuthorisation = createAction<AuthorizationStatus>('user/requireAuthorisation');
 export const resetGame = createAction('game/reset');
+export const setError = createAction<string>('data/setError');
+export const clearError = createAction<string[]>('data/clearError');

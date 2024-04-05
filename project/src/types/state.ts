@@ -2,7 +2,8 @@ import store from '../store';
 import { Questions } from './question';
 
 export type InitialState = {
-  authorizationStatus: string
+  authorizationStatus: string,
+  errors: string[],
   mistakesCount: number
   questions: Questions,
   step: number

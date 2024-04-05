@@ -22,7 +22,7 @@ const LoseScreen = (): JSX.Element => {
       </div>
       <h2 className="result__title">What a pity!</h2>
       <p className="result__total result__total--fail">
-        You've run out of attempts. Never mind, you'll be lucky next time!
+        You&apos;ve run out of attempts. Never mind, you&apos;ll be lucky next time!
       </p>
       <button
         className="replay"
