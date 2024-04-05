@@ -13,7 +13,7 @@ import { setError } from '../store/actions/game';
 import { getToken } from './token';
 
 
-const BASE_URL = 'https://13.design.htmlacademy.pro./guess-melody1';
+const BASE_URL = 'https://10.design.htmlacademy.pro./guess-melody';
 const REQUEST_TIMEOUT = 5000;
 
 
@@ -48,6 +48,9 @@ export const createAPI = (): AxiosInstance => {
       if (token) {
         config.headers['x-token'] = token;
       }
+
+      console.log('config', config);
+
 
       return config;
     }
