@@ -9,7 +9,6 @@ import {StatusCodes} from 'http-status-codes';
 
 import store from '../store';
 import { setError } from '../store/actions/game';
-
 import { getToken } from './token';
 
 
@@ -48,10 +47,6 @@ export const createAPI = (): AxiosInstance => {
       if (token) {
         config.headers['x-token'] = token;
       }
-
-      console.log('config', config);
-
-
       return config;
     }
   );
