@@ -1,8 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { AppRoute } from '../../settings';
+import { AppRoute, AuthorizationStatus } from '../../settings';
 import { resetGame } from '../../store/actions/game';
 
 type WelcomeScreenProps = {
@@ -14,8 +14,15 @@ const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <section className="welcome">
+      {/* TODO: add styles for Link */}
+      {
+        authorizationStatus !== AuthorizationStatus.AUTH
+          && <Link to={AppRoute.LOGIN}>Login</Link>
+      }
       <div className="welcome__logo">
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
       </div>
