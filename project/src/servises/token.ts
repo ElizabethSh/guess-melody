@@ -6,7 +6,7 @@ export const getToken = (): Token => {
   let token = '';
   try {
     if (global.localStorage && (typeof global.localStorage.getItem) === 'function') {
-      token = JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN) || '');
+      token = localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN) || '';
     }
 
   /* eslint-disable-next-line */
@@ -14,7 +14,7 @@ export const getToken = (): Token => {
   return token;
 };
 
-export const setToken = (token: Token) => {
+export const setToken = (token: Token): void => {
   try {
     if (global.localStorage && (typeof global.localStorage.setItem) === 'function') {
       localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN, token);
@@ -23,7 +23,7 @@ export const setToken = (token: Token) => {
   } catch (err) {}
 };
 
-export const dropToken = () => {
+export const dropToken = (): void => {
   try {
     if (global.localStorage && (typeof global.localStorage.removeItem) === 'function') {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN);
