@@ -9,6 +9,7 @@ const Login = () => {
 
   const dispatch = useAppDispatch();
 
+  // TODO: should redirect to welcome screen after autorization
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current && passwordRef.current) {
