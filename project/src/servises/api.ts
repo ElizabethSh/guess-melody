@@ -12,7 +12,7 @@ import { setError } from '../store/actions/game';
 import { getToken } from './token';
 
 
-const BASE_URL = 'https://10.design.htmlacademy.pro./guess-melody';
+const BASE_URL = 'https://13.design.htmlacademy.pro./guess-melody';
 const REQUEST_TIMEOUT = 5000;
 
 
@@ -28,11 +28,10 @@ type DetailMessageType = {
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true,
+  [StatusCodes.NOT_FOUND]: true
 };
 
-const shouldDispalyError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
-
+const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -44,7 +43,7 @@ export const createAPI = (): AxiosInstance => {
     (config: AdaptAxiosRequestConfig) => {
       const token = getToken();
 
-      if (token) {
+      if (token && config.headers) {
         config.headers['x-token'] = token;
       }
       return config;
@@ -54,10 +53,15 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
-      if (error.response && shouldDispalyError(error.response)) {
-        const detailMessage = error.response.data;
+      if (error.response && shouldDisplayError(error.response)) {
+        let detailMessage = error.response.data;
+        // FIXME: handle it better. Add better error message
+        if (error.response.status === StatusCodes.UNAUTHORIZED) {
+          detailMessage.message = "Unauthorized"
+        }
         store.dispatch(setError(detailMessage.message));
       }
+      throw error;
     }
   );
 
