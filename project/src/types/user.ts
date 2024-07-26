@@ -5,6 +5,6 @@ export type UserData = {
 }
 
 export type AuthData = {
-  email: string,
+  login: string,
   password: string
 }

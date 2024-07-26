@@ -33,6 +33,7 @@ function App({errorsCount}: AppProps): JSX.Element {
     <Route path="*" key='not-found' element={<NotFoundPage />} />
   ];
 
+  // FIXME: user don't have an access to the '/result' even if he is autorized
   if (authorizationStatus === AuthorizationStatus.AUTH) {
     routes = routes.concat([
       <Route path={AppRoute.RESULT} key='result-win' element={<WinScreen />} />,

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../../settings';
 import { logoutAction } from '../../../store/actions/api-actions';
 import { resetGame } from '../../../store/actions/game';
+
 import { InitialState } from '../../../types/state';
 
 
@@ -46,7 +47,7 @@ const WinScreen = (): JSX.Element => {
       </Link>
       <h2 className="result__title">You are a real music lover!</h2>
       <p className="result__total">
-        You answered {questions.length - mistakesCount} questions correctly and made {mistakesCount} mistakes
+        You answered {questions.length - mistakesCount} questions correctly and made {mistakesCount} {mistakesCount === 1 ? 'mistake' : 'mistakes'}
       </p>
       <button
         className="replay"
