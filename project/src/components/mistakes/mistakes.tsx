@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { useAppSelector } from '../../hooks';
 
 const Mistakes = () => {
   const mistakesCount = useAppSelector((state) => state.mistakesCount);
   const mistakes = Array.from(Array(mistakesCount).keys());
+  const id = useId();
 
   if (!mistakes.length) return null;
 
   return (
-    <div className="game__mistakes">
-      {!!mistakes.length && mistakes.map((mistake, index) => (
-        <div className="wrong" key={`${index - mistake}`} />
+    <div className="game__mistakes" data-testid="mistake-container">
+      {!!mistakes.length && mistakes.map((mistake) => (
+        <div className="wrong" key={`${id}-${mistake}`} data-testid="mistake-value"/>
       ))}
     </div>
   );
