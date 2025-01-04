@@ -55,14 +55,15 @@ const ArtistQuestionScreen = (props: ArtistQuestionScreenProps): JSX.Element => 
 
         <form className="game__artist">
           {
-            answers.map((answer, index) => {
+            answers.map((answer) => {
               const {artist, picture} = answer;
-              const key = `${artist}-${index}`; // TODO: change it after getting data from server
+              const id = `answer-${artist.split(' ').join('-')}`;
+
               return (
-                <div className="artist" key={key}>
+                <div className="artist" key={artist}>
                   <input
                     className="artist__input visually-hidden"
-                    id="answer-1"
+                    id={id}
                     name="answer"
                     onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                       evt.preventDefault();
@@ -71,7 +72,7 @@ const ArtistQuestionScreen = (props: ArtistQuestionScreenProps): JSX.Element => 
                     type="radio"
                     value={artist}
                   />
-                  <label className="artist__name" htmlFor="answer-1">
+                  <label className="artist__name" htmlFor={id}>
                     <img className="artist__picture" src={picture} alt={artist} />
                     {artist}
                   </label>
