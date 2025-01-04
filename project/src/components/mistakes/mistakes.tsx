@@ -5,6 +5,8 @@ const Mistakes = () => {
   const mistakesCount = useAppSelector((state) => state.mistakesCount);
   const mistakes = Array.from(Array(mistakesCount).keys());
 
+  if (!mistakes.length) return null;
+
   return (
     <div className="game__mistakes">
       {!!mistakes.length && mistakes.map((mistake, index) => (
@@ -12,7 +14,6 @@ const Mistakes = () => {
       ))}
     </div>
   );
-
 };
 
 export default Mistakes;
