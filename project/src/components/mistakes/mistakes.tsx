@@ -6,7 +6,9 @@ const Mistakes = () => {
   const mistakes = Array.from(Array(mistakesCount).keys());
   const id = useId();
 
-  if (!mistakes.length) return null;
+  if (!mistakes.length) {
+    return null;
+  }
 
   return (
     <div className="game__mistakes" data-testid="mistake-container">
