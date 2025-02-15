@@ -13,7 +13,7 @@ const NotFoundPage = () => (
     </header>
     <main>
       <h1>Page not found</h1>
-      <Link to={AppRoute.ROOT}>Вернуться на главную</Link>
+      <Link to={AppRoute.Root}>Вернуться на главную</Link>
     </main>
   </section>
 );
