@@ -16,11 +16,12 @@ import { InitialState } from '../../types/state';
 const STEP_GAP = 1;
 
 const initialState: InitialState = {
-  authorizationStatus: AuthorizationStatus.UNKNOWN,
+  authorizationStatus: AuthorizationStatus.Unknown,
   errors: [],
+  isDataLoaded: false,
   mistakesCount: 0,
   questions: [],
-  step: FIRST_GAME_STEP
+  step: FIRST_GAME_STEP,
 };
 
 const reducer = createReducer(initialState, (builder) => {
