@@ -1,12 +1,14 @@
+import { AuthorizationStatus } from '../settings';
 import store from '../store';
 import { Questions } from './question';
 
 export type InitialState = {
-  authorizationStatus: string,
+  authorizationStatus: AuthorizationStatus.Auth | AuthorizationStatus.NoAuth | AuthorizationStatus.Unknown,
   errors: string[],
+  isDataLoaded: boolean
   mistakesCount: number
   questions: Questions,
-  step: number
+  step: number,
 };
 
 

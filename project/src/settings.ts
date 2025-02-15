@@ -1,26 +1,26 @@
 export enum ApiRoute {
-  LOGIN = '/login',
-  LOGOUT = '/logout',
-  QUESTIONS = '/questions',
+  Login = '/login',
+  Logout = '/logout',
+  Questions = '/questions',
 }
 
 export enum AppRoute {
-  GAME = '/game',
-  LOGIN = '/login',
-  LOSE = '/lose',
-  RESULT = '/result',
-  ROOT = '/',
+  Game = '/game',
+  Login = '/login',
+  Lose = '/lose',
+  Result = '/result',
+  Root = '/',
 }
 
 export enum AuthorizationStatus {
-  AUTH = 'auth',
-  NO_AUTH = 'no-auth',
-  UNKNOWN = 'unknown'
+  Auth = 'auth',
+  NoAuth = 'no-auth',
+  Unknown = 'unknown'
 }
 
 export enum GameType {
-  ARTIST = 'artist',
-  GENRE = 'genre'
+  Artist = 'artist',
+  Genre = 'genre'
 }
 
 export const FIRST_GAME_STEP = 0;

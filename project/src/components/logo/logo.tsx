@@ -5,7 +5,7 @@ import { AppRoute } from '../../settings';
 
 
 const Logo = (): JSX.Element => (
-  <Link className="game__back" to={AppRoute.ROOT}>
+  <Link className="game__back" to={AppRoute.Root}>
     <span className="visually-hidden">Сыграть ещё раз</span>
     <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию" />
   </Link>

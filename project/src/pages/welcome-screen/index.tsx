@@ -20,8 +20,8 @@ const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
     <section className="welcome">
       {/* TODO: add styles for Link */}
       {
-        authorizationStatus !== AuthorizationStatus.AUTH
-          && <Link to={AppRoute.LOGIN}>Login</Link>
+        authorizationStatus !== AuthorizationStatus.Auth
+          && <Link to={AppRoute.Login}>Login</Link>
       }
       <div className="welcome__logo">
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
@@ -30,7 +30,7 @@ const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
         className="welcome__button"
         onClick={() => {
           dispatch(resetGame());
-          navigate(AppRoute.GAME);
+          navigate(AppRoute.Game);
         }}
       >
         <span className="visually-hidden">Начать игру</span>

@@ -12,7 +12,7 @@ const LoseScreen = (): JSX.Element => {
 
   const onReplyClick = () => {
     dispatch(resetGame());
-    navigate(AppRoute.GAME);
+    navigate(AppRoute.Game);
   };
 
   return (

@@ -18,7 +18,7 @@ const WinScreen = (): JSX.Element => {
 
   const onReplyClick = () => {
     dispatch(resetGame());
-    navigate(AppRoute.GAME);
+    navigate(AppRoute.Game);
   };
 
   const onLogoutClick = (evt: React.MouseEvent<HTMLElement>) => {
@@ -29,20 +29,20 @@ const WinScreen = (): JSX.Element => {
   return (
     <section className="result">
       {
-        authorizationStatus === AuthorizationStatus.AUTH
+        authorizationStatus === AuthorizationStatus.Auth
           && (
             <div className="result-logout__wrapper">
               <Link
                 className="result-logout__link"
                 onClick={(evt: React.MouseEvent<HTMLElement>) => onLogoutClick(evt)}
-                to={AppRoute.ROOT}
+                to={AppRoute.Root}
               >
                 Log out
               </Link>
             </div>
           )
       }
-      <Link className="result__logo" to={AppRoute.ROOT}>
+      <Link className="result__logo" to={AppRoute.Root}>
         <img src="img/melody-logo.png" alt="Guess melody" width="186" height="83" />
       </Link>
       <h2 className="result__title">You are a real music lover!</h2>
