@@ -24,7 +24,7 @@ const GameScreen = () : JSX.Element => {
   // NOTE: If we don't have any questions and mistakes_count < max_mistake_count
   // we redirect user to the win screen
   if (!questions.length || questions.length <= step) {
-    return (<Navigate to={AppRoute.RESULT} />);
+    return (<Navigate to={AppRoute.Result} />);
   }
 
   if (mistakesCount >= MAX_ERRORS_COUNT) {
@@ -39,14 +39,14 @@ const GameScreen = () : JSX.Element => {
 
   switch (question.type) {
 
-    case GameType.ARTIST:
+    case GameType.Artist:
       return (
         <ArtistQuestionScreenWrapped
           question={question as ArtistQuestion}
         />
       );
 
-    case GameType.GENRE:
+    case GameType.Genre:
       return (
         <GenreQuestionScreenWrapped
           question={question as GenreQuestion}
@@ -54,7 +54,7 @@ const GameScreen = () : JSX.Element => {
       );
 
     default:
-      return (<Navigate to={AppRoute.ROOT} />);
+      return (<Navigate to={AppRoute.Root} />);
   }
 };
 

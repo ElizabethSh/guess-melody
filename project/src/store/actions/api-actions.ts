@@ -18,7 +18,7 @@ export const fetchQuestionAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchQuestions',
   async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Questions>(ApiRoute.QUESTIONS);
+    const {data} = await api.get<Questions>(ApiRoute.Questions);
     dispatch(loadQuestions(data));
   },
 );
@@ -31,10 +31,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuthStatus',
   async (_arg, { dispatch, extra: api}) => {
     try {
-      await api.get(ApiRoute.LOGIN);
-      dispatch(requireAuthorisation(AuthorizationStatus.AUTH));
+      await api.get(ApiRoute.Login);
+      dispatch(requireAuthorisation(AuthorizationStatus.Auth));
     } catch {
-      dispatch(requireAuthorisation(AuthorizationStatus.NO_AUTH));
+      dispatch(requireAuthorisation(AuthorizationStatus.NoAuth));
     }
   }
 );
@@ -46,9 +46,9 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(ApiRoute.LOGIN, {email, password});
+    const {data: {token}} = await api.post<UserData>(ApiRoute.Login, {email, password});
     setToken(token);
-    dispatch(redirectToRoute(AppRoute.RESULT));
+    dispatch(redirectToRoute(AppRoute.Result));
   },
 );
 
@@ -59,8 +59,8 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 }>(
   'user/logout',
   async (_arg, { dispatch, extra: api }) => {
-    await api.delete(ApiRoute.LOGOUT);
+    await api.delete(ApiRoute.Logout);
     dropToken();
-    dispatch(requireAuthorisation(AuthorizationStatus.NO_AUTH));
+    dispatch(requireAuthorisation(AuthorizationStatus.NoAuth));
   }
 );
