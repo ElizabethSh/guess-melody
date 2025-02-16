@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { AppRoute, AuthorizationStatus } from '../../settings';
-import { resetGame } from '../../store/actions/game';
+import { resetGame } from '../../store/game/slices/process';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 
 type WelcomeScreenProps = {
   errorsCount: number
@@ -14,7 +14,7 @@ const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   return (
     <section className="welcome">
