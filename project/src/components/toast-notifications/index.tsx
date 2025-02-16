@@ -12,7 +12,8 @@ import './toast-notifications.css';
 const ToastNotifications = (): JSX.Element => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const errors = useAppSelector((state) => state.errors);
+  // const errors = useAppSelector((state) => state.errors);
+  const errors: any = [];
   const dispatch = useAppDispatch();
 
   useEffect(() => {

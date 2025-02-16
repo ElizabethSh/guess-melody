@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import App from './components/app/app';
-import ToastNotifications from './components/toast-notifications';
+// import ToastNotifications from './components/toast-notifications';
 
 import { MAX_ERRORS_COUNT } from './settings';
 import store from './store';
@@ -20,7 +20,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastNotifications />
+      {/* <ToastNotifications /> */}
       <App errorsCount={MAX_ERRORS_COUNT} />
     </Provider>
   </React.StrictMode>
