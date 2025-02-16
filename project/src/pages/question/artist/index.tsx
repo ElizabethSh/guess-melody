@@ -3,9 +3,10 @@ import React, { ChangeEvent } from 'react';
 import Logo from '../../../components/logo/logo';
 import Mistakes from '../../../components/mistakes/mistakes';
 import { useAppDispatch } from '../../../hooks';
-import { incrementMistakes, incrementStep } from '../../../store/actions/game';
 
 import { ArtistQuestion } from '../../../types/question';
+import { incrementStep } from '../../../store/game/slices/process';
+import { incrementMistakes } from '../../../store/actions/game';
 
 
 type ArtistQuestionScreenProps = {

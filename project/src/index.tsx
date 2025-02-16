@@ -7,7 +7,7 @@ import ToastNotifications from './components/toast-notifications';
 
 import { MAX_ERRORS_COUNT } from './settings';
 import store from './store';
-import { fetchQuestionAction, checkAuthAction } from './store/actions/api-actions';
+import { fetchQuestionAction, checkAuthAction } from './store/api-actions';
 
 store.dispatch(fetchQuestionAction());
 store.dispatch(checkAuthAction());
