@@ -23,6 +23,12 @@ export enum GameType {
   Genre = 'genre'
 }
 
+export enum NameSpace {
+  Data = 'DATA',
+  Game = 'GAME',
+  User = 'USER',
+}
+
 export const FIRST_GAME_STEP = 0;
 export const MAX_ERRORS_COUNT = 3;
 export const CLEAR_MESSAGE_TIMEOUT = 2000;
