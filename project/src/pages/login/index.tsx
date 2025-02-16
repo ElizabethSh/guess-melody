@@ -1,6 +1,6 @@
-import React, { FormEvent, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks';
-import { loginAction } from '../../store/actions/api-actions';
+import { loginAction } from '../../store/api-actions';
 
 
 const Login = () => {
@@ -23,13 +23,13 @@ const Login = () => {
   return (
     <section className="login">
       <div className="login__logo">
-        <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
+        <img src="img/melody-logo.png" alt="Guess melody logo" width="186" height="83" />
       </div>
-      <h2 className="login__title">Вы настоящий меломан!</h2>
-      <p className="login__text">Хотите узнать свой результат? Представтесь!</p>
+      <h2 className="login__title">You are a real music lover!</h2>
+      <p className="login__text">Do you want to know your result? Introduce yourself!</p>
       <form className="login__form" action="" onSubmit={handleSubmit}>
         <p className="login__field">
-          <label className="login__label" htmlFor="name">Логин</label>
+          <label className="login__label" htmlFor="name">Login</label>
           <input
             className="login__input"
             id="name"
@@ -39,7 +39,7 @@ const Login = () => {
           />
         </p>
         <p className="login__field">
-          <label className="login__label" htmlFor="password">Пароль</label>
+          <label className="login__label" htmlFor="password">Password</label>
           <input
             className="login__input"
             id="password"
@@ -52,7 +52,7 @@ const Login = () => {
         </p>
         <button className="login__button button" type="submit">Log in</button>
       </form>
-      <button className="replay" type="button">Сыграть ещё раз</button>
+      <button className="replay" type="button">Play again</button>
     </section>
   );
 };
