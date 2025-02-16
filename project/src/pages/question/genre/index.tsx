@@ -1,10 +1,7 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 import Logo from '../../../components/logo/logo';
 import Mistakes from '../../../components/mistakes/mistakes';
-
-import { useAppDispatch } from '../../../hooks';
-import { incrementMistakes, incrementStep } from '../../../store/actions/game';
 
 import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question';
 
@@ -12,32 +9,19 @@ import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question'
 type GenreQuestionProps = {
   question: GenreQuestion;
   renderPlayer: (src: string, idx: number) => JSX.Element;
+  onAnswer: (question: GenreQuestion, userAnswer: UserGenreQuestionAnswer) => void;
 };
 
 
-const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
-  const {question, renderPlayer} = props;
+const GenreQuestionScreen = ({
+  question,
+  renderPlayer,
+  onAnswer
+}: GenreQuestionProps): JSX.Element => {
   const defaultAnswers: boolean [] = [false, false, false, false];
   const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>(defaultAnswers);
 
-  const dispatch = useAppDispatch();
   const {answers, genre } = question;
-
-  const onSubmitClick = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    const isAnswerCorrect = userAnswers
-      .filter((answer) => typeof answer === 'string')
-      .every((answer) => answer === genre);
-
-    if (isAnswerCorrect) {
-      dispatch(incrementStep());
-    } else {
-      dispatch(incrementMistakes());
-      dispatch(incrementStep());
-    }
-    setUserAnswers(defaultAnswers);
-  };
-
 
   return (
     <section className="game game--genre">
@@ -58,7 +42,8 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
         <form
           className="game__tracks"
           onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-            onSubmitClick(evt);
+            evt.preventDefault();
+            onAnswer(question, userAnswers);
           }}
         >
           {
@@ -76,7 +61,11 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
                       type="checkbox"
                       value={answer.genre}
                       onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-                        setUserAnswers([...userAnswers.slice(0, idx), target.value, ...userAnswers.slice(idx + 1)]);
+                        setUserAnswers([
+                          ...userAnswers.slice(0, idx),
+                          target.value,
+                          ...userAnswers.slice(idx + 1)
+                        ]);
                       }}
                     />
                     <label className="game__check" htmlFor={`answer-${idx}`}>Check</label>

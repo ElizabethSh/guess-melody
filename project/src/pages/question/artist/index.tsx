@@ -1,35 +1,23 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 
 import Logo from '../../../components/logo/logo';
 import Mistakes from '../../../components/mistakes/mistakes';
-import { useAppDispatch } from '../../../hooks';
-import { incrementMistakes, incrementStep } from '../../../store/actions/game';
 
-import { ArtistQuestion } from '../../../types/question';
+import { ArtistQuestion, UserArtistQuestionAnswer } from '../../../types/question';
 
 
 type ArtistQuestionScreenProps = {
   question: ArtistQuestion;
   renderPlayer: (src: string, idx: number) => JSX.Element;
+  onAnswer: (question: ArtistQuestion, userAnswer: UserArtistQuestionAnswer) => void;
 }
 
-const formatString = (string: string) => string.toLowerCase().replace(/\s/g, '');
-
-
-const ArtistQuestionScreen = (props: ArtistQuestionScreenProps): JSX.Element => {
-  const {question, renderPlayer} = props;
+const ArtistQuestionScreen = ({
+  onAnswer,
+  question,
+  renderPlayer,
+}: ArtistQuestionScreenProps): JSX.Element => {
   const {answers, song} = question;
-  const dispatch = useAppDispatch();
-
-  const onAnswerClick = (artist: string) => {
-
-    if (formatString(artist) === formatString(song.artist)) {
-      dispatch(incrementStep());
-    } else {
-      dispatch(incrementMistakes());
-      dispatch(incrementStep());
-    }
-  };
 
   return (
     <section className="game game--artist">
@@ -45,10 +33,10 @@ const ArtistQuestionScreen = (props: ArtistQuestionScreenProps): JSX.Element => 
       </header>
 
       <section className="game__screen">
-        <h2 className="game__title">Кто исполняет эту песню?</h2>
+        <h2 className="game__title">Who sings this song?</h2>
         <div className="game__track">
           <div className="track">
-            {/* NOTE: don't play song automatically */}
+            {/* NOTE: it doesn't play song automatically */}
             {renderPlayer(song.src, 0)}
           </div>
         </div>
@@ -67,7 +55,7 @@ const ArtistQuestionScreen = (props: ArtistQuestionScreenProps): JSX.Element => 
                     name="answer"
                     onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                       evt.preventDefault();
-                      onAnswerClick(evt.target.value);
+                      onAnswer(question, answer.artist);
                     }}
                     type="radio"
                     value={artist}

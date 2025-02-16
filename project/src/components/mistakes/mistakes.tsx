@@ -1,8 +1,10 @@
 import React, { useId } from 'react';
 import { useAppSelector } from '../../hooks';
+import { selectMistakeCount } from '../../store/game/selectors';
 
 const Mistakes = () => {
-  const mistakesCount = useAppSelector((state) => state.mistakesCount);
+  const mistakesCount = useAppSelector(selectMistakeCount);
+
   const mistakes = Array.from(Array(mistakesCount).keys());
   const id = useId();
 

@@ -3,18 +3,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 
 import { AppRoute, AuthorizationStatus } from '../../../settings';
-import { logoutAction } from '../../../store/actions/api-actions';
-import { resetGame } from '../../../store/actions/game';
+import { logoutAction } from '../../../store/api-actions';
 
-import { InitialState } from '../../../types/state';
+import { resetGame } from '../../../store/game/slices/process';
+import { selectAuthorizationStatus } from '../../../store/user-process/selectors';
+import { selectMistakeCount, selectQuestions } from '../../../store/game/selectors';
 
 
 const WinScreen = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const mistakesCount = useAppSelector((state: InitialState) => state.mistakesCount);
-  const questions = useAppSelector((state: InitialState) => state.questions);
-  const authorizationStatus = useAppSelector((state: InitialState) => state.authorizationStatus);
+  const mistakesCount = useAppSelector(selectMistakeCount);
+  const questions = useAppSelector(selectQuestions);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   const onReplyClick = () => {
     dispatch(resetGame());

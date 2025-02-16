@@ -1,55 +1,61 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 import ArtistQuestionScreen from '../question/artist';
 import GenreQuestionScreen from '../question/genre';
-import LoseScreen from '../result/lose';
-import WinScreen from '../result/win';
 
-import { ArtistQuestion, GenreQuestion } from '../../types/question';
+import { Question, UserAnswer } from '../../types/question';
 import { AppRoute, GameType, MAX_ERRORS_COUNT } from '../../settings';
 
 import withAudioPlayer from '../../hocs/with-audio-player';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { selectMistakeCount, selectQuestions, selectStep } from '../../store/game/selectors';
+import { checkUserAnswer, incrementStep } from '../../store/game/slices/process';
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
 
 
 const GameScreen = () : JSX.Element => {
-  const step = useAppSelector((state) => state.step);
-  const mistakesCount = useAppSelector((state) => state.mistakesCount);
-  const questions = useAppSelector((state) => state.questions);
-
-  // NOTE: If we don't have any questions and mistakes_count < max_mistake_count
-  // we redirect user to the win screen
-  if (!questions.length || questions.length <= step) {
-    return (<Navigate to={AppRoute.Result} />);
-  }
+  const mistakesCount = useAppSelector(selectMistakeCount);
+  const questions = useAppSelector(selectQuestions);
+  const step = useAppSelector(selectStep);
+  const dispatch = useAppDispatch();
 
   if (mistakesCount >= MAX_ERRORS_COUNT) {
-    return <LoseScreen />;
-  }
-
-  if (mistakesCount <= MAX_ERRORS_COUNT && questions.length === step) {
-    return <WinScreen />;
+    return <Navigate to={AppRoute.Lose} />;
   }
 
   const question = questions[step];
+  if (step >= questions.length || !question) {
+    return <Navigate to={AppRoute.Result} />;
+  }
+
+  if (step >= questions.length || !question) {
+    return <Navigate to={AppRoute.Result} />;
+  }
+
+  const onUserAnswer = (questionItem: Question, userAnswer: UserAnswer) => {
+    dispatch(incrementStep());
+    dispatch(checkUserAnswer({question: questionItem, userAnswer}));
+  };
 
   switch (question.type) {
 
     case GameType.Artist:
       return (
         <ArtistQuestionScreenWrapped
-          question={question as ArtistQuestion}
+          key={step}
+          question={question}
+          onAnswer={onUserAnswer}
         />
       );
 
     case GameType.Genre:
       return (
         <GenreQuestionScreenWrapped
-          question={question as GenreQuestion}
+          key={step}
+          question={question}
+          onAnswer={onUserAnswer}
         />
       );
 
