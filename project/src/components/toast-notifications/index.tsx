@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../hooks';
 
 import { circlePlus, closingCross } from '../../icons';
 import { CLEAR_MESSAGE_TIMEOUT } from '../../settings';

@@ -30,7 +30,6 @@ const Login = () => {
   return (
     <section className="login">
       <div className="login__logo">
-        {/* <img src="img/melody-logo.png" alt="Guess melody logo" width="186" height="83" /> */}
         <Logo />
       </div>
       <h2 className="login__title">You are a real music lover!</h2>
@@ -61,17 +60,17 @@ const Login = () => {
         <button
           className="login__button button"
           type="submit"
-          >
-            Log in
-          </button>
+        >
+          Log in
+        </button>
       </form>
       <button
         className="replay"
         onClick={() => navigate(AppRoute.Game)}
         type="button"
-        >
-          Play again
-        </button>
+      >
+        Play again
+      </button>
     </section>
   );
 };

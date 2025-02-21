@@ -3,8 +3,6 @@ import { useAppDispatch } from '../../../hooks';
 import { AppRoute } from '../../../settings';
 import { resetGame } from '../../../store/game/slices/process';
 
-
-
 const LoseScreen = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
