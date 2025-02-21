@@ -14,7 +14,7 @@ export type ArtistQuestion = {
   type: 'artist';
 };
 
-type GenreQuestionAnswer = {
+export type GenreQuestionAnswer = {
   genre: string;
   src: string;
 };

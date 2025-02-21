@@ -1,7 +1,6 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-
 import Logo from '../../../components/logo/logo';
 import Mistakes from '../../../components/mistakes/mistakes';
+import GenreQuestionList from '../../../components/genre-question/list';
 
 import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question';
 
@@ -18,10 +17,7 @@ const GenreQuestionScreen = ({
   renderPlayer,
   onAnswer
 }: GenreQuestionProps): JSX.Element => {
-  const defaultAnswers: boolean [] = [false, false, false, false];
-  const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>(defaultAnswers);
-
-  const {answers, genre } = question;
+  const { genre } = question;
 
   return (
     <section className="game game--genre">
@@ -39,49 +35,11 @@ const GenreQuestionScreen = ({
 
       <section className="game__screen">
         <h2 className="game__title">Select {genre} tracks</h2>
-        <form
-          className="game__tracks"
-          onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-            evt.preventDefault();
-            onAnswer(question, userAnswers);
-          }}
-        >
-          {
-            answers.map((answer, idx) => {
-              const key = `${answer.genre}-${idx}`;
-              return (
-                <div className="track" key={key}>
-                  {renderPlayer(answer.src, idx)}
-                  <div className="game__answer">
-                    <input
-                      className="game__input visually-hidden"
-                      checked={Boolean(userAnswers[idx])}
-                      id={`answer-${idx}`}
-                      name="answer"
-                      type="checkbox"
-                      value={answer.genre}
-                      onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-                        setUserAnswers([
-                          ...userAnswers.slice(0, idx),
-                          target.value,
-                          ...userAnswers.slice(idx + 1)
-                        ]);
-                      }}
-                    />
-                    <label className="game__check" htmlFor={`answer-${idx}`}>Check</label>
-                  </div>
-                </div>
-              );
-            })
-          }
-          {/* TODO: disable button if nothing is selected */}
-          <button
-            className="game__submit button"
-            type="submit"
-          >
-            Confirm
-          </button>
-        </form>
+        <GenreQuestionList
+          onAnswer={onAnswer}
+          question={question}
+          renderPlayer={renderPlayer}
+        />
       </section>
     </section>
   );
