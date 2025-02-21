@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AppRoute } from '../../settings';
+import Logo from '../../components/logo/logo';
 
 import './login.css';
 
@@ -29,7 +30,8 @@ const Login = () => {
   return (
     <section className="login">
       <div className="login__logo">
-        <img src="img/melody-logo.png" alt="Guess melody logo" width="186" height="83" />
+        {/* <img src="img/melody-logo.png" alt="Guess melody logo" width="186" height="83" /> */}
+        <Logo />
       </div>
       <h2 className="login__title">You are a real music lover!</h2>
       <p className="login__text">Do you want to know your result? Introduce yourself!</p>
