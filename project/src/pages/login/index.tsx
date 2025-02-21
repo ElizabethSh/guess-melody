@@ -1,21 +1,26 @@
 import { FormEvent, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { AppRoute } from '../../settings';
 
 
 const Login = () => {
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const loginRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // TODO: should redirect to welcome screen after autorization
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
     if (loginRef.current && passwordRef.current) {
       dispatch(loginAction({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
+        login: loginRef.current?.value,
+        password: passwordRef.current?.value,
       }));
     }
   };
@@ -50,9 +55,20 @@ const Login = () => {
           {/* TODO: how we define that password is invalid? */}
           {/* <span className="login__error">Неверный пароль</span> */}
         </p>
-        <button className="login__button button" type="submit">Log in</button>
+        <button
+          className="login__button button"
+          type="submit"
+          >
+            Log in
+          </button>
       </form>
-      <button className="replay" type="button">Play again</button>
+      <button
+        className="replay"
+        onClick={() => navigate(AppRoute.Game)}
+        type="button"
+        >
+          Play again
+        </button>
     </section>
   );
 };
