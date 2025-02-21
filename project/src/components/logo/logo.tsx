@@ -1,13 +1,17 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppRoute } from '../../settings';
 
-
 const Logo = (): JSX.Element => (
-  <Link className="game__back" to={AppRoute.Root}>
-    <span className="visually-hidden">Сыграть ещё раз</span>
-    <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию" />
+  <Link className="game__back" style={{marginLeft: '0'}} to={AppRoute.Root}>
+    <span className="visually-hidden">Play again</span>
+    <img
+      alt="Guess melody logo"
+      className="game__logo"
+      height="83"
+      src="img/melody-logo-ginger.png"
+      width="186"
+    />
   </Link>
 );
 

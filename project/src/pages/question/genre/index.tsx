@@ -1,10 +1,6 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-
 import Logo from '../../../components/logo/logo';
 import Mistakes from '../../../components/mistakes/mistakes';
-
-import { useAppDispatch } from '../../../hooks';
-import { incrementMistakes, incrementStep } from '../../../store/actions/game';
+import GenreQuestionList from '../../../components/genre-question/list';
 
 import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question';
 
@@ -12,32 +8,16 @@ import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question'
 type GenreQuestionProps = {
   question: GenreQuestion;
   renderPlayer: (src: string, idx: number) => JSX.Element;
+  onAnswer: (question: GenreQuestion, userAnswer: UserGenreQuestionAnswer) => void;
 };
 
 
-const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
-  const {question, renderPlayer} = props;
-  const defaultAnswers: boolean [] = [false, false, false, false];
-  const [userAnswers, setUserAnswers] = useState<UserGenreQuestionAnswer>(defaultAnswers);
-
-  const dispatch = useAppDispatch();
-  const {answers, genre } = question;
-
-  const onSubmitClick = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    const isAnswerCorrect = userAnswers
-      .filter((answer) => typeof answer === 'string')
-      .every((answer) => answer === genre);
-
-    if (isAnswerCorrect) {
-      dispatch(incrementStep());
-    } else {
-      dispatch(incrementMistakes());
-      dispatch(incrementStep());
-    }
-    setUserAnswers(defaultAnswers);
-  };
-
+const GenreQuestionScreen = ({
+  question,
+  renderPlayer,
+  onAnswer
+}: GenreQuestionProps): JSX.Element => {
+  const { genre } = question;
 
   return (
     <section className="game game--genre">
@@ -55,44 +35,11 @@ const GenreQuestionScreen = (props: GenreQuestionProps): JSX.Element => {
 
       <section className="game__screen">
         <h2 className="game__title">Select {genre} tracks</h2>
-        <form
-          className="game__tracks"
-          onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-            onSubmitClick(evt);
-          }}
-        >
-          {
-            answers.map((answer, idx) => {
-              const key = `${answer.genre}-${idx}`;
-              return (
-                <div className="track" key={key}>
-                  {renderPlayer(answer.src, idx)}
-                  <div className="game__answer">
-                    <input
-                      className="game__input visually-hidden"
-                      checked={Boolean(userAnswers[idx])}
-                      id={`answer-${idx}`}
-                      name="answer"
-                      type="checkbox"
-                      value={answer.genre}
-                      onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-                        setUserAnswers([...userAnswers.slice(0, idx), target.value, ...userAnswers.slice(idx + 1)]);
-                      }}
-                    />
-                    <label className="game__check" htmlFor={`answer-${idx}`}>Check</label>
-                  </div>
-                </div>
-              );
-            })
-          }
-          {/* TODO: disable button if nothing is selected */}
-          <button
-            className="game__submit button"
-            type="submit"
-          >
-            Confirm
-          </button>
-        </form>
+        <GenreQuestionList
+          onAnswer={onAnswer}
+          question={question}
+          renderPlayer={renderPlayer}
+        />
       </section>
     </section>
   );

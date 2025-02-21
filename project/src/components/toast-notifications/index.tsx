@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../hooks';
 
 import { circlePlus, closingCross } from '../../icons';
 import { CLEAR_MESSAGE_TIMEOUT } from '../../settings';
@@ -12,7 +12,8 @@ import './toast-notifications.css';
 const ToastNotifications = (): JSX.Element => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const errors = useAppSelector((state) => state.errors);
+  // const errors = useAppSelector((state) => state.errors);
+  const errors: any = [];
   const dispatch = useAppDispatch();
 
   useEffect(() => {
