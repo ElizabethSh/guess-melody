@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AppRoute } from '../../settings';
 
+import './login.css';
 
 const Login = () => {
   const loginRef = useRef<HTMLInputElement>(null);
@@ -34,7 +35,7 @@ const Login = () => {
       <p className="login__text">Do you want to know your result? Introduce yourself!</p>
       <form className="login__form" action="" onSubmit={handleSubmit}>
         <p className="login__field">
-          <label className="login__label" htmlFor="name">Login</label>
+          <label className="login__label" htmlFor="name">E-mail</label>
           <input
             className="login__input"
             id="name"
