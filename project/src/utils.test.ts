@@ -5,7 +5,7 @@ import {isArtistAnswerCorrect, isGenreAnswerCorrect} from './utils';
 const mockArtistQuestion = makeFakeArtistQuestion();
 const mockGenreQuestion = makeFakeGenreQuestion();
 
-describe("Business Logiс: check user\'s answer", () => {
+describe('Business Logiс: check users answer', () => {
   describe('Function: isArtistAnswerCorrect', () => {
     it('should return "true" when answer is correct', () => {
       const {artist: correctAnswer} = mockArtistQuestion.song;
