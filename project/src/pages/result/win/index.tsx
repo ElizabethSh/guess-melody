@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../../settings';
 import { logoutAction } from '../../../store/api-actions';
 
-import { resetGame } from '../../../store/game/slices/process';
+import { resetGame } from '../../../store/game/slices/process/process';
 import { selectAuthorizationStatus } from '../../../store/user-process/selectors';
 import { selectMistakeCount, selectQuestions } from '../../../store/game/selectors';
 
