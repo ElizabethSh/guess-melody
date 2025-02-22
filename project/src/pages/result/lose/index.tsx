@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import { AppRoute } from '../../../settings';
-import { resetGame } from '../../../store/game/slices/process/process';
+import { resetGame } from '../../../store/game/process/process';
 
 const LoseScreen = (): JSX.Element => {
   const navigate = useNavigate();
