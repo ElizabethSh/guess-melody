@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { AppRoute, AuthorizationStatus } from '../../settings';
-import { resetGame } from '../../store/game/slices/process';
+import { resetGame } from '../../store/game/process/process';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 
 type WelcomeScreenProps = {
