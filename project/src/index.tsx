@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import {createRoot} from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import App from './components/app/app';
@@ -13,7 +13,7 @@ store.dispatch(fetchQuestionAction());
 store.dispatch(checkAuthAction());
 
 
-const root = ReactDOM.createRoot(
+const root = createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
