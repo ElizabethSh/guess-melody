@@ -21,12 +21,7 @@ const WelcomeScreen = React.lazy(() => import('../../pages/welcome-screen'));
 const WinScreen = React.lazy(() => import('../../pages/result/win'));
 
 
-type AppProps = {
-  errorsCount: number;
-};
-
-
-function App({errorsCount}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const isDataLoaded = useAppSelector(selectLoadedDataStatus);
   if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoaded) {
@@ -39,7 +34,7 @@ function App({errorsCount}: AppProps): JSX.Element {
     <BrowserRouter>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path={AppRoute.Root} key='root' element={<WelcomeScreen errorsCount={errorsCount} />} />,
+          <Route path={AppRoute.Root} key='root' element={<WelcomeScreen />} />,
           <Route path={AppRoute.Login} key='login' element={<Login />} />,
           <Route
             path={AppRoute.Result}

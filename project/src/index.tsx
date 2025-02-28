@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import App from './components/app/app';
 // import ToastNotifications from './components/toast-notifications';
 
-import { MAX_ERRORS_COUNT } from './settings';
 import store from './store';
 import { fetchQuestionAction, checkAuthAction } from './store/api-actions';
 
@@ -21,7 +20,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       {/* <ToastNotifications /> */}
-      <App errorsCount={MAX_ERRORS_COUNT} />
+      <App />
     </Provider>
   </React.StrictMode>
 );
