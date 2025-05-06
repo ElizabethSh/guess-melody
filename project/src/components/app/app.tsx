@@ -53,6 +53,6 @@ const App: React.FC = () => {
       </Suspense>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
