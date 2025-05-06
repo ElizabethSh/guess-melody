@@ -1,0 +1,38 @@
+.welcome__user {
+  align-items: center;
+  align-self: end;
+  display: flex;
+  gap: 1rem;
+}
+
+.welcome__login {
+  align-self: end;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.welcome__email {
+  color: #f0eed5;
+  font-size: 1.25rem;
+}
+
+.button {
+  background-color: transparent;
+  border-radius: 1rem;
+  border: 2px solid #ff9749;
+  color: #ff9749;
+}
+
+.button:hover,
+.button:focus {
+  border-color:#f86d02;
+  color: #f86d02;
+}
+
+.user {
+  border: 1px solid #ff9749;
+  border-radius: 50%;
+  fill: #ff9749;
+  height: 2rem;
+  width: 2rem;
+}
