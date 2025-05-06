@@ -11,11 +11,7 @@ import { logoutAction } from '../../store/api-actions';
 import './welcome-screen.css';
 
 
-type WelcomeScreenProps = {
-  errorsCount: number
-};
-
-const WelcomeScreen: React.FC<WelcomeScreenProps> = ({errorsCount}) => {
+const WelcomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
