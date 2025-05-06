@@ -47,5 +47,5 @@ describe('component/mistakes', () => {
     const mistakesContainer = screen.queryByTestId(mistakeContainerTestId);
     expect(mistakesContainer).toBeNull();
 
-  })
+  });
 });
