@@ -1,16 +1,21 @@
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { AppRoute, AuthorizationStatus } from '../../settings';
 import { resetGame } from '../../store/game/process/process';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
+import { user as userIcon } from '../../icons';
+import { logoutAction } from '../../store/api-actions';
+
+import './welcome-screen.css';
+
 
 type WelcomeScreenProps = {
   errorsCount: number
 };
 
-
-const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
+const WelcomeScreen: React.FC<WelcomeScreenProps> = ({errorsCount}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -18,13 +23,25 @@ const WelcomeScreen = ({errorsCount}: WelcomeScreenProps): JSX.Element => {
 
   return (
     <section className="welcome">
-      {/* TODO: add styles for Link */}
       {
-        authorizationStatus !== AuthorizationStatus.Auth
-          && <Link to={AppRoute.Login}>Login</Link>
+        authorizationStatus === AuthorizationStatus.Auth
+          ? (
+            <div className='welcome__user'>
+              {userIcon}
+              {/* TODO: add e-mail instead of logged in */}
+              <span className='welcome__email'>Logged in</span>
+              <button
+                className='welcome__logout button'
+                onClick={() => dispatch(logoutAction())}
+                type='button'
+              >
+                Log out
+              </button>
+            </div>)
+          : <Link className='welcome__login button' to={AppRoute.Login}>Login</Link>
       }
       <div className="welcome__logo">
-        <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
+        <img src="img/melody-logo.png" alt="Guess melody logo" width="186" height="83" />
       </div>
       <button
         className="welcome__button"
