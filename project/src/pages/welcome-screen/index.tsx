@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { AppRoute, AuthorizationStatus } from '../../settings';
+import { AppRoute, AuthorizationStatus, MAX_ERRORS_COUNT } from '../../settings';
 import { resetGame } from '../../store/game/process/process';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 import { user as userIcon } from '../../icons';
@@ -11,11 +11,7 @@ import { logoutAction } from '../../store/api-actions';
 import './welcome-screen.css';
 
 
-type WelcomeScreenProps = {
-  errorsCount: number
-};
-
-const WelcomeScreen: React.FC<WelcomeScreenProps> = ({errorsCount}) => {
+const WelcomeScreen: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -50,15 +46,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({errorsCount}) => {
           navigate(AppRoute.Game);
         }}
       >
-        <span className="visually-hidden">Начать игру</span>
+        <span className="visually-hidden">Start the game</span>
       </button>
-      <h2 className="welcome__rules-title">Правила игры</h2>
-      <p className="welcome__text">Правила просты:</p>
+      <h2 className="welcome__rules-title">The rules of the game</h2>
+      <p className="welcome__text">The rules are simple:</p>
       <ul className="welcome__rules-list">
-        <li>Нужно ответить на все вопросы.</li>
-        <li>Можно допустить {errorsCount} ошибки.</li>
+        <li>You need to answer all the questions.</li>
+        <li>You can make up to {MAX_ERRORS_COUNT} mistakes.</li>
       </ul>
-      <p className="welcome__text">Удачи!</p>
+      <p className="welcome__text">Good luck!</p>
     </section>
   );
 };
