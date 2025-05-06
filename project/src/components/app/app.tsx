@@ -21,7 +21,7 @@ const WelcomeScreen = React.lazy(() => import('../../pages/welcome-screen'));
 const WinScreen = React.lazy(() => import('../../pages/result/win'));
 
 
-function App(): JSX.Element {
+const App: React.FC = () => {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const isDataLoaded = useAppSelector(selectLoadedDataStatus);
   if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoaded) {

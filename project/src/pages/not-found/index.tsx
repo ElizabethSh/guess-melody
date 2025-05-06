@@ -1,10 +1,11 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../components/logo/logo';
 import { AppRoute } from '../../settings';
 
 
-const NotFoundPage = () => (
+const NotFoundPage: React.FC = () => (
   <section className='game'>
     <header className='game__header'>
       <Logo />
