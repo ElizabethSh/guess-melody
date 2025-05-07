@@ -37,7 +37,13 @@ function GenreQuestionList(props: GenreQuestionListProps) {
         );
       })}
 
-      <button className="game__submit button" type="submit">Ответить</button>
+      <button
+        className="game__submit button"
+        disabled={!userAnswers.some((answer) => answer === true)}
+        type="submit"
+      >
+        Confirm
+      </button>
     </form>
   );
 }
