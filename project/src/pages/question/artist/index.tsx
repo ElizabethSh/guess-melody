@@ -1,9 +1,7 @@
 import { ChangeEvent } from 'react';
 
-import Logo from '../../../components/logo/logo';
-import Mistakes from '../../../components/mistakes/mistakes';
-
 import { ArtistQuestion, UserArtistQuestionAnswer } from '../../../types/question';
+import PageHeader from '../page-header';
 
 
 type ArtistQuestionScreenProps = {
@@ -21,17 +19,7 @@ const ArtistQuestionScreen = ({
 
   return (
     <section className="game game--artist">
-      <header className="game__header">
-        <Logo />
-        <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-          <circle className="timer__line" cx="390" cy="390" r="370"
-            style={{ filter: 'url(#blur)', transform: 'rotate(-90deg) scaleY(-1)', transformOrigin: 'center' }}
-          />
-        </svg>
-
-        <Mistakes />
-      </header>
-
+      <PageHeader />
       <section className="game__screen">
         <h2 className="game__title">Who sings this song?</h2>
         <div className="game__track">

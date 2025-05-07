@@ -1,38 +1,28 @@
-import Logo from '../../../components/logo/logo';
-import Mistakes from '../../../components/mistakes/mistakes';
+import React from 'react';
+
 import GenreQuestionList from '../../../components/genre-question/list';
 
 import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question';
+import PageHeader from '../page-header';
 
 
 type GenreQuestionProps = {
+  onAnswer: (question: GenreQuestion, userAnswer: UserGenreQuestionAnswer) => void;
   question: GenreQuestion;
   renderPlayer: (src: string, idx: number) => JSX.Element;
-  onAnswer: (question: GenreQuestion, userAnswer: UserGenreQuestionAnswer) => void;
 };
 
 
-const GenreQuestionScreen = ({
+const GenreQuestionScreen: React.FC<GenreQuestionProps> = ({
+  onAnswer,
   question,
   renderPlayer,
-  onAnswer
-}: GenreQuestionProps): JSX.Element => {
+}) => {
   const { genre } = question;
 
   return (
     <section className="game game--genre">
-      <header className="game__header">
-        <Logo />
-
-        <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-          <circle className="timer__line" cx="390" cy="390" r="370"
-            style={{ filter: 'url(#blur)', transform: 'rotate(-90deg) scaleY(-1)', transformOrigin: 'center' }}
-          />
-        </svg>
-
-        <Mistakes />
-      </header>
-
+      <PageHeader />
       <section className="game__screen">
         <h2 className="game__title">Select {genre} tracks</h2>
         <GenreQuestionList
