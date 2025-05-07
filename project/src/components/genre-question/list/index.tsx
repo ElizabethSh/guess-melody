@@ -1,3 +1,4 @@
+import React from 'react';
 import {FormEvent} from 'react';
 
 import { useUserAnswers } from '../../../hooks/use-user-answers';
@@ -10,8 +11,12 @@ type GenreQuestionListProps = {
   renderPlayer: (src: string, playerIndex: number) => JSX.Element;
 };
 
-function GenreQuestionList(props: GenreQuestionListProps) {
-  const {question, onAnswer, renderPlayer} = props;
+const GenreQuestionList: React.FC<GenreQuestionListProps> = ({
+  question,
+  onAnswer,
+  renderPlayer
+}) => {
+
   const {answers} = question;
   const [userAnswers, handleAnswerChange] = useUserAnswers(question);
 
@@ -46,6 +51,6 @@ function GenreQuestionList(props: GenreQuestionListProps) {
       </button>
     </form>
   );
-}
+};
 
 export default GenreQuestionList;
