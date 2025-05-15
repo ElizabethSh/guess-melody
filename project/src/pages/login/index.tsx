@@ -1,10 +1,12 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AppRoute } from '../../settings';
 import Logo from '../../components/logo/logo';
+import { selectQuestions, selectStep } from '../../store/game/selectors';
+import { selectUserEmail } from '../../store/user-process/user-process';
 
 import './login.css';
 
@@ -14,8 +16,18 @@ const Login = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const email = useAppSelector(selectUserEmail);
+  const questions = useAppSelector(selectQuestions);
+  const step = useAppSelector(selectStep);
 
-  // TODO: should redirect to welcome screen after autorization
+  useEffect(() => {
+    if (step && step === questions.length) {
+      navigate(AppRoute.Result);
+    } else if (email) {
+      navigate(AppRoute.Root);
+    }
+  }, [step, email]);
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
@@ -32,8 +44,7 @@ const Login = () => {
       <div className="login__logo">
         <Logo />
       </div>
-      <h2 className="login__title">You are a real music lover!</h2>
-      <p className="login__text">Do you want to know your result? Introduce yourself!</p>
+      <h2 className="login__text">Do you want to know your result? Introduce yourself!</h2>
       <form className="login__form" action="" onSubmit={handleSubmit}>
         <p className="login__field">
           <label className="login__label" htmlFor="name">E-mail</label>
@@ -52,9 +63,9 @@ const Login = () => {
             id="password"
             name="password"
             ref={passwordRef}
-            type="text"
+            type="password"
           />
-          {/* TODO: how we define that password is invalid? */}
+          {/* TODO: how we define that password is invalid (should have at least 1 letter)? */}
           {/* <span className="login__error">Неверный пароль</span> */}
         </p>
         <button
