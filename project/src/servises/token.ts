@@ -1,3 +1,4 @@
+/* eslint no-empty: ["error", { "allowEmptyCatch": true }] */
 const LOCALSTORAGE_AUTH_TOKEN = 'guess-melody-auth-token';
 
 export type Token = string;
