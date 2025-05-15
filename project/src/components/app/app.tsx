@@ -8,8 +8,9 @@ import {
 import { AppRoute, AuthorizationStatus } from '../../settings';
 import { useAppSelector } from '../../hooks';
 import Loader from '../loader';
-import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 import { selectLoadedDataStatus } from '../../store/game/selectors';
+import { selectAuthorizationStatus } from '../../store/user-process/user-process';
+import { useSelector } from 'react-redux';
 
 
 const GameScreen = React.lazy(() => import('../../pages/game'));
@@ -22,7 +23,8 @@ const WinScreen = React.lazy(() => import('../../pages/result/win'));
 
 
 const App: React.FC = () => {
-  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  // TODO: why it asks to use useSelector here instead of useAppSelector?
+  const authorizationStatus = useSelector(selectAuthorizationStatus);
   const isDataLoaded = useAppSelector(selectLoadedDataStatus);
   if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoaded) {
     return (
