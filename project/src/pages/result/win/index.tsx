@@ -6,8 +6,8 @@ import { AppRoute, AuthorizationStatus } from '../../../settings';
 import { logoutAction } from '../../../store/api-actions';
 
 import { resetGame } from '../../../store/game/process/process';
-import { selectAuthorizationStatus } from '../../../store/user-process/selectors';
 import { selectMistakeCount, selectQuestions } from '../../../store/game/selectors';
+import { selectAuthorizationStatus } from '../../../store/user-process/user-process';
 
 
 const WinScreen = (): JSX.Element => {

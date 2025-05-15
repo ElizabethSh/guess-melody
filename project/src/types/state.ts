@@ -13,7 +13,8 @@ export type GameProcess = {
 };
 
 export type UserProcess = {
-  authorizationStatus: AuthorizationStatus
+  authorizationStatus: AuthorizationStatus,
+  eMail: string | null,
 };
 
 export type State = ReturnType<typeof store.getState>;
