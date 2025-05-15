@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { AppRoute, AuthorizationStatus, MAX_ERRORS_COUNT } from '../../settings';
 import { resetGame } from '../../store/game/process/process';
-import { selectAuthorizationStatus } from '../../store/user-process/selectors';
+import { selectAuthorizationStatus, selectUserEmail } from '../../store/user-process/user-process';
+
 import { user as userIcon } from '../../icons';
 import { logoutAction } from '../../store/api-actions';
 
@@ -16,6 +17,7 @@ const WelcomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const userEMail = useAppSelector(selectUserEmail);
 
   return (
     <section className="welcome">
@@ -24,8 +26,7 @@ const WelcomeScreen: React.FC = () => {
           ? (
             <div className='welcome__user'>
               {userIcon}
-              {/* TODO: add e-mail instead of logged in */}
-              <span className='welcome__email'>Logged in</span>
+              <span className='welcome__email'>{userEMail}</span>
               <button
                 className='welcome__logout button'
                 onClick={() => dispatch(logoutAction())}
