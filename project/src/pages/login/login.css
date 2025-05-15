@@ -1,3 +1,7 @@
+.login__text {
+  margin-top: 3.75rem;
+}
+
 .login__form {
   display: grid;
   gap: 1.25rem 1.75rem;
