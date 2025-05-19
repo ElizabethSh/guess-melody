@@ -2,7 +2,7 @@ import React, { useId } from 'react';
 import { useAppSelector } from '../../hooks';
 import { selectMistakeCount } from '../../store/game/selectors';
 
-const Mistakes = () => {
+const Mistakes: React.FC = () => {
   const mistakesCount = useAppSelector(selectMistakeCount);
 
   const mistakes = Array.from(Array(mistakesCount).keys());

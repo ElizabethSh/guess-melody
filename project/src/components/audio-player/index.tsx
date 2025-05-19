@@ -7,7 +7,11 @@ type AudioPlayerProps = {
 };
 
 
-const AudioPlayer = ({src, isPlaying, onPlayAudioClick}: AudioPlayerProps): JSX.Element => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({
+  src,
+  isPlaying,
+  onPlayAudioClick
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -16,7 +20,7 @@ const AudioPlayer = ({src, isPlaying, onPlayAudioClick}: AudioPlayerProps): JSX.
       return;
     }
 
-    // NOTE: check if song was loaded
+    // check if song was loaded
     audioRef.current.addEventListener('loadeddata', () => setIsLoading(false));
 
     if (isPlaying) {
@@ -30,7 +34,7 @@ const AudioPlayer = ({src, isPlaying, onPlayAudioClick}: AudioPlayerProps): JSX.
     <>
       <button
         className={`track__button track__button--${isPlaying ? 'pause' : 'play'}`}
-        disabled={isLoading} // disable button if song is loading
+        disabled={isLoading}
         onClick={onPlayAudioClick}
         type="button"
       />
