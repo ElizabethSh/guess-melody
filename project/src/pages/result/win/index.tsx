@@ -10,7 +10,7 @@ import { selectMistakeCount, selectQuestions } from '../../../store/game/selecto
 import { selectAuthorizationStatus } from '../../../store/user-process/user-process';
 
 
-const WinScreen = (): JSX.Element => {
+const WinScreen: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const mistakesCount = useAppSelector(selectMistakeCount);
@@ -35,7 +35,7 @@ const WinScreen = (): JSX.Element => {
             <div className="result-logout__wrapper">
               <Link
                 className="result-logout__link"
-                onClick={(evt: React.MouseEvent<HTMLElement>) => onLogoutClick(evt)}
+                onClick={(evt) => onLogoutClick(evt)}
                 to={AppRoute.Root}
               >
                 Log out

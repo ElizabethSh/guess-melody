@@ -1,3 +1,4 @@
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 import ArtistQuestionScreen from '../question/artist';
@@ -15,7 +16,7 @@ const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
 
 
-const GameScreen = () : JSX.Element => {
+const GameScreen: React.FC = () => {
   const mistakesCount = useAppSelector(selectMistakeCount);
   const questions = useAppSelector(selectQuestions);
   const step = useAppSelector(selectStep);
