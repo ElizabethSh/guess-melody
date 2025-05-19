@@ -1,16 +1,11 @@
 import React, { Suspense } from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Routes
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { AppRoute, AuthorizationStatus } from '../../settings';
 import { useAppSelector } from '../../hooks';
 import Loader from '../loader';
 import { selectLoadedDataStatus } from '../../store/game/selectors';
 import { selectAuthorizationStatus } from '../../store/user-process/user-process';
-import { useSelector } from 'react-redux';
 
 
 const GameScreen = React.lazy(() => import('../../pages/game'));
@@ -23,37 +18,33 @@ const WinScreen = React.lazy(() => import('../../pages/result/win'));
 
 
 const App: React.FC = () => {
-  // TODO: why it asks to use useSelector here instead of useAppSelector?
-  const authorizationStatus = useSelector(selectAuthorizationStatus);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const isDataLoaded = useAppSelector(selectLoadedDataStatus);
+
   if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoaded) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path={AppRoute.Root} key='root' element={<WelcomeScreen />} />,
-          <Route path={AppRoute.Login} key='login' element={<Login />} />,
-          <Route
-            path={AppRoute.Result}
-            element={
-              <PrivateRoute
-                authorizationStatus={authorizationStatus}
-              >
-                <WinScreen />
-              </PrivateRoute>
-            }
-          />
-          <Route path={AppRoute.Lose} key='result-lose' element={<LoseScreen />} />,
-          <Route path={AppRoute.Game} key='game' element={<GameScreen />} />,
-          <Route path="*" key='not-found' element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path={AppRoute.Root} key='root' element={<WelcomeScreen />} />,
+        <Route path={AppRoute.Login} key='login' element={<Login />} />,
+        <Route
+          path={AppRoute.Result}
+          element={
+            <PrivateRoute
+              authorizationStatus={authorizationStatus}
+            >
+              <WinScreen />
+            </PrivateRoute>
+          }
+        />
+        <Route path={AppRoute.Lose} key='result-lose' element={<LoseScreen />} />,
+        <Route path={AppRoute.Game} key='game' element={<GameScreen />} />,
+        <Route path="*" key='not-found' element={<NotFoundPage />} />
+      </Routes>
+    </Suspense>
   );
 };
 
