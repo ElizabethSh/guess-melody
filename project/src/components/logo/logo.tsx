@@ -1,8 +1,9 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppRoute } from '../../settings';
 
-const Logo = (): JSX.Element => (
+const Logo: React.FC = () => (
   <Link className="game__back" style={{marginLeft: '0'}} to={AppRoute.Root}>
     <span className="visually-hidden">Play again</span>
     <img

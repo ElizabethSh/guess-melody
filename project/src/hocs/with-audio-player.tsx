@@ -1,3 +1,4 @@
+import React from 'react';
 import {ComponentType, useState} from 'react';
 import AudioPlayer from '../components/audio-player';
 
@@ -7,11 +8,12 @@ type withAudioPlayerProps = {
 }
 
 
-const withAudioPlayer = <T extends object>(Component: ComponentType<T>): ComponentType<Omit<T, keyof withAudioPlayerProps>> => {
+const withAudioPlayer = <T extends object>(Component: ComponentType<T>):
+  ComponentType<Omit<T, keyof withAudioPlayerProps>> => {
 
   type ComponentProps = Omit<T, keyof withAudioPlayerProps>
 
-  const WithAudioPlayer = (props: ComponentProps): JSX.Element => {
+  const WithAudioPlayer: React.FC<ComponentProps> = (props) => {
     const [activePlayer, setActivePlayer] = useState(-1);
 
     return (

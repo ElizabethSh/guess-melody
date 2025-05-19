@@ -1,3 +1,4 @@
+import React from 'react';
 import { FormEvent, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ import { selectUserEmail } from '../../store/user-process/user-process';
 
 import './login.css';
 
-const Login = () => {
+const Login: React.FC = () => {
   const loginRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
