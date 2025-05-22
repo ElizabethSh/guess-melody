@@ -33,10 +33,12 @@ const Login: React.FC = () => {
     evt.preventDefault();
 
     if (loginRef.current && passwordRef.current) {
-      dispatch(loginAction({
-        login: loginRef.current?.value,
-        password: passwordRef.current?.value,
-      }));
+      dispatch(
+        loginAction({
+          login: loginRef.current?.value,
+          password: passwordRef.current?.value,
+        }),
+      );
     }
   };
 
@@ -45,10 +47,14 @@ const Login: React.FC = () => {
       <div className="login__logo">
         <Logo />
       </div>
-      <h2 className="login__text">Do you want to know your result? Introduce yourself!</h2>
+      <h2 className="login__text">
+        Do you want to know your result? Introduce yourself!
+      </h2>
       <form className="login__form" action="" onSubmit={handleSubmit}>
         <p className="login__field">
-          <label className="login__label" htmlFor="name">E-mail</label>
+          <label className="login__label" htmlFor="name">
+            E-mail
+          </label>
           <input
             className="login__input"
             id="name"
@@ -58,7 +64,9 @@ const Login: React.FC = () => {
           />
         </p>
         <p className="login__field">
-          <label className="login__label" htmlFor="password">Password</label>
+          <label className="login__label" htmlFor="password">
+            Password
+          </label>
           <input
             className="login__input"
             id="password"
@@ -69,10 +77,7 @@ const Login: React.FC = () => {
           {/* TODO: how we define that password is invalid (should have at least 1 letter)? */}
           {/* <span className="login__error">Неверный пароль</span> */}
         </p>
-        <button
-          className="login__button button"
-          type="submit"
-        >
+        <button className="login__button button" type="submit">
           Log in
         </button>
       </form>

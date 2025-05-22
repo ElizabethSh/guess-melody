@@ -9,12 +9,18 @@ import { AppRoute, GameType, MAX_ERRORS_COUNT } from '../../settings';
 
 import withAudioPlayer from '../../hocs/with-audio-player';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectMistakeCount, selectQuestions, selectStep } from '../../store/game/selectors';
-import { checkUserAnswer, incrementStep } from '../../store/game/process/process';
+import {
+  selectMistakeCount,
+  selectQuestions,
+  selectStep,
+} from '../../store/game/selectors';
+import {
+  checkUserAnswer,
+  incrementStep,
+} from '../../store/game/process/process';
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
-
 
 const GameScreen: React.FC = () => {
   const mistakesCount = useAppSelector(selectMistakeCount);
@@ -37,11 +43,10 @@ const GameScreen: React.FC = () => {
 
   const onUserAnswer = (questionItem: Question, userAnswer: UserAnswer) => {
     dispatch(incrementStep());
-    dispatch(checkUserAnswer({question: questionItem, userAnswer}));
+    dispatch(checkUserAnswer({ question: questionItem, userAnswer }));
   };
 
   switch (question.type) {
-
     case GameType.Artist:
       return (
         <ArtistQuestionScreenWrapped
@@ -61,7 +66,7 @@ const GameScreen: React.FC = () => {
       );
 
     default:
-      return (<Navigate to={AppRoute.Root} />);
+      return <Navigate to={AppRoute.Root} />;
   }
 };
 

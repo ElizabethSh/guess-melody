@@ -6,11 +6,10 @@ type AudioPlayerProps = {
   src: string;
 };
 
-
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
   src,
   isPlaying,
-  onPlayAudioClick
+  onPlayAudioClick,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -39,10 +38,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         type="button"
       />
       <div className="track__status">
-        <audio
-          ref={audioRef}
-          src={src}
-        />
+        <audio ref={audioRef} src={src} />
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
-import {ChangeEvent} from 'react';
-import {GenreQuestionAnswer} from '../../../types/question';
+import { ChangeEvent } from 'react';
+import { GenreQuestionAnswer } from '../../../types/question';
 
 type GenreQuestionItemProps = {
   answer: GenreQuestionAnswer;
@@ -8,14 +8,14 @@ type GenreQuestionItemProps = {
   onChange: (id: number, value: boolean) => void;
   renderPlayer: (path: string, playerIndex: number) => JSX.Element;
   userAnswer: boolean;
-}
+};
 
 const GenreQuestionItem: React.FC<GenreQuestionItemProps> = ({
   answer,
   id,
   onChange,
   renderPlayer,
-  userAnswer
+  userAnswer,
 }) => (
   <div className="track">
     {renderPlayer(answer.src, id)}
@@ -27,15 +27,12 @@ const GenreQuestionItem: React.FC<GenreQuestionItemProps> = ({
         value={`answer-${id}`}
         id={`answer-${id}`}
         checked={userAnswer}
-        onChange={({target}: ChangeEvent<HTMLInputElement>) => {
+        onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
           const value = target.checked;
           onChange(id, value);
         }}
       />
-      <label
-        className="game__check"
-        htmlFor={`answer-${id}`}
-      >
+      <label className="game__check" htmlFor={`answer-${id}`}>
         Select
       </label>
     </div>

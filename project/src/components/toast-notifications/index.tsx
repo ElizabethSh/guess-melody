@@ -8,7 +8,6 @@ import { clearError } from '../../store/actions/game';
 
 import './toast-notifications.css';
 
-
 const ToastNotifications: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -40,28 +39,25 @@ const ToastNotifications: React.FC = () => {
 
   return (
     <div
-      className='notifications-list'
+      className="notifications-list"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {
-        errors.map((error: string, index: number) => (
-          <div className='toast' key={error}>
-            {circlePlus}
-            <p className='toast-text'>{error}</p>
-            <button
-              className='toast-close-button'
-              onClick={() => closeErrorToast(index)}
-              type='button'
-            >
-              {closingCross}
-            </button>
-          </div>
-        ))
-      }
+      {errors.map((error: string, index: number) => (
+        <div className="toast" key={error}>
+          {circlePlus}
+          <p className="toast-text">{error}</p>
+          <button
+            className="toast-close-button"
+            onClick={() => closeErrorToast(index)}
+            type="button"
+          >
+            {closingCross}
+          </button>
+        </div>
+      ))}
     </div>
   );
-
 };
 
 export default ToastNotifications;

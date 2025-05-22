@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
-import {configureMockStore} from '@jedmao/redux-mock-store';
+import { configureMockStore } from '@jedmao/redux-mock-store';
 
 import Mistakes from './mistakes';
 
@@ -14,7 +14,7 @@ describe('component/mistakes', () => {
     const expectedCount = 3;
 
     const store = mockStore({
-      GAME: {mistakes: 3},
+      GAME: { mistakes: 3 },
     });
 
     render(
@@ -22,7 +22,7 @@ describe('component/mistakes', () => {
         <MemoryRouter>
           <Mistakes />
         </MemoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     const mistakesContainer = screen.getByTestId(mistakeContainerTestId);
@@ -33,7 +33,7 @@ describe('component/mistakes', () => {
 
   it('should not render mistakes', () => {
     const store = mockStore({
-      GAME: {mistakes: 0},
+      GAME: { mistakes: 0 },
     });
 
     render(
@@ -41,11 +41,10 @@ describe('component/mistakes', () => {
         <MemoryRouter>
           <Mistakes />
         </MemoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     const mistakesContainer = screen.queryByTestId(mistakeContainerTestId);
     expect(mistakesContainer).toBeNull();
-
   });
 });

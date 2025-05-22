@@ -1,5 +1,4 @@
-
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchQuestionAction } from '../../api-actions';
 import { NameSpace } from '../../../settings';
@@ -7,7 +6,7 @@ import { GameData } from '../../../types/state';
 
 const initialState: GameData = {
   questions: [],
-  isDataLoaded:false,
+  isDataLoaded: false,
 };
 
 export const gameData = createSlice({
@@ -23,5 +22,5 @@ export const gameData = createSlice({
         state.questions = action.payload;
         state.isDataLoaded = false;
       });
-  }
+  },
 });

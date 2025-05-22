@@ -1,4 +1,4 @@
-import {Questions} from '../types/question';
+import { Questions } from '../types/question';
 
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
@@ -24,7 +24,7 @@ export const questions: Questions = [
         genre: 'disco',
         src: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg',
       },
-    ]
+    ],
   },
   {
     // NOTE: user can select only one answer
@@ -45,7 +45,7 @@ export const questions: Questions = [
       {
         artist: 'Jim Beam',
         picture: `${AVATAR_URL}?rnd=${Math.random()}`,
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];

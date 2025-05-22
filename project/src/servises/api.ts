@@ -3,35 +3,34 @@ import axios, {
   AxiosInstance,
   AxiosRequestConfig,
   AxiosRequestHeaders,
-  AxiosResponse
+  AxiosResponse,
 } from 'axios';
-import {StatusCodes} from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import store from '../store';
 import { setError } from '../store/actions/game';
 import { getToken } from './token';
 
-
 const BASE_URL = 'https://13.design.htmlacademy.pro./guess-melody';
 const REQUEST_TIMEOUT = 5000;
 
-
 interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
-  headers: AxiosRequestHeaders
+  headers: AxiosRequestHeaders;
 }
 
 type DetailMessageType = {
   type: string;
   message: string;
-}
+};
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true
+  [StatusCodes.NOT_FOUND]: true,
 };
 
-const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+const shouldDisplayError = (response: AxiosResponse) =>
+  !!StatusCodeMapping[response.status];
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -39,16 +38,14 @@ export const createAPI = (): AxiosInstance => {
     timeout: REQUEST_TIMEOUT,
   });
 
-  api.interceptors.request.use(
-    (config: AdaptAxiosRequestConfig) => {
-      const token = getToken();
+  api.interceptors.request.use((config: AdaptAxiosRequestConfig) => {
+    const token = getToken();
 
-      if (token && config.headers) {
-        config.headers['x-token'] = token;
-      }
-      return config;
+    if (token && config.headers) {
+      config.headers['x-token'] = token;
     }
-  );
+    return config;
+  });
 
   api.interceptors.response.use(
     (response) => response,
@@ -62,7 +59,7 @@ export const createAPI = (): AxiosInstance => {
         store.dispatch(setError(detailMessage.message));
       }
       throw error;
-    }
+    },
   );
 
   return api;

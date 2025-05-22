@@ -4,9 +4,9 @@ import {
   UserGenreQuestionAnswer,
   UserAnswer,
   ArtistQuestion,
-  GenreQuestion
+  GenreQuestion,
 } from './types/question';
-import {GameType, AuthorizationStatus} from './settings';
+import { GameType, AuthorizationStatus } from './settings';
 
 export const isAnswerCorrect = (question: Question, answer: UserAnswer) => {
   if (question.type === GameType.Artist && typeof answer === 'string') {
@@ -20,12 +20,19 @@ export const isAnswerCorrect = (question: Question, answer: UserAnswer) => {
   return false;
 };
 
-export const isArtistAnswerCorrect = (question: ArtistQuestion, userAnswer: UserArtistQuestionAnswer) =>
-  userAnswer === question.song.artist;
+export const isArtistAnswerCorrect = (
+  question: ArtistQuestion,
+  userAnswer: UserArtistQuestionAnswer,
+) => userAnswer === question.song.artist;
 
-export const isGenreAnswerCorrect = (question: GenreQuestion, userAnswer: UserGenreQuestionAnswer) =>
-  userAnswer.every((answer, index) =>
-    answer === (question.answers[index].genre === question.genre));
+export const isGenreAnswerCorrect = (
+  question: GenreQuestion,
+  userAnswer: UserGenreQuestionAnswer,
+) =>
+  userAnswer.every(
+    (answer, index) =>
+      answer === (question.answers[index].genre === question.genre),
+  );
 
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus) =>
   authorizationStatus === AuthorizationStatus.Unknown;

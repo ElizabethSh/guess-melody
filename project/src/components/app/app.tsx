@@ -7,7 +7,6 @@ import Loader from '../loader';
 import { selectLoadedDataStatus } from '../../store/game/selectors';
 import { selectAuthorizationStatus } from '../../store/user-process/user-process';
 
-
 const GameScreen = React.lazy(() => import('../../pages/game'));
 const Login = React.lazy(() => import('../../pages/login'));
 const LoseScreen = React.lazy(() => import('../../pages/result/lose'));
@@ -15,7 +14,6 @@ const NotFoundPage = React.lazy(() => import('../../pages/not-found'));
 const PrivateRoute = React.lazy(() => import('../private-route'));
 const WelcomeScreen = React.lazy(() => import('../../pages/welcome-screen'));
 const WinScreen = React.lazy(() => import('../../pages/result/win'));
-
 
 const App: React.FC = () => {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
@@ -28,21 +26,24 @@ const App: React.FC = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-        <Route path={AppRoute.Root} key='root' element={<WelcomeScreen />} />,
-        <Route path={AppRoute.Login} key='login' element={<Login />} />,
+        <Route path={AppRoute.Root} key="root" element={<WelcomeScreen />} />,
+        <Route path={AppRoute.Login} key="login" element={<Login />} />,
         <Route
           path={AppRoute.Result}
           element={
-            <PrivateRoute
-              authorizationStatus={authorizationStatus}
-            >
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <WinScreen />
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Lose} key='result-lose' element={<LoseScreen />} />,
-        <Route path={AppRoute.Game} key='game' element={<GameScreen />} />,
-        <Route path="*" key='not-found' element={<NotFoundPage />} />
+        <Route
+          path={AppRoute.Lose}
+          key="result-lose"
+          element={<LoseScreen />}
+        />
+        ,
+        <Route path={AppRoute.Game} key="game" element={<GameScreen />} />,
+        <Route path="*" key="not-found" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );
