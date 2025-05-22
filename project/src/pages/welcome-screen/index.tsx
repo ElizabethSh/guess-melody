@@ -2,15 +2,21 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { AppRoute, AuthorizationStatus, MAX_ERRORS_COUNT } from '../../settings';
+import {
+  AppRoute,
+  AuthorizationStatus,
+  MAX_ERRORS_COUNT,
+} from '../../settings';
 import { resetGame } from '../../store/game/process/process';
-import { selectAuthorizationStatus, selectUserEmail } from '../../store/user-process/user-process';
+import {
+  selectAuthorizationStatus,
+  selectUserEmail,
+} from '../../store/user-process/user-process';
 
 import { user as userIcon } from '../../icons';
 import { logoutAction } from '../../store/api-actions';
 
 import './welcome-screen.css';
-
 
 const WelcomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -21,24 +27,30 @@ const WelcomeScreen: React.FC = () => {
 
   return (
     <section className="welcome">
-      {
-        authorizationStatus === AuthorizationStatus.Auth
-          ? (
-            <div className='welcome__user'>
-              {userIcon}
-              <span className='welcome__email'>{userEMail}</span>
-              <button
-                className='welcome__logout button'
-                onClick={() => dispatch(logoutAction())}
-                type='button'
-              >
-                Log out
-              </button>
-            </div>)
-          : <Link className='welcome__login button' to={AppRoute.Login}>Login</Link>
-      }
+      {authorizationStatus === AuthorizationStatus.Auth ? (
+        <div className="welcome__user">
+          {userIcon}
+          <span className="welcome__email">{userEMail}</span>
+          <button
+            className="welcome__logout button"
+            onClick={() => dispatch(logoutAction())}
+            type="button"
+          >
+            Log out
+          </button>
+        </div>
+      ) : (
+        <Link className="welcome__login button" to={AppRoute.Login}>
+          Login
+        </Link>
+      )}
       <div className="welcome__logo">
-        <img src="img/melody-logo.png" alt="Guess melody logo" width="186" height="83" />
+        <img
+          src="img/melody-logo.png"
+          alt="Guess melody logo"
+          width="186"
+          height="83"
+        />
       </div>
       <button
         className="welcome__button"

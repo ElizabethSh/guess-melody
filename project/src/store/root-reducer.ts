@@ -1,5 +1,5 @@
-import {combineReducers} from '@reduxjs/toolkit';
-import {NameSpace} from '../settings';
+import { combineReducers } from '@reduxjs/toolkit';
+import { NameSpace } from '../settings';
 
 import { gameData } from './game/data/data';
 import { gameProcess } from './game/process/process';

@@ -6,9 +6,11 @@ import { AppRoute, AuthorizationStatus } from '../../../settings';
 import { logoutAction } from '../../../store/api-actions';
 
 import { resetGame } from '../../../store/game/process/process';
-import { selectMistakeCount, selectQuestions } from '../../../store/game/selectors';
+import {
+  selectMistakeCount,
+  selectQuestions,
+} from '../../../store/game/selectors';
 import { selectAuthorizationStatus } from '../../../store/user-process/user-process';
-
 
 const WinScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -29,32 +31,31 @@ const WinScreen: React.FC = () => {
 
   return (
     <section className="result">
-      {
-        authorizationStatus === AuthorizationStatus.Auth
-          && (
-            <div className="result-logout__wrapper">
-              <Link
-                className="result-logout__link"
-                onClick={(evt) => onLogoutClick(evt)}
-                to={AppRoute.Root}
-              >
-                Log out
-              </Link>
-            </div>
-          )
-      }
+      {authorizationStatus === AuthorizationStatus.Auth && (
+        <div className="result-logout__wrapper">
+          <Link
+            className="result-logout__link"
+            onClick={(evt) => onLogoutClick(evt)}
+            to={AppRoute.Root}
+          >
+            Log out
+          </Link>
+        </div>
+      )}
       <Link className="result__logo" to={AppRoute.Root}>
-        <img src="img/melody-logo.png" alt="Guess melody" width="186" height="83" />
+        <img
+          src="img/melody-logo.png"
+          alt="Guess melody"
+          width="186"
+          height="83"
+        />
       </Link>
       <h2 className="result__title">You are a real music lover!</h2>
       <p className="result__total">
-        You answered {questions.length - mistakesCount} questions correctly and made {mistakesCount} {mistakesCount === 1 ? 'mistake' : 'mistakes'}
+        You answered {questions.length - mistakesCount} questions correctly and
+        made {mistakesCount} {mistakesCount === 1 ? 'mistake' : 'mistakes'}
       </p>
-      <button
-        className="replay"
-        onClick={onReplyClick}
-        type="button"
-      >
+      <button className="replay" onClick={onReplyClick} type="button">
         Play again
       </button>
     </section>

@@ -3,18 +3,18 @@ import store from '../store';
 import { Questions } from './question';
 
 export type GameData = {
-  questions: Questions,
-  isDataLoaded: boolean,
+  questions: Questions;
+  isDataLoaded: boolean;
 };
 
 export type GameProcess = {
-  mistakes: number,
-  step: number,
+  mistakes: number;
+  step: number;
 };
 
 export type UserProcess = {
-  authorizationStatus: AuthorizationStatus,
-  eMail: string | null,
+  authorizationStatus: AuthorizationStatus;
+  eMail: string | null;
 };
 
 export type State = ReturnType<typeof store.getState>;

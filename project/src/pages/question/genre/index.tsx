@@ -2,16 +2,20 @@ import React from 'react';
 
 import GenreQuestionList from '../../../components/genre-question/list';
 
-import { GenreQuestion, UserGenreQuestionAnswer } from '../../../types/question';
+import {
+  GenreQuestion,
+  UserGenreQuestionAnswer,
+} from '../../../types/question';
 import PageHeader from '../page-header';
 
-
 type GenreQuestionProps = {
-  onAnswer: (question: GenreQuestion, userAnswer: UserGenreQuestionAnswer) => void;
+  onAnswer: (
+    question: GenreQuestion,
+    userAnswer: UserGenreQuestionAnswer,
+  ) => void;
   question: GenreQuestion;
   renderPlayer: (src: string, idx: number) => JSX.Element;
 };
-
 
 const GenreQuestionScreen: React.FC<GenreQuestionProps> = ({
   onAnswer,

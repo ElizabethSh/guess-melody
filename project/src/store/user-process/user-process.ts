@@ -1,9 +1,8 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import {NameSpace, AuthorizationStatus} from '../../settings';
-import {State, UserProcess} from '../../types/state';
+import { NameSpace, AuthorizationStatus } from '../../settings';
+import { State, UserProcess } from '../../types/state';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
-
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -40,10 +39,10 @@ export const userProcessSlice = createSlice({
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.eMail = null;
       });
-  }
+  },
 });
 
-export const {
-  selectAuthorizationStatus,
-  selectUserEmail
-} = userProcessSlice.getSelectors((state: State) => state[NameSpace.User] || initialState);
+export const { selectAuthorizationStatus, selectUserEmail } =
+  userProcessSlice.getSelectors(
+    (state: State) => state[NameSpace.User] || initialState,
+  );

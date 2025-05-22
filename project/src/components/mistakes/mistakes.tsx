@@ -14,9 +14,14 @@ const Mistakes: React.FC = () => {
 
   return (
     <div className="game__mistakes" data-testid="mistake-container">
-      {!!mistakes.length && mistakes.map((mistake) => (
-        <div className="wrong" key={`${id}-${mistake}`} data-testid="mistake-value"/>
-      ))}
+      {!!mistakes.length &&
+        mistakes.map((mistake) => (
+          <div
+            className="wrong"
+            key={`${id}-${mistake}`}
+            data-testid="mistake-value"
+          />
+        ))}
     </div>
   );
 };

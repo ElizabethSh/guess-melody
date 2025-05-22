@@ -15,12 +15,12 @@ export enum AppRoute {
 export enum AuthorizationStatus {
   Auth = 'auth',
   NoAuth = 'no-auth',
-  Unknown = 'unknown'
+  Unknown = 'unknown',
 }
 
 export enum GameType {
   Artist = 'artist',
-  Genre = 'genre'
+  Genre = 'genre',
 }
 
 export enum NameSpace {
