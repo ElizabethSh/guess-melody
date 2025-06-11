@@ -1,16 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-
 import { AppRoute, AuthorizationStatus } from '../../../settings';
 import { logoutAction } from '../../../store/api-actions';
 
 import { resetGame } from '../../../store/game/process/process';
-import {
-  selectMistakeCount,
-  selectQuestions,
-} from '../../../store/game/selectors';
+import { selectMistakeCount } from '../../../store/game/selectors';
 import { selectAuthorizationStatus } from '../../../store/slices/user/user';
+import { selectQuestions } from '../../../store/slices/data/data';
 
 const WinScreen: React.FC = () => {
   const navigate = useNavigate();
