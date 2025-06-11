@@ -5,7 +5,7 @@ import { AppRoute, AuthorizationStatus } from '../../settings';
 import { useAppSelector } from '../../hooks';
 import Loader from '../loader';
 import { selectLoadedDataStatus } from '../../store/game/selectors';
-import { selectAuthorizationStatus } from '../../store/user-process/user-process';
+import { selectAuthorizationStatus } from '../../store/slices/user-process/user';
 
 const GameScreen = React.lazy(() => import('../../pages/game'));
 const Login = React.lazy(() => import('../../pages/login'));
