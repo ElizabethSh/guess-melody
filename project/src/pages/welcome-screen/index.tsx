@@ -11,7 +11,7 @@ import { resetGame } from '../../store/game/process/process';
 import {
   selectAuthorizationStatus,
   selectUserEmail,
-} from '../../store/slices/user-process/user';
+} from '../../store/slices/user/user';
 
 import { user as userIcon } from '../../icons';
 import { logoutAction } from '../../store/api-actions';

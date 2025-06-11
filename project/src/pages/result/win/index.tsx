@@ -10,7 +10,7 @@ import {
   selectMistakeCount,
   selectQuestions,
 } from '../../../store/game/selectors';
-import { selectAuthorizationStatus } from '../../../store/slices/user-process/user';
+import { selectAuthorizationStatus } from '../../../store/slices/user/user';
 
 const WinScreen: React.FC = () => {
   const navigate = useNavigate();
