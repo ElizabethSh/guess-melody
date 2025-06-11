@@ -20,12 +20,11 @@ cd guess_melody_10
 2. **Install dependencies:**
 
 ```bash
-# Example for Python projects
 npm install
 ```
 
 3. **Run the game:**
 
 ```bash
-npm run
+npm run start
 ```
