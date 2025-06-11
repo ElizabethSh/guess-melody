@@ -17,6 +17,5 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   transform: {
     '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
-    '^.+\\.(css|scss)$': '<rootDir>/config/jest/css-transform.js',
   },
 };
