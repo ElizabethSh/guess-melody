@@ -7,7 +7,7 @@ import { loginAction } from '../../store/api-actions';
 import { AppRoute } from '../../settings';
 import Logo from '../../components/logo/logo';
 import { selectQuestions, selectStep } from '../../store/game/selectors';
-import { selectUserEmail } from '../../store/user-process/user-process';
+import { selectUserEmail } from '../../store/slices/user/user';
 
 import './login.css';
 

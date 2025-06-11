@@ -3,7 +3,7 @@ import { NameSpace } from '../settings';
 
 import { gameData } from './game/data/data';
 import { gameProcess } from './game/process/process';
-import { userProcessSlice } from './user-process/user-process';
+import { userProcessSlice } from './slices/user/user';
 
 export const rootReducer = combineReducers({
   [NameSpace.Data]: gameData.reducer,

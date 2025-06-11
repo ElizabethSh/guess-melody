@@ -1,8 +1,8 @@
-import { userProcessSlice } from './user-process';
-import { UserProcess } from '../../types/state';
+import { userProcessSlice } from './user';
+import { UserProcess } from '../../../types/state';
 
-import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
-import { AuthorizationStatus } from '../../settings';
+import { checkAuthAction, loginAction, logoutAction } from '../../api-actions';
+import { AuthorizationStatus } from '../../../settings';
 
 describe('Reducer: user', () => {
   let state: UserProcess;
