@@ -1,6 +1,6 @@
 import React, { useId } from 'react';
 import { useAppSelector } from '../../hooks';
-import { selectMistakeCount } from '../../store/game/selectors';
+import { selectMistakeCount } from '../../store/slices/game-process/game-process';
 
 const Mistakes: React.FC = () => {
   const mistakesCount = useAppSelector(selectMistakeCount);

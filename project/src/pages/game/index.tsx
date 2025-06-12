@@ -9,12 +9,14 @@ import { AppRoute, GameType, MAX_ERRORS_COUNT } from '../../settings';
 
 import withAudioPlayer from '../../hocs/with-audio-player';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectMistakeCount, selectStep } from '../../store/game/selectors';
+
+import { selectQuestions } from '../../store/slices/data/data';
 import {
   checkUserAnswer,
   incrementStep,
-} from '../../store/game/process/process';
-import { selectQuestions } from '../../store/slices/data/data';
+  selectMistakeCount,
+  selectStep,
+} from '../../store/slices/game-process/game-process';
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);

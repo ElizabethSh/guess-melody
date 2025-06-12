@@ -2,15 +2,21 @@ import {
   makeFakeArtistQuestion,
   makeFakeGenreQuestion,
 } from '../../../mocks/mocks';
-import { gameProcess } from './process';
-import { incrementStep, checkUserAnswer, resetGame } from './process';
+import {
+  checkUserAnswer,
+  gameProcessSlice,
+  incrementStep,
+  resetGame,
+} from './game-process';
 
 const mockArtistQuestion = makeFakeArtistQuestion();
 const mockFakeGenreQuestion = makeFakeGenreQuestion();
 
 describe('Reducer: gameProcess', () => {
   it('without additional parameters should return initial state', () => {
-    expect(gameProcess.reducer(void 0, { type: 'UNKNOWN_ACTION' })).toEqual({
+    expect(
+      gameProcessSlice.reducer(void 0, { type: 'UNKNOWN_ACTION' }),
+    ).toEqual({
       step: 0,
       mistakes: 0,
     });
@@ -18,7 +24,7 @@ describe('Reducer: gameProcess', () => {
 
   it('should increment current step by a given value', () => {
     const state = { step: 0, mistakes: 0 };
-    expect(gameProcess.reducer(state, incrementStep())).toEqual({
+    expect(gameProcessSlice.reducer(state, incrementStep())).toEqual({
       step: 1,
       mistakes: 0,
     });
@@ -32,7 +38,7 @@ describe('Reducer: gameProcess', () => {
     );
 
     expect(
-      gameProcess.reducer(
+      gameProcessSlice.reducer(
         state,
         checkUserAnswer({
           question: mockArtistQuestion,
@@ -42,7 +48,7 @@ describe('Reducer: gameProcess', () => {
     ).toEqual({ step: 0, mistakes: 1 });
 
     expect(
-      gameProcess.reducer(
+      gameProcessSlice.reducer(
         state,
         checkUserAnswer({
           question: mockFakeGenreQuestion,
@@ -60,7 +66,7 @@ describe('Reducer: gameProcess', () => {
     );
 
     expect(
-      gameProcess.reducer(
+      gameProcessSlice.reducer(
         state,
         checkUserAnswer({
           question: mockArtistQuestion,
@@ -70,7 +76,7 @@ describe('Reducer: gameProcess', () => {
     ).toEqual({ step: 0, mistakes: 0 });
 
     expect(
-      gameProcess.reducer(
+      gameProcessSlice.reducer(
         state,
         checkUserAnswer({
           question: mockFakeGenreQuestion,
@@ -81,17 +87,23 @@ describe('Reducer: gameProcess', () => {
   });
 
   it('should have reset game', () => {
-    expect(gameProcess.reducer({ step: 5, mistakes: 1 }, resetGame())).toEqual({
+    expect(
+      gameProcessSlice.reducer({ step: 5, mistakes: 1 }, resetGame()),
+    ).toEqual({
       step: 0,
       mistakes: 0,
     });
 
-    expect(gameProcess.reducer({ step: 0, mistakes: 0 }, resetGame())).toEqual({
+    expect(
+      gameProcessSlice.reducer({ step: 0, mistakes: 0 }, resetGame()),
+    ).toEqual({
       step: 0,
       mistakes: 0,
     });
 
-    expect(gameProcess.reducer({ step: 2, mistakes: 0 }, resetGame())).toEqual({
+    expect(
+      gameProcessSlice.reducer({ step: 2, mistakes: 0 }, resetGame()),
+    ).toEqual({
       step: 0,
       mistakes: 0,
     });
