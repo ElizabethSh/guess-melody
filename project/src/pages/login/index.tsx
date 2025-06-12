@@ -8,7 +8,7 @@ import { AppRoute } from '../../settings';
 import Logo from '../../components/logo/logo';
 import { selectUserEmail } from '../../store/slices/user/user';
 import { selectQuestions } from '../../store/slices/data/data';
-import { selectStep } from '../../store/game/selectors';
+import { selectStep } from '../../store/slices/game-process/game-process';
 
 import './login.css';
 

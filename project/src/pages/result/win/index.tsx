@@ -4,10 +4,12 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../../settings';
 import { logoutAction } from '../../../store/api-actions';
 
-import { resetGame } from '../../../store/game/process/process';
-import { selectMistakeCount } from '../../../store/game/selectors';
 import { selectAuthorizationStatus } from '../../../store/slices/user/user';
 import { selectQuestions } from '../../../store/slices/data/data';
+import {
+  resetGame,
+  selectMistakeCount,
+} from '../../../store/slices/game-process/game-process';
 
 const WinScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const WinScreen: React.FC = () => {
       <Link className="result__logo" to={AppRoute.Root}>
         <img
           src="img/melody-logo.png"
-          alt="Guess melody"
+          alt="Guess melody logo"
           width="186"
           height="83"
         />
