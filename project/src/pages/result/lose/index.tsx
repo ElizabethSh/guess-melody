@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import { AppRoute } from '../../../settings';
-import { resetGame } from '../../../store/game/process/process';
+import { resetGame } from '../../../store/slices/game-process/game-process';
 
 const LoseScreen: React.FC = () => {
   const navigate = useNavigate();

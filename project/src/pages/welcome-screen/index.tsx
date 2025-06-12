@@ -7,7 +7,6 @@ import {
   AuthorizationStatus,
   MAX_ERRORS_COUNT,
 } from '../../settings';
-import { resetGame } from '../../store/game/process/process';
 import {
   selectAuthorizationStatus,
   selectUserEmail,
@@ -15,6 +14,7 @@ import {
 
 import { user as userIcon } from '../../icons';
 import { logoutAction } from '../../store/api-actions';
+import { resetGame } from '../../store/slices/game-process/game-process';
 
 import './welcome-screen.css';
 
