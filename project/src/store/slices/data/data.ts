@@ -2,17 +2,21 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchQuestionAction } from '../../api-actions';
 import { NameSpace } from '../../../settings';
-import { GameData } from '../../../types/state';
+import { GameData, State } from '../../../types/state';
 
 const initialState: GameData = {
   questions: [],
   isDataLoaded: false,
 };
 
-export const gameData = createSlice({
+export const gameQuestionsSlice = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {},
+  selectors: {
+    selectQuestions: (state) => state.questions,
+    selectLoadedDataStatus: (state) => state.isDataLoaded,
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchQuestionAction.pending, (state) => {
@@ -24,3 +28,8 @@ export const gameData = createSlice({
       });
   },
 });
+
+export const { selectQuestions, selectLoadedDataStatus } =
+  gameQuestionsSlice.getSelectors(
+    (state: State) => state[NameSpace.Data] || initialState,
+  );

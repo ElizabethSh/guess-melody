@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../settings';
 import { useAppSelector } from '../../hooks';
 import Loader from '../loader';
-import { selectLoadedDataStatus } from '../../store/game/selectors';
 import { selectAuthorizationStatus } from '../../store/slices/user/user';
+import { selectLoadedDataStatus } from '../../store/slices/data/data';
 
 const GameScreen = React.lazy(() => import('../../pages/game'));
 const Login = React.lazy(() => import('../../pages/login'));
