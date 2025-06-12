@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GameProcess } from '../../../types/state';
-import { FIRST_GAME_STEP, NameSpace } from '../../../settings';
+
+import { NameSpace, FIRST_GAME_STEP } from '../../../settings';
+import { GameProcess, State } from '../../../types/state';
 import { isAnswerCorrect } from '../../../utils';
 
 const initialState: GameProcess = {
@@ -10,7 +11,7 @@ const initialState: GameProcess = {
 
 const STEP_COUNT = 1;
 
-export const gameProcess = createSlice({
+export const gameProcessSlice = createSlice({
   name: NameSpace.Game,
   initialState,
   reducers: {
@@ -26,7 +27,15 @@ export const gameProcess = createSlice({
       state.step = FIRST_GAME_STEP;
     },
   },
+  selectors: {
+    selectMistakeCount: (state) => state.mistakes,
+    selectStep: (state) => state.step,
+  },
 });
 
+export const { selectMistakeCount, selectStep } = gameProcessSlice.getSelectors(
+  (state: State) => state[NameSpace.Game] || initialState,
+);
+
 export const { incrementStep, checkUserAnswer, resetGame } =
-  gameProcess.actions;
+  gameProcessSlice.actions;
