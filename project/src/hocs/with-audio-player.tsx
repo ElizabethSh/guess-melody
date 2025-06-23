@@ -1,4 +1,3 @@
-/* eslint react/jsx-curly-newline: "off" */
 import React from 'react';
 import { ComponentType, useState } from 'react';
 import AudioPlayer from '../components/audio-player';

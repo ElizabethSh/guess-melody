@@ -26,11 +26,10 @@ export const checkAuthAction = createAsyncThunk<
   string | null,
   undefined,
   {
-    dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
+>('user/checkAuth', async (_arg, { extra: api }) => {
   const { data } = await api.get(ApiRoute.Login);
   return data.email;
 });
@@ -39,31 +38,26 @@ export const loginAction = createAsyncThunk<
   string,
   AuthData,
   {
-    dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->(
-  'user/login',
-  async ({ login: email, password }, { dispatch, extra: api }) => {
-    const { data } = await api.post<UserData>(ApiRoute.Login, {
-      email,
-      password,
-    });
-    setToken(data.token);
-    return data.email;
-  },
-);
+>('user/login', async ({ login: email, password }, { extra: api }) => {
+  const { data } = await api.post<UserData>(ApiRoute.Login, {
+    email,
+    password,
+  });
+  setToken(data.token);
+  return data.email;
+});
 
 export const logoutAction = createAsyncThunk<
   void,
   undefined,
   {
-    dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('user/logout', async (_arg, { dispatch, extra: api }) => {
+>('user/logout', async (_arg, { extra: api }) => {
   await api.delete(ApiRoute.Logout);
   dropToken();
 });
