@@ -1,15 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Guess melody</title>
-    <link href="css/main.min.css" rel="stylesheet">
+    <link href="css/main.min.css" rel="stylesheet" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
     <main class="app">
-      <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: -1200em;">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        style="position: absolute; left: -1200em"
+      >
         <filter id="blur">
           <feGaussianBlur in="SourceGraphic" stdDeviation="5"></feGaussianBlur>
           <feOffset dx="0" dy="0"></feOffset>
@@ -25,9 +28,15 @@
 
     <footer class="footer">
       <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
-        <img src="img/icon-cc.png" alt="Creative Commons License" width="88" height="31" style="border-width:0">
+        <img
+          src="img/icon-cc.png"
+          alt="Creative Commons License"
+          width="88"
+          height="31"
+          style="border-width: 0"
+        />
       </a>
-
     </footer>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

@@ -12,7 +12,7 @@ export const getToken = (): Token => {
     ) {
       token = localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN) || '';
     }
-  } catch (err) {}
+  } catch {}
   return token;
 };
 
@@ -24,7 +24,7 @@ export const setToken = (token: Token): void => {
     ) {
       localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN, token);
     }
-  } catch (err) {}
+  } catch {}
 };
 
 export const dropToken = (): void => {
@@ -35,5 +35,5 @@ export const dropToken = (): void => {
     ) {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN);
     }
-  } catch (err) {}
+  } catch {}
 };
