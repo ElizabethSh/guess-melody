@@ -36,7 +36,7 @@ describe('App component', () => {
     );
     expect(screen.getByText('Loading...')).toBeVisible();
   });
-  it('should renedr error page', () => {
+  it('should render error page', () => {
     const store = mockStore({
       USER: { authorizationStatus: AuthorizationStatus.Auth },
       DATA: { isLoadingData: false, isError: true },
