@@ -8,7 +8,7 @@ describe('Reducer: user', () => {
   let state: UserProcess;
 
   beforeEach(() => {
-    state = { authorizationStatus: AuthorizationStatus.Unknown, eMail: null };
+    state = { authorizationStatus: AuthorizationStatus.Unknown, email: null };
   });
 
   it('without additional parameters should return initial state', () => {
@@ -16,7 +16,7 @@ describe('Reducer: user', () => {
       userProcessSlice.reducer(undefined, { type: 'UNKNOWN_ACTION' }),
     ).toEqual({
       authorizationStatus: AuthorizationStatus.Unknown,
-      eMail: null,
+      email: null,
     });
   });
 
@@ -35,7 +35,7 @@ describe('Reducer: user', () => {
         }),
       ).toEqual({
         authorizationStatus: AuthorizationStatus.NoAuth,
-        eMail: null,
+        email: null,
       });
     });
   });
@@ -51,7 +51,7 @@ describe('Reducer: user', () => {
         userProcessSlice.reducer(state, { type: loginAction.rejected.type }),
       ).toEqual({
         authorizationStatus: AuthorizationStatus.NoAuth,
-        eMail: null,
+        email: null,
       });
     });
   });
@@ -62,7 +62,7 @@ describe('Reducer: user', () => {
         userProcessSlice.reducer(state, { type: logoutAction.fulfilled.type }),
       ).toEqual({
         authorizationStatus: AuthorizationStatus.NoAuth,
-        eMail: null,
+        email: null,
       });
     });
   });
