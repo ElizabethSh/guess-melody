@@ -4,7 +4,8 @@ import { Questions } from './question';
 
 export type GameData = {
   questions: Questions;
-  isDataLoaded: boolean;
+  isLoadingData: boolean;
+  isError: boolean;
 };
 
 export type GameProcess = {
@@ -14,7 +15,7 @@ export type GameProcess = {
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
-  eMail: string | null;
+  email: string | null;
 };
 
 export type State = ReturnType<typeof store.getState>;

@@ -1,0 +1,15 @@
+.error-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 22rem;
+}
+
+.error-page-title {
+  color: #bd1818;
+}
+
+.error-page-button {
+  margin-top: auto;
+}

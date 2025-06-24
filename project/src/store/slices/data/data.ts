@@ -6,7 +6,8 @@ import { GameData, State } from '../../../types/state';
 
 const initialState: GameData = {
   questions: [],
-  isDataLoaded: false,
+  isLoadingData: false,
+  isError: false,
 };
 
 export const gameQuestionsSlice = createSlice({
@@ -15,21 +16,31 @@ export const gameQuestionsSlice = createSlice({
   reducers: {},
   selectors: {
     selectQuestions: (state) => state.questions,
-    selectLoadedDataStatus: (state) => state.isDataLoaded,
+    selectLoadingDataStatus: (state) => state.isLoadingData,
+    selectLoadingDataError: (state) => state.isError,
   },
   extraReducers(builder) {
     builder
       .addCase(fetchQuestionAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isLoadingData = true;
       })
       .addCase(fetchQuestionAction.fulfilled, (state, action) => {
         state.questions = action.payload;
-        state.isDataLoaded = false;
+        state.isLoadingData = false;
+        state.isError = false;
+      })
+      .addCase(fetchQuestionAction.rejected, (state) => {
+        state.questions = initialState.questions;
+        state.isLoadingData = false;
+        state.isError = true;
       });
   },
 });
 
-export const { selectQuestions, selectLoadedDataStatus } =
-  gameQuestionsSlice.getSelectors(
-    (state: State) => state[NameSpace.Data] || initialState,
-  );
+export const {
+  selectQuestions,
+  selectLoadingDataStatus,
+  selectLoadingDataError,
+} = gameQuestionsSlice.getSelectors(
+  (state: State) => state[NameSpace.Data] || initialState,
+);

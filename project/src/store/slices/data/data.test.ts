@@ -13,17 +13,18 @@ describe('Reducer: gameData', () => {
       gameQuestionsSlice.reducer(void 0, { type: 'UNKNOWN_ACTION' }),
     ).toEqual({
       questions: [],
-      isDataLoaded: false,
+      isLoadingData: false,
+      isError: false,
     });
   });
 
   it('should update questions by load questions', () => {
-    const state = { questions: [], isDataLoaded: false };
+    const state = { questions: [], isLoadingData: false, isError: false };
     expect(
       gameQuestionsSlice.reducer(state, {
         type: fetchQuestionAction.fulfilled.type,
         payload: questions,
       }),
-    ).toEqual({ questions, isDataLoaded: false });
+    ).toEqual({ questions, isLoadingData: false, isError: false });
   });
 });
