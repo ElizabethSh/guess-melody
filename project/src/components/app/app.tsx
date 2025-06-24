@@ -2,10 +2,15 @@ import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { AppRoute, AuthorizationStatus } from '../../settings';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Loader from '../loader';
 import { selectAuthorizationStatus } from '../../store/slices/user/user';
-import { selectLoadedDataStatus } from '../../store/slices/data/data';
+import {
+  selectLoadingDataError,
+  selectLoadingDataStatus,
+} from '../../store/slices/data/data';
+import ErrorPage from '../../pages/error';
+import { fetchQuestionAction } from '../../store/api-actions';
 
 const GameScreen = React.lazy(() => import('../../pages/game'));
 const Login = React.lazy(() => import('../../pages/login'));
@@ -16,11 +21,20 @@ const WelcomeScreen = React.lazy(() => import('../../pages/welcome-screen'));
 const WinScreen = React.lazy(() => import('../../pages/result/win'));
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const isDataLoaded = useAppSelector(selectLoadedDataStatus);
+  const isLoadingData = useAppSelector(selectLoadingDataStatus);
+  const isLoadingDataError = useAppSelector(selectLoadingDataError);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoaded) {
+  if (
+    authorizationStatus === AuthorizationStatus.Unknown ||
+    (isLoadingData && !isLoadingDataError)
+  ) {
     return <Loader />;
+  }
+
+  if (isLoadingDataError) {
+    return <ErrorPage onButtonClick={() => dispatch(fetchQuestionAction())} />;
   }
 
   return (
