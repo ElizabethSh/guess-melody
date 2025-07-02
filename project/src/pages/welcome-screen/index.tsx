@@ -15,6 +15,7 @@ import {
 import { user as userIcon } from '../../icons';
 import { logoutAction } from '../../store/api-actions';
 import { resetGame } from '../../store/slices/game-process/game-process';
+import Logo from '../../components/logo/logo';
 
 import './welcome-screen.css';
 
@@ -45,12 +46,7 @@ const WelcomeScreen: React.FC = () => {
         </Link>
       )}
       <div className="welcome__logo">
-        <img
-          src="img/melody-logo.png"
-          alt="Guess melody logo"
-          width="186"
-          height="83"
-        />
+        <Logo />
       </div>
       <button
         className="welcome__button"
