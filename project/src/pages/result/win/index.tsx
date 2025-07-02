@@ -10,6 +10,7 @@ import {
   resetGame,
   selectMistakeCount,
 } from '../../../store/slices/game-process/game-process';
+import Logo from '../../../components/logo/logo';
 
 const WinScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -41,14 +42,7 @@ const WinScreen: React.FC = () => {
           </Link>
         </div>
       )}
-      <Link className="result__logo" to={AppRoute.Root}>
-        <img
-          src="img/melody-logo.png"
-          alt="Guess melody logo"
-          width="186"
-          height="83"
-        />
-      </Link>
+      <Logo />
       <h2 className="result__title">You are a real music lover!</h2>
       <p className="result__total">
         You answered {questions.length - mistakesCount} questions correctly and

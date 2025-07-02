@@ -1,19 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { AppRoute } from '../../settings';
+import { logo } from '../../icons';
 
-const Logo: React.FC = () => (
-  <Link className="game__back" style={{ marginLeft: '0' }} to={AppRoute.Root}>
-    <span className="visually-hidden">Play again</span>
-    <img
-      alt="Guess melody logo"
-      className="game__logo"
-      height="83"
-      src="img/melody-logo-ginger.png"
-      width="186"
-    />
-  </Link>
-);
+import './logo.css';
+
+const Logo: React.FC = () => {
+  const { pathname } = useLocation();
+
+  if (pathname === AppRoute.Root) {
+    return logo;
+  }
+
+  return (
+    <Link className="game__back" to={AppRoute.Root}>
+      <span className="visually-hidden">Play again</span>
+      {logo}
+    </Link>
+  );
+};
 
 export default Logo;

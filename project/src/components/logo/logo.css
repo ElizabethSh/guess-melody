@@ -1,0 +1,11 @@
+.game__back {
+  margin-left: 0;
+}
+
+.game__logo path {
+  fill: var(--dark-gray);
+}
+
+.game__back .game__logo path {
+  fill: var(--orange);
+}
