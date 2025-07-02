@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { FIRST_GAME_STEP, NameSpace } from '@settings';
+import { isAnswerCorrect } from '@utils';
 
-import { FIRST_GAME_STEP, NameSpace } from '../../../settings';
-import { GameProcess, State } from '../../../types/state';
-import { isAnswerCorrect } from '../../../utils';
+import { GameProcess, State } from 'types/state';
 
 const initialState: GameProcess = {
   mistakes: 0,

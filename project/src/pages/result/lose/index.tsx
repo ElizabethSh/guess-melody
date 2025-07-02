@@ -1,10 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import Logo from '../../../components/logo/logo';
-import { useAppDispatch } from '../../../hooks';
-import { AppRoute } from '../../../settings';
-import { resetGame } from '../../../store/slices/game-process/game-process';
+import Logo from '@components/logo/logo';
+import { useAppDispatch } from '@hooks/use-store';
+import { AppRoute } from '@settings';
+import { resetGame } from '@store/slices/game-process/game-process';
 
 const LoseScreen: React.FC = () => {
   const navigate = useNavigate();

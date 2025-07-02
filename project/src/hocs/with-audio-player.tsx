@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentType, useState } from 'react';
-
-import AudioPlayer from '../components/audio-player';
+import AudioPlayer from '@components/audio-player';
 
 type withAudioPlayerProps = {
   renderPlayer: (src: string, idx: number) => void;

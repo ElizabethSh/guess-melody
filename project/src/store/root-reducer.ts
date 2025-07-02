@@ -1,6 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-
-import { NameSpace } from '../settings';
+import { NameSpace } from '@settings';
 
 import { gameQuestionsSlice } from './slices/data/data';
 import { gameProcessSlice } from './slices/game-process/game-process';

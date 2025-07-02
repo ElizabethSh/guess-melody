@@ -1,5 +1,7 @@
-import { AuthorizationStatus } from '../../../settings';
-import { UserProcess } from '../../../types/state';
+import { AuthorizationStatus } from '@settings';
+
+import { UserProcess } from 'types/state';
+
 import { checkAuthAction, loginAction, logoutAction } from '../../api-actions';
 
 import { userProcessSlice } from './user';

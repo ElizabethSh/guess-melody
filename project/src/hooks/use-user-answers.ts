@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { GenreQuestion } from '../types/question';
+import { GenreQuestion } from 'types/question';
 
 type ResultUserAnswers = [boolean[], (id: number, value: boolean) => void];
 

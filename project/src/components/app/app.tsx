@@ -1,24 +1,24 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import ErrorPage from '../../pages/error';
-import { AppRoute, AuthorizationStatus } from '../../settings';
-import { fetchQuestionAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '@hooks/use-store';
+import ErrorPage from '@pages/error';
+import { AppRoute, AuthorizationStatus } from '@settings';
+import { fetchQuestionAction } from '@store/api-actions';
 import {
   selectLoadingDataError,
   selectLoadingDataStatus,
-} from '../../store/slices/data/data';
-import { selectAuthorizationStatus } from '../../store/slices/user/user';
+} from '@store/slices/data/data';
+import { selectAuthorizationStatus } from '@store/slices/user/user';
+
 import Loader from '../loader';
 
-const GameScreen = React.lazy(() => import('../../pages/game'));
-const Login = React.lazy(() => import('../../pages/login'));
-const LoseScreen = React.lazy(() => import('../../pages/result/lose'));
-const NotFoundPage = React.lazy(() => import('../../pages/not-found'));
-const PrivateRoute = React.lazy(() => import('../private-route'));
-const WelcomeScreen = React.lazy(() => import('../../pages/welcome-screen'));
-const WinScreen = React.lazy(() => import('../../pages/result/win'));
+const GameScreen = React.lazy(() => import('@pages/game'));
+const Login = React.lazy(() => import('@pages/login'));
+const LoseScreen = React.lazy(() => import('@pages/result/lose'));
+const NotFoundPage = React.lazy(() => import('@pages/not-found'));
+const PrivateRoute = React.lazy(() => import('@components/private-route'));
+const WelcomeScreen = React.lazy(() => import('@pages/welcome-screen'));
+const WinScreen = React.lazy(() => import('@pages/result/win'));
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();

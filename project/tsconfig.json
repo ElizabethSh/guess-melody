@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "target": "es2020",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -11,6 +12,20 @@
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "outDir": "./dist",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@context/*": ["context/*"],
+      "@hooks/*": ["hooks/*"],
+      "@pages/*": ["pages/*"],
+      "@services/*": ["services/*"],
+      "@store/*": ["store/*"],
+      "@icons": ["icons.tsx"],
+      "@settings": ["settings.ts"],
+      "@utils": ["utils.ts"],
+      "types/*": ["types/*"]
+      // add more aliases here
+    },
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,

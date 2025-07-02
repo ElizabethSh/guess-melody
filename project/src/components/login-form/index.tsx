@@ -1,8 +1,7 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-import { useAppDispatch } from '../../hooks';
-import { loginAction } from '../../store/api-actions';
+import { useAppDispatch } from '@hooks/use-store';
+import { loginAction } from '@store/api-actions';
 
 import './login-form.css';
 
