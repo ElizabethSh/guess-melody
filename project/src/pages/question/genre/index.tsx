@@ -1,10 +1,8 @@
 import React from 'react';
+import GenreQuestionList from '@components/genre-question/list';
 
-import GenreQuestionList from '../../../components/genre-question/list';
-import {
-  GenreQuestion,
-  UserGenreQuestionAnswer,
-} from '../../../types/question';
+import { GenreQuestion, UserGenreQuestionAnswer } from 'types/question';
+
 import PageHeader from '../page-header';
 
 type GenreQuestionProps = {

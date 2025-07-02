@@ -1,4 +1,5 @@
-import { AuthorizationStatus } from '../settings';
+import { AuthorizationStatus } from '@settings';
+
 import store from '../store';
 
 import { Questions } from './question';

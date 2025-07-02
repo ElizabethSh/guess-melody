@@ -1,11 +1,9 @@
 import React from 'react';
 import { FormEvent } from 'react';
+import { useUserAnswers } from '@hooks/use-user-answers';
 
-import { useUserAnswers } from '../../../hooks/use-user-answers';
-import {
-  GenreQuestion,
-  UserGenreQuestionAnswer,
-} from '../../../types/question';
+import { GenreQuestion, UserGenreQuestionAnswer } from 'types/question';
+
 import GenreQuestionItem from '../item';
 
 type GenreQuestionListProps = {

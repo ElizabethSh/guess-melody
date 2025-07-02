@@ -1,3 +1,5 @@
+import { AuthorizationStatus, GameType } from '@settings';
+
 import {
   ArtistQuestion,
   GenreQuestion,
@@ -5,8 +7,7 @@ import {
   UserAnswer,
   UserArtistQuestionAnswer,
   UserGenreQuestionAnswer,
-} from './types/question';
-import { AuthorizationStatus, GameType } from './settings';
+} from 'types/question';
 
 export const isAnswerCorrect = (question: Question, answer: UserAnswer) => {
   if (question.type === GameType.Artist && typeof answer === 'string') {

@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
+import { GameType } from '@settings';
 
-import { GameType } from '../settings';
-import { ArtistQuestion, GenreQuestion } from '../types/question';
+import { ArtistQuestion, GenreQuestion } from 'types/question';
 
 export const makeFakeArtistQuestion = (): ArtistQuestion =>
   ({

@@ -1,9 +1,7 @@
 import { ChangeEvent } from 'react';
 
-import {
-  ArtistQuestion,
-  UserArtistQuestionAnswer,
-} from '../../../types/question';
+import { ArtistQuestion, UserArtistQuestionAnswer } from 'types/question';
+
 import PageHeader from '../page-header';
 
 type ArtistQuestionScreenProps = {

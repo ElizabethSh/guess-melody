@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { NameSpace } from '@settings';
+import { fetchQuestionAction } from '@store/api-actions';
 
-import { NameSpace } from '../../../settings';
-import { GameData, State } from '../../../types/state';
-import { fetchQuestionAction } from '../../api-actions';
+import { GameData, State } from 'types/state';
 
 const initialState: GameData = {
   questions: [],
