@@ -1,3 +1,4 @@
+import { setError } from '@store/actions/game';
 import axios, {
   AxiosError,
   AxiosInstance,
@@ -8,7 +9,6 @@ import axios, {
 import { StatusCodes } from 'http-status-codes';
 
 import store from '../store';
-import { setError } from '../store/actions/game';
 
 import { getToken } from './token';
 
