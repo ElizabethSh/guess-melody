@@ -9,6 +9,8 @@ import App from './components/app/app';
 import store from './store';
 import { fetchQuestionAction, checkAuthAction } from './store/api-actions';
 
+import './styles.css';
+
 store.dispatch(fetchQuestionAction());
 store.dispatch(checkAuthAction());
 
