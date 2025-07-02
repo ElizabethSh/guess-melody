@@ -18,10 +18,12 @@
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
+      "@services/*": ["services/*"],
       "@store/*": ["store/*"],
+      "@icons": ["icons.tsx"],
       "@settings": ["settings.ts"],
-      "types/*": ["types/*"],
-      "@utils/*": ["utils.ts"]
+      "@utils": ["utils.ts"],
+      "types/*": ["types/*"]
       // add more aliases here
     },
     "resolveJsonModule": true,
