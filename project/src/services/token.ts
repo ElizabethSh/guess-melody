@@ -7,8 +7,8 @@ export const getToken = (): Token => {
   let token = '';
   try {
     if (
-      global.localStorage &&
-      typeof global.localStorage.getItem === 'function'
+      window.localStorage &&
+      typeof window.localStorage.getItem === 'function'
     ) {
       token = localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN) || '';
     }
@@ -19,8 +19,8 @@ export const getToken = (): Token => {
 export const setToken = (token: Token): void => {
   try {
     if (
-      global.localStorage &&
-      typeof global.localStorage.setItem === 'function'
+      window.localStorage &&
+      typeof window.localStorage.setItem === 'function'
     ) {
       localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN, token);
     }
@@ -30,8 +30,8 @@ export const setToken = (token: Token): void => {
 export const dropToken = (): void => {
   try {
     if (
-      global.localStorage &&
-      typeof global.localStorage.removeItem === 'function'
+      window.localStorage &&
+      typeof window.localStorage.removeItem === 'function'
     ) {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN);
     }
