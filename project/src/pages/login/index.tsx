@@ -2,13 +2,13 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import LoginForm from '../../components/login-form';
+import Logo from '../../components/logo/logo';
 import { useAppSelector } from '../../hooks';
 import { AppRoute } from '../../settings';
-import Logo from '../../components/logo/logo';
-import { selectUserEmail } from '../../store/slices/user/user';
 import { selectQuestions } from '../../store/slices/data/data';
 import { selectStep } from '../../store/slices/game-process/game-process';
-import LoginForm from '../../components/login-form';
+import { selectUserEmail } from '../../store/slices/user/user';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();

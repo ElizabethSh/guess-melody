@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChangeEvent } from 'react';
+
 import { GenreQuestionAnswer } from '../../../types/question';
 
 type GenreQuestionItemProps = {

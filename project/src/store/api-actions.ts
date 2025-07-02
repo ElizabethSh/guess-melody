@@ -1,13 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
+import { dropToken, setToken } from '../servises/token';
 import { ApiRoute } from '../settings';
-
-import { AuthData, UserData } from '../types/user';
 import { Questions } from '../types/question';
 import { AppDispatch, State } from '../types/state';
-
-import { dropToken, setToken } from '../servises/token';
+import { AuthData, UserData } from '../types/user';
 
 export const fetchQuestionAction = createAsyncThunk<
   Questions,

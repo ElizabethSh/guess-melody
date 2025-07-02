@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { NameSpace, FIRST_GAME_STEP } from '../../../settings';
+import { FIRST_GAME_STEP,NameSpace } from '../../../settings';
 import { GameProcess, State } from '../../../types/state';
 import { isAnswerCorrect } from '../../../utils';
 

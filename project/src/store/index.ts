@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import { createAPI } from './../servises/api';
 import { rootReducer } from './root-reducer';
 

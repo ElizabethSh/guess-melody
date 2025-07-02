@@ -1,7 +1,7 @@
-import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { configureMockStore } from '@jedmao/redux-mock-store';
+import { render, screen } from '@testing-library/react';
 
 import Mistakes from './mistakes';
 

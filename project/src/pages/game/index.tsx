@@ -1,15 +1,9 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-import ArtistQuestionScreen from '../question/artist';
-import GenreQuestionScreen from '../question/genre';
-
-import { Question, UserAnswer } from '../../types/question';
-import { AppRoute, GameType, MAX_ERRORS_COUNT } from '../../settings';
-
 import withAudioPlayer from '../../hocs/with-audio-player';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-
+import { AppRoute, GameType, MAX_ERRORS_COUNT } from '../../settings';
 import { selectQuestions } from '../../store/slices/data/data';
 import {
   checkUserAnswer,
@@ -17,6 +11,9 @@ import {
   selectMistakeCount,
   selectStep,
 } from '../../store/slices/game-process/game-process';
+import { Question, UserAnswer } from '../../types/question';
+import ArtistQuestionScreen from '../question/artist';
+import GenreQuestionScreen from '../question/genre';
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);

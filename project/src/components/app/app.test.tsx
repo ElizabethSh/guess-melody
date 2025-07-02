@@ -1,9 +1,11 @@
-import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import App from './app';
+import { render, screen } from '@testing-library/react';
+
 import { AuthorizationStatus } from '../../settings';
+
+import App from './app';
 
 const mockStore = configureMockStore();
 
