@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { AuthorizationStatus,NameSpace } from '../../../settings';
+import { AuthorizationStatus, NameSpace } from '../../../settings';
 import { State, UserProcess } from '../../../types/state';
 import { checkAuthAction, loginAction, logoutAction } from '../../api-actions';
 
