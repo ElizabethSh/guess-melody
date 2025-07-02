@@ -4,10 +4,9 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './components/app/app';
+import { checkAuthAction,fetchQuestionAction } from './store/api-actions';
 // import ToastNotifications from './components/toast-notifications';
-
 import store from './store';
-import { fetchQuestionAction, checkAuthAction } from './store/api-actions';
 
 import './styles.css';
 

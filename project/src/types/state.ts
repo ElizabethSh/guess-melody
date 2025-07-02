@@ -1,5 +1,6 @@
 import { AuthorizationStatus } from '../settings';
 import store from '../store';
+
 import { Questions } from './question';
 
 export type GameData = {

@@ -3,6 +3,7 @@ import {
   makeFakeGenreQuestion,
 } from '../../../mocks/mocks';
 import { fetchQuestionAction } from '../../api-actions';
+
 import { gameQuestionsSlice } from './data';
 
 const questions = [makeFakeArtistQuestion(), makeFakeGenreQuestion()];

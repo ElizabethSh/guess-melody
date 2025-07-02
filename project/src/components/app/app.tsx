@@ -1,16 +1,16 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { AppRoute, AuthorizationStatus } from '../../settings';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import Loader from '../loader';
-import { selectAuthorizationStatus } from '../../store/slices/user/user';
+import ErrorPage from '../../pages/error';
+import { AppRoute, AuthorizationStatus } from '../../settings';
+import { fetchQuestionAction } from '../../store/api-actions';
 import {
   selectLoadingDataError,
   selectLoadingDataStatus,
 } from '../../store/slices/data/data';
-import ErrorPage from '../../pages/error';
-import { fetchQuestionAction } from '../../store/api-actions';
+import { selectAuthorizationStatus } from '../../store/slices/user/user';
+import Loader from '../loader';
 
 const GameScreen = React.lazy(() => import('../../pages/game'));
 const Login = React.lazy(() => import('../../pages/login'));

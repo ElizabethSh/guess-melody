@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
 
+import { useAppDispatch } from '../../hooks';
 import { circlePlus, closingCross } from '../../icons';
 import { CLEAR_MESSAGE_TIMEOUT } from '../../settings';
-
 import { clearError } from '../../store/actions/game';
 
 import './toast-notifications.css';

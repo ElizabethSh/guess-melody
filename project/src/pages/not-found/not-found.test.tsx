@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import NotFoundPage from '.';
 import { MemoryRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+
+import NotFoundPage from '.';
 
 describe('Page: NotFound', () => {
   it('should render correctly', () => {

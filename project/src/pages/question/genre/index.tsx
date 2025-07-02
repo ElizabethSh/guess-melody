@@ -1,7 +1,6 @@
 import React from 'react';
 
 import GenreQuestionList from '../../../components/genre-question/list';
-
 import {
   GenreQuestion,
   UserGenreQuestionAnswer,

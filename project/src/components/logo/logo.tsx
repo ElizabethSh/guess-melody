@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { AppRoute } from '../../settings';
 import { logo } from '../../icons';
+import { AppRoute } from '../../settings';
 
 import './logo.css';
 

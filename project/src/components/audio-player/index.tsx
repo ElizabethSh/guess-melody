@@ -19,7 +19,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       return;
     }
 
-    // check if song was loaded
+    // checks if song was loaded
     audioRef.current.addEventListener('loadeddata', () => setIsLoading(false));
 
     if (isPlaying) {
@@ -38,6 +38,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         type="button"
       />
       <div className="track__status">
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <audio ref={audioRef} src={src} />
       </div>
     </>

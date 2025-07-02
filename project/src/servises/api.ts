@@ -9,6 +9,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import store from '../store';
 import { setError } from '../store/actions/game';
+
 import { getToken } from './token';
 
 const BASE_URL = 'https://13.design.htmlacademy.pro./guess-melody';
