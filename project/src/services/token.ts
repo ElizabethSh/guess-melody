@@ -3,11 +3,14 @@ const LOCALSTORAGE_AUTH_TOKEN = 'guess-melody-auth-token';
 
 export type Token = string;
 
+const isLocalStorageAvailable = (): boolean =>
+  typeof window !== 'undefined' && !!window.localStorage;
+
 export const getToken = (): Token => {
   let token = '';
   try {
     if (
-      window.localStorage &&
+      isLocalStorageAvailable() &&
       typeof window.localStorage.getItem === 'function'
     ) {
       token = localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN) || '';
@@ -19,7 +22,7 @@ export const getToken = (): Token => {
 export const setToken = (token: Token): void => {
   try {
     if (
-      window.localStorage &&
+      isLocalStorageAvailable() &&
       typeof window.localStorage.setItem === 'function'
     ) {
       localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN, token);
@@ -30,7 +33,7 @@ export const setToken = (token: Token): void => {
 export const dropToken = (): void => {
   try {
     if (
-      window.localStorage &&
+      isLocalStorageAvailable() &&
       typeof window.localStorage.removeItem === 'function'
     ) {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN);
