@@ -10,7 +10,7 @@ const NotFoundPage: React.FC = () => (
     <header className="game__header">
       <Logo />
     </header>
-    <section className="game__screen not-found">
+    <main className="game__screen not-found">
       <h1 className="not-found__title">404</h1>
       <h2 className="not-found__subtitle">Page not found</h2>
       <p className="not-found__description">
@@ -19,7 +19,7 @@ const NotFoundPage: React.FC = () => (
       <Link className="link" to={AppRoute.Root}>
         Go back to the main page
       </Link>
-    </section>
+    </main>
   </section>
 );
 

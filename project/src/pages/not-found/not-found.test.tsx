@@ -11,9 +11,11 @@ describe('Page: NotFound', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole('heading', { name: '404' })).toBeVisible();
     expect(
-      screen.getByRole('heading', { name: 'Page not found' }),
+      screen.getByRole('heading', { name: '404', level: 1 }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole('heading', { name: 'Page not found', level: 2 }),
     ).toBeVisible();
     expect(
       screen.getByText(
