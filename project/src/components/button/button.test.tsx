@@ -30,7 +30,7 @@ describe('Button', () => {
 
     const button = screen.getByRole('button', { name: 'Custom Button' });
     expect(button).toBeVisible();
-    expect(button).toHaveClass('button', 'custom-class');
+    expect(button).toHaveClass('button', 'custom-class', 'button-primary');
     expect(button).toBeDisabled();
   });
 });
