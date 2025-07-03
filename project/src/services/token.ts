@@ -1,39 +1,44 @@
-/* eslint no-empty: ["error", { "allowEmptyCatch": true }] */
 const LOCALSTORAGE_AUTH_TOKEN = 'guess-melody-auth-token';
 
-export type Token = string;
+export type Token = string | undefined;
+
+const isLocalStorageAvailable = (): boolean =>
+  typeof window !== 'undefined' && !!window.localStorage;
 
 export const getToken = (): Token => {
-  let token = '';
   try {
     if (
-      global.localStorage &&
-      typeof global.localStorage.getItem === 'function'
+      isLocalStorageAvailable() &&
+      typeof window.localStorage.getItem === 'function'
     ) {
-      token = localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN) || '';
+      const token = localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN);
+      return token ? JSON.parse(token) : undefined;
     }
-  } catch {}
-  return token;
+  } catch {
+    return undefined;
+  }
 };
 
 export const setToken = (token: Token): void => {
   try {
     if (
-      global.localStorage &&
-      typeof global.localStorage.setItem === 'function'
+      isLocalStorageAvailable() &&
+      typeof window.localStorage.setItem === 'function'
     ) {
-      localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN, token);
+      localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN, JSON.stringify(token));
     }
+    // eslint-disable-next-line no-empty
   } catch {}
 };
 
 export const dropToken = (): void => {
   try {
     if (
-      global.localStorage &&
-      typeof global.localStorage.removeItem === 'function'
+      isLocalStorageAvailable() &&
+      typeof window.localStorage.removeItem === 'function'
     ) {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN);
     }
+    // eslint-disable-next-line no-empty
   } catch {}
 };
