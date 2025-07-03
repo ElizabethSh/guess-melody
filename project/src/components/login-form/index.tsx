@@ -1,5 +1,6 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import Button from '@components/button';
 import { useAppDispatch } from '@hooks/use-store';
 import { loginAction } from '@store/api-actions';
 
@@ -76,13 +77,12 @@ const LoginForm: React.FC = () => {
           <span className="login__error">{errors.password.message}</span>
         )}
       </p>
-      <button
-        className="login__button button"
+      <Button
+        className="login__button"
         disabled={isSubmitting}
+        label={isSubmitting ? 'Logging in...' : 'Log in'}
         type="submit"
-      >
-        {isSubmitting ? 'Logging in...' : 'Log in'}
-      </button>
+      />
     </form>
   );
 };

@@ -1,0 +1,28 @@
+.button {
+  font-weight: 500;
+  border: 3px solid var(--color-button);
+  border-radius: 1rem;
+  font-style: italic;
+}
+
+.button:disabled {
+  color: var(--text-color-button-disabled);
+  border: 0.25rem solid var(--color-button-disabled);
+}
+
+.button:hover:enabled,
+.button:focus:enabled {
+  color: var(--color-button-hover);
+  border: 3px solid var(--color-button-hover);
+}
+
+.button.button-primary {
+  background-color: var(--background-color-primary-button);
+  color: var(--text-color);
+  font-size: 1.125rem;
+}
+
+.button.button-secondary {
+  background-color: transparent;
+  color: var(--color-button);
+}

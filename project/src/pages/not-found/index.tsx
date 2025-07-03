@@ -10,7 +10,9 @@ const NotFoundPage: React.FC = () => (
     </header>
     <main>
       <h1>Page not found</h1>
-      <Link to={AppRoute.Root}>Go back to the main page</Link>
+      <Link className="link" to={AppRoute.Root}>
+        Go back to the main page
+      </Link>
     </main>
   </section>
 );

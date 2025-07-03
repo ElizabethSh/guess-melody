@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Button from '@components/button';
 import Logo from '@components/logo/logo';
 import { useAppDispatch, useAppSelector } from '@hooks/use-store';
 import { user as userIcon } from '@icons';
@@ -26,16 +27,15 @@ const WelcomeScreen: React.FC = () => {
         <div className="welcome__user">
           {userIcon}
           <span className="welcome__email">{userEMail}</span>
-          <button
-            className="welcome__logout button"
+          <Button
+            className="welcome__logout"
+            label="Log out"
             onClick={() => dispatch(logoutAction())}
-            type="button"
-          >
-            Log out
-          </button>
+            variant="secondary"
+          />
         </div>
       ) : (
-        <Link className="welcome__login button" to={AppRoute.Login}>
+        <Link className="welcome__login link" to={AppRoute.Login}>
           Login
         </Link>
       )}

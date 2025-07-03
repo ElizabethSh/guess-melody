@@ -1,4 +1,33 @@
 :root {
   --orange: #ff9749;
+  --light-orange: #ffc396;
+  --dark-orange: #f86d02;
   --dark-gray: #333d33;
+  --gray: #808080;
+  --beige: #f0eed5;
+
+  --background-color-primary-button: var(--beige);
+
+  --text-color: var(--dark-gray);
+
+  --color-button-disabled: var(--light-orange);
+  --text-color-button-disabled: var(--gray);
+  --color-button: var(--orange);
+  --color-button-hover: var(--dark-orange);
+}
+
+.link {
+  border-radius: 1rem;
+  border: 3px solid var(--color-button);
+  color: var(--dark-gray);
+  font-style: italic;
+  font-weight: 500;
+  padding: 0.25rem 1.25rem;
+  text-decoration: none;
+}
+
+.link:hover,
+.link:focus {
+  color: var(--color-button-hover);
+  border: 3px solid var(--color-button-hover);
 }
