@@ -12,10 +12,18 @@ describe('Page: NotFound', () => {
     );
 
     expect(
-      screen.getByRole('heading', { name: /Page not found/i }),
+      screen.getByRole('heading', { name: '404', level: 1 }),
     ).toBeVisible();
     expect(
-      screen.getByRole('link', { name: /Go back to the main page/i }),
+      screen.getByRole('heading', { name: 'Page not found', level: 2 }),
+    ).toBeVisible();
+    expect(
+      screen.getByText(
+        'Sorry, the page you are looking for doesn’t exist or has been moved.',
+      ),
+    ).toBeVisible();
+    expect(
+      screen.getByRole('link', { name: 'Go back to the main page' }),
     ).toBeVisible();
   });
 });
