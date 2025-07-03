@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormEvent } from 'react';
+import Button from '@components/button';
 import { useUserAnswers } from '@hooks/use-user-answers';
 
 import { GenreQuestion, UserGenreQuestionAnswer } from 'types/question';
@@ -42,13 +43,12 @@ const GenreQuestionList: React.FC<GenreQuestionListProps> = ({
         );
       })}
 
-      <button
-        className="game__submit button"
+      <Button
+        className="game__submit"
         disabled={!userAnswers.some((answer) => answer === true)}
+        label="Confirm"
         type="submit"
-      >
-        Confirm
-      </button>
+      />
     </form>
   );
 };
