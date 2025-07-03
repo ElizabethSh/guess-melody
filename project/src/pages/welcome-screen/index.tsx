@@ -28,6 +28,7 @@ const WelcomeScreen: React.FC = () => {
           {userIcon}
           <span className="welcome__email">{userEMail}</span>
           <Button
+            className="welcome__logout"
             label="Log out"
             onClick={() => dispatch(logoutAction())}
             variant="secondary"
