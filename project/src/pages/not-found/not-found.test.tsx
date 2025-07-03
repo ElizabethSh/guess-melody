@@ -11,11 +11,17 @@ describe('Page: NotFound', () => {
       </MemoryRouter>,
     );
 
+    expect(screen.getByRole('heading', { name: '404' })).toBeVisible();
     expect(
-      screen.getByRole('heading', { name: /Page not found/i }),
+      screen.getByRole('heading', { name: 'Page not found' }),
     ).toBeVisible();
     expect(
-      screen.getByRole('link', { name: /Go back to the main page/i }),
+      screen.getByText(
+        'Sorry, the page you are looking for doesn’t exist or has been moved.',
+      ),
+    ).toBeVisible();
+    expect(
+      screen.getByRole('link', { name: 'Go back to the main page' }),
     ).toBeVisible();
   });
 });
