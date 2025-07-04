@@ -1,10 +1,14 @@
+import { NameSpace } from '@settings';
+import store from '@store/index';
+
 import { Notification } from 'types/notification';
-import { NotificationsState } from 'types/state';
+import { NotificationsState, State } from 'types/state';
 
 import {
   addNotification,
   notificationsSlice,
   removeNotification,
+  selectNotifications,
   setIsHovered,
 } from './notifications';
 
@@ -59,6 +63,43 @@ describe('notificationsSlice', () => {
     ).toEqual({
       notifications: [],
       isHovered: true,
+    });
+  });
+
+  describe('selectors', () => {
+    let initialState: State;
+    beforeEach(() => {
+      initialState = {
+        ...store.getState(),
+        [NameSpace.Notifications]: {
+          notifications: [
+            {
+              id: '1',
+              title: 'Test notification',
+              type: 'info',
+              description: 'This is a description',
+            },
+          ],
+          isHovered: false,
+        },
+      };
+    });
+    it('should select notifications', () => {
+      const selectedNotifications = selectNotifications(initialState);
+      expect(selectedNotifications).toEqual([
+        {
+          id: '1',
+          title: 'Test notification',
+          type: 'info',
+          description: 'This is a description',
+        },
+      ]);
+    });
+
+    it('should select isHovered', () => {
+      expect(
+        notificationsSlice.selectors.selectIsHovered(initialState),
+      ).toEqual(false);
     });
   });
 });
