@@ -1,6 +1,7 @@
 import { AuthorizationStatus } from '@settings';
+import store from '@store/index';
 
-import store from '../store';
+import { Notification } from 'types/notification';
 
 import { Questions } from './question';
 
@@ -13,6 +14,11 @@ export type GameData = {
 export type GameProcess = {
   mistakes: number;
   step: number;
+};
+
+export type NotificationsState = {
+  notifications: Notification[];
+  isHovered: boolean;
 };
 
 export type UserProcess = {

@@ -20,8 +20,8 @@ export const userProcessSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(checkAuthAction.fulfilled, (state, action) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
-        state.email = action.payload;
+        state.authorizationStatus = action.payload.status;
+        state.email = action.payload.email;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;

@@ -5,6 +5,9 @@
   --dark-gray: #333d33;
   --gray: #808080;
   --beige: #f0eed5;
+  --red: #fe3d33;
+  --green: #0b7005;
+  --blue: #1e90ff;
 
   --background-color-primary-button: var(--beige);
 
@@ -14,6 +17,10 @@
   --text-color-button-disabled: var(--gray);
   --color-button: var(--orange);
   --color-button-hover: var(--dark-orange);
+
+  --text-color-error: var(--red);
+  --text-color-success: var(--green);
+  --text-color-info: var(--blue);
 }
 
 .link {

@@ -21,6 +21,7 @@
     "start": "vite",
     "build": "vite build",
     "test": "vitest run --coverage",
+    "coverage": "vitest run --coverage --coverage.reporter=text-summary",
     "lint": "eslint . --fix",
     "prettier": "prettier --write ."
   },

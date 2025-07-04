@@ -1,12 +1,11 @@
 import { AuthorizationStatus } from '@settings';
+import { checkAuthAction, loginAction, logoutAction } from '@store/api-actions';
 
 import { UserProcess } from 'types/state';
 
-import { checkAuthAction, loginAction, logoutAction } from '../../api-actions';
-
 import { userProcessSlice } from './user';
 
-describe('Reducer: user', () => {
+describe('userProcessSlice', () => {
   let state: UserProcess;
 
   beforeEach(() => {
@@ -27,8 +26,12 @@ describe('Reducer: user', () => {
       expect(
         userProcessSlice.reducer(state, {
           type: checkAuthAction.fulfilled.type,
+          payload: { status: AuthorizationStatus.Auth, email: 'test@mail.com' },
         }),
-      ).toEqual({ authorizationStatus: AuthorizationStatus.Auth });
+      ).toEqual({
+        authorizationStatus: AuthorizationStatus.Auth,
+        email: 'test@mail.com',
+      });
     });
     it('should update authorizationStatus to "NO_AUTH" if checkAuthAction rejected', () => {
       expect(
