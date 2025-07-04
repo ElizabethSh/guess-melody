@@ -19,14 +19,14 @@ const WelcomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const userEMail = useAppSelector(selectUserEmail);
+  const userEmail = useAppSelector(selectUserEmail);
 
   return (
     <section className="welcome">
       {authorizationStatus === AuthorizationStatus.Auth ? (
         <div className="welcome__user">
           {userIcon}
-          <span className="welcome__email">{userEMail}</span>
+          <span className="welcome__email">{userEmail}</span>
           <Button
             className="welcome__logout"
             label="Log out"
