@@ -37,7 +37,7 @@ const ToastNotifications: React.FC = () => {
       onMouseEnter={() => dispatch(setIsHovered(true))}
       onMouseLeave={() => dispatch(setIsHovered(false))}
     >
-      {(notifications || []).map((notification, index) => (
+      {notifications.map((notification, index) => (
         <ToastNotification
           key={notification.id}
           index={index}

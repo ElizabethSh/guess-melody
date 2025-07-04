@@ -30,7 +30,7 @@ export const notificationsSlice = createSlice({
 
 export const { selectNotifications, selectIsHovered } =
   notificationsSlice.getSelectors(
-    (state: State) => state[NameSpace.Notifications] || initialState,
+    (state: State) => state[NameSpace.Notifications],
   );
 
 export const { addNotification, removeNotification, setIsHovered } =
