@@ -1,11 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { dropToken, setToken } from '@services/token';
-import { ApiRoute } from '@settings';
-import { AxiosInstance } from 'axios';
+import { ApiRoute, AuthorizationStatus } from '@settings';
+import { AxiosInstance, isAxiosError } from 'axios';
 
 import { Questions } from 'types/question';
 import { AppDispatch, State } from 'types/state';
 import { AuthData, UserData } from 'types/user';
+
+import { addNotification } from './slices/notifications/notifications';
 
 export const fetchQuestionAction = createAsyncThunk<
   Questions,
@@ -21,15 +23,39 @@ export const fetchQuestionAction = createAsyncThunk<
 });
 
 export const checkAuthAction = createAsyncThunk<
-  string | null,
+  { status: AuthorizationStatus; email: string | null },
   undefined,
   {
     state: State;
     extra: AxiosInstance;
   }
->('user/checkAuth', async (_arg, { extra: api }) => {
-  const { data } = await api.get(ApiRoute.Login);
-  return data.email;
+>('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get(ApiRoute.Login);
+    return {
+      status: AuthorizationStatus.Auth,
+      email: data.email,
+    };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      let notification = {
+        id: error.code || 'unknown_error',
+        title: 'An error occurred',
+        description: 'Please try again later.',
+        type: 'error',
+      };
+      if (error.response?.status === 401) {
+        notification = {
+          id: error.code || 'unauthorized',
+          title: 'Unauthorized',
+          description: "Only authorized users can view the game's results.",
+          type: 'info',
+        };
+      }
+      dispatch(addNotification(notification));
+    }
+    return { status: AuthorizationStatus.NoAuth, email: null };
+  }
 });
 
 export const loginAction = createAsyncThunk<
