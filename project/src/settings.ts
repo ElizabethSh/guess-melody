@@ -27,6 +27,7 @@ export enum NameSpace {
   Data = 'DATA',
   Game = 'GAME',
   User = 'USER',
+  Notifications = 'NOTIFICATIONS',
 }
 
 export const FIRST_GAME_STEP = 0;
