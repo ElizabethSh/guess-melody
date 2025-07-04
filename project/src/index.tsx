@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from '@components/app/app';
+import ToastNotifications from '@components/toast-notifications';
 import { checkAuthAction, fetchQuestionAction } from '@store/api-actions';
 
-// import ToastNotifications from './components/toast-notifications';
 import store from './store';
 
 import './styles.css';
@@ -20,7 +20,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
-        {/* <ToastNotifications /> */}
+        <ToastNotifications />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
