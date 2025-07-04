@@ -1,8 +1,7 @@
 import { AuthorizationStatus } from '@settings';
+import store from '@store/index';
 
 import { Notification } from 'types/notification';
-
-import store from '../store';
 
 import { Questions } from './question';
 
