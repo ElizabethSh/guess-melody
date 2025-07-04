@@ -38,13 +38,12 @@
 }
 
 .toast-text {
-  color: var(--text-color-primary);
+  color: var(--dark-gray);
   font-size: 0.75rem;
   font-weight: 600;
   grid-area: text;
   margin: 0;
   width: 100%;
-  color: var(--dark-gray);
 }
 
 .circle-plus,

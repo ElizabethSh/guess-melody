@@ -8,6 +8,7 @@ import {
   addNotification,
   notificationsSlice,
   removeNotification,
+  selectIsHovered,
   selectNotifications,
   setIsHovered,
 } from './notifications';
@@ -97,9 +98,7 @@ describe('notificationsSlice', () => {
     });
 
     it('should select isHovered', () => {
-      expect(
-        notificationsSlice.selectors.selectIsHovered(initialState),
-      ).toEqual(false);
+      expect(selectIsHovered(initialState)).toEqual(false);
     });
   });
 });
