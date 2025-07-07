@@ -45,6 +45,34 @@ describe('Genre Question Item', () => {
       );
       expect(checkbox).not.toBeChecked();
     });
+
+    it('should render checkbox as checked when userAnswer is true', () => {
+      const props = {
+        ...defaultProps,
+        id: 1,
+        userAnswer: true,
+      };
+
+      render(<GenreQuestionItem {...props} />);
+
+      const checkbox = screen.getByRole('checkbox');
+      expect(checkbox).toBeChecked();
+    });
+
+    it('should render description element with correct content', () => {
+      const props = {
+        ...defaultProps,
+        id: 1,
+      };
+
+      render(<GenreQuestionItem {...props} />);
+
+      const description = screen.getByText(
+        'Rock music track for genre question',
+      );
+      expect(description).toBeInTheDocument();
+      expect(description).toHaveAttribute('id', 'answer-1-description');
+    });
   });
 
   it('should render label with correct text and htmlFor attribute', () => {

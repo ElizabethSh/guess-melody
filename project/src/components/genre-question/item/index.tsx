@@ -36,6 +36,9 @@ const GenreQuestionItem: React.FC<GenreQuestionItemProps> = ({
       <label className="game__check" htmlFor={`answer-${id}`}>
         Select
       </label>
+      <div id={`answer-${id}-description`} className="visually-hidden">
+        {answer.genre} music track for genre question
+      </div>
     </div>
   </div>
 );
