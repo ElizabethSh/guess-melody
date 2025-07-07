@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
+import { AuthorizationStatus, NameSpace } from '@settings';
 import { rootReducer } from '@store/root-reducer';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -12,9 +13,37 @@ import ToastNotification from '.';
 describe('Toast Notification', () => {
   let store: ReturnType<typeof configureStore>;
   beforeEach(() => {
-    const preloadedState = {};
+    const preloadedState = {
+      [NameSpace.Data]: {
+        questions: [],
+        isLoadingData: false,
+        isError: false,
+      },
+      [NameSpace.Game]: {
+        mistakes: 0,
+        step: 0,
+      },
+      [NameSpace.User]: {
+        authorizationStatus: AuthorizationStatus.Unknown,
+        email: null,
+      },
+      [NameSpace.Notifications]: {
+        notifications: [],
+        isHovered: false,
+      },
+    };
     store = configureStore({ reducer: rootReducer, preloadedState });
   });
+
+  const renderToastNotification = (notification: Notification, index = 0) => {
+    return render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <ToastNotification notification={notification} index={index} />
+        </MemoryRouter>
+      </Provider>,
+    );
+  };
 
   it('should render success notification', () => {
     const notification: Notification = {
@@ -23,18 +52,12 @@ describe('Toast Notification', () => {
       description: 'Operation completed successfully.',
       type: 'success',
     };
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <ToastNotification notification={notification} index={0} />
-        </MemoryRouter>
-      </Provider>,
-    );
+    renderToastNotification(notification);
 
     const toastNotification = screen.getByRole('status');
-
     expect(toastNotification).toBeVisible();
-    expect(screen.getByRole('status')).toHaveClass('toast-success');
+    expect(toastNotification).toHaveClass('toast', 'toast-success');
+    expect(toastNotification).toHaveAttribute('aria-live', 'polite');
     expect(screen.getByText('Success')).toBeVisible();
     expect(screen.getByText('Operation completed successfully.')).toBeVisible();
   });
@@ -46,18 +69,12 @@ describe('Toast Notification', () => {
       description: 'An error occurred.',
       type: 'error',
     };
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <ToastNotification notification={notification} index={0} />
-        </MemoryRouter>
-      </Provider>,
-    );
+    renderToastNotification(notification);
 
-    const toastNotification = screen.getByRole('status');
-
+    const toastNotification = screen.getByRole('alert');
     expect(toastNotification).toBeVisible();
-    expect(screen.getByRole('status')).toHaveClass('toast-error');
+    expect(toastNotification).toHaveClass('toast', 'toast-error');
+    expect(toastNotification).toHaveAttribute('aria-live', 'assertive');
     expect(screen.getByText('Error')).toBeVisible();
     expect(screen.getByText('An error occurred.')).toBeVisible();
   });
@@ -69,18 +86,12 @@ describe('Toast Notification', () => {
       description: 'This is an informational message.',
       type: 'info',
     };
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <ToastNotification notification={notification} index={0} />
-        </MemoryRouter>
-      </Provider>,
-    );
+    renderToastNotification(notification);
 
     const toastNotification = screen.getByRole('status');
-
     expect(toastNotification).toBeVisible();
-    expect(screen.getByRole('status')).toHaveClass('toast-info');
+    expect(toastNotification).toHaveClass('toast', 'toast-info');
+    expect(toastNotification).toHaveAttribute('aria-live', 'polite');
     expect(screen.getByText('Info')).toBeVisible();
     expect(screen.getByText('This is an informational message.')).toBeVisible();
   });
@@ -93,13 +104,7 @@ describe('Toast Notification', () => {
       description: 'This notification will be closed.',
       type: 'info',
     };
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <ToastNotification notification={notification} index={0} />
-        </MemoryRouter>
-      </Provider>,
-    );
+    renderToastNotification(notification);
 
     const closeButton = screen.getByRole('button');
     expect(closeButton).toBeVisible();
