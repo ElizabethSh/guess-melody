@@ -18,7 +18,7 @@ const ToastNotifications: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    let timeoutID: ReturnType<typeof setTimeout>;
+    let timeoutID: ReturnType<typeof setTimeout> | null = null;
 
     if (!isHovered && notifications.length) {
       timeoutID = setTimeout(() => {
@@ -27,13 +27,20 @@ const ToastNotifications: React.FC = () => {
     }
 
     return () => {
-      clearTimeout(timeoutID);
+      if (timeoutID) {
+        clearTimeout(timeoutID);
+      }
     };
   }, [notifications, isHovered, dispatch]);
+
+  if (notifications.length === 0) {
+    return null;
+  }
 
   return (
     <div
       className="notifications-list"
+      aria-label="Notifications"
       onMouseEnter={() => dispatch(setIsHovered(true))}
       onMouseLeave={() => dispatch(setIsHovered(false))}
     >
