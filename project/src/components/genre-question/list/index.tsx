@@ -37,6 +37,10 @@ const GenreQuestionList: React.FC<GenreQuestionListProps> = ({
       role="group"
       aria-labelledby="genre-question-heading"
     >
+      <div id="genre-question-heading" className="visually-hidden">
+        Select all tracks that belong to the {question.genre} genre
+      </div>
+
       {answers.map((answer, id) => {
         const keyValue = `${id}-${answer.src}`;
         return (
