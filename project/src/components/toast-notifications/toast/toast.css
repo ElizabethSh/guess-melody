@@ -8,10 +8,19 @@
   grid-template-areas:
     'icon title close'
     'icon text close';
-  grid-template-columns: min-content auto min-content;
+  grid-template-columns: min-content 1fr min-content;
   min-height: 4rem;
   padding: 0.75rem 1.5rem;
-  width: 29rem;
+  width: 100%;
+  max-width: 29rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.toast-icon {
+  grid-area: icon;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .toast-close-button {
@@ -20,10 +29,19 @@
   box-shadow: none;
   grid-area: close;
   min-width: 2rem;
+  min-height: 2rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.toast-close-button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .toast-close-button svg path {
   stroke: var(--gray);
+  transition: stroke 0.2s ease;
 }
 
 .toast-close-button:hover svg path {
@@ -54,47 +72,46 @@
   width: 1.25rem;
 }
 
+/* Error Toast */
 .toast-error {
   border-left: 5px solid var(--text-color-error);
-
-  .circle-plus {
-    transform: rotate(45deg);
-
-    path {
-      stroke-width: 1;
-      stroke: var(--text-color-error);
-    }
-  }
 }
 
-.toast-error.toast-title {
+.toast-error .toast-title {
   color: var(--text-color-error);
 }
 
-.toast-success {
-  border-left: 5px solid var(--text-color-success);
-
-  .circle-check {
-    path {
-      stroke: var(--text-color-success);
-    }
-  }
+.toast-error .circle-plus {
+  transform: rotate(45deg);
 }
 
-.toast-success.toast-title {
+.toast-error .circle-plus path {
+  stroke-width: 1;
+  stroke: var(--text-color-error);
+}
+
+/* Success Toast */
+.toast-success {
+  border-left: 5px solid var(--text-color-success);
+}
+
+.toast-success .toast-title {
   color: var(--text-color-success);
 }
 
-.toast-info {
-  border-left: 5px solid var(--text-color-info);
-
-  .info {
-    path {
-      stroke: var(--text-color-info);
-    }
-  }
+.toast-success .circle-check path {
+  stroke: var(--text-color-success);
 }
 
-.toast-info.toast-title {
+/* Info Toast */
+.toast-info {
+  border-left: 5px solid var(--text-color-info);
+}
+
+.toast-info .toast-title {
   color: var(--text-color-info);
+}
+
+.toast-info .info path {
+  stroke: var(--text-color-info);
 }
