@@ -25,16 +25,19 @@ const GameScreen: React.FC = () => {
   const step = useAppSelector(selectStep);
   const dispatch = useAppDispatch();
 
+  // Redirect to Lose screen if mistakes count exceeds maximum allowed
   if (mistakesCount >= MAX_ERRORS_COUNT) {
     return <Navigate to={AppRoute.Lose} />;
   }
 
-  const question = questions[step];
-  if (step >= questions.length || !question) {
-    return <Navigate to={AppRoute.Result} />;
+  // Early return for no questions available
+  // TODO: add error handling if questions are loaded but empty
+  if (!questions.length) {
+    return <Navigate to={AppRoute.Root} />;
   }
 
-  if (step >= questions.length || !question) {
+  // Early return for game completion
+  if (step >= questions.length) {
     return <Navigate to={AppRoute.Result} />;
   }
 
@@ -42,6 +45,8 @@ const GameScreen: React.FC = () => {
     dispatch(incrementStep());
     dispatch(checkUserAnswer({ question: questionItem, userAnswer }));
   };
+
+  const question = questions[step];
 
   switch (question.type) {
     case GameType.Artist:
