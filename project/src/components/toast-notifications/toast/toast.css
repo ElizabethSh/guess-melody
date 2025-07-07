@@ -13,7 +13,6 @@
   padding: 0.75rem 1.5rem;
   width: 100%;
   max-width: 29rem;
-  transition: all 0.3s ease-in-out;
 }
 
 .toast-icon {
@@ -24,6 +23,7 @@
 }
 
 .toast-close-button {
+  display: flex;
   background-color: transparent;
   border: none;
   box-shadow: none;
@@ -34,17 +34,16 @@
   border-radius: 0.25rem;
 }
 
-.toast-close-button:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
+.closing-cross {
+  align-self: center;
 }
 
-.toast-close-button svg path {
+.closing-cross path {
   stroke: var(--gray);
   transition: stroke 0.2s ease;
 }
 
-.toast-close-button:hover svg path {
+.closing-cross:hover path {
   stroke: var(--dark-gray);
 }
 
