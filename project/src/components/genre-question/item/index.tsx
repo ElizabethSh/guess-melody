@@ -1,5 +1,4 @@
-import React from 'react';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 
 import { GenreQuestionAnswer } from 'types/question';
 
@@ -32,6 +31,7 @@ const GenreQuestionItem: React.FC<GenreQuestionItemProps> = ({
           const value = target.checked;
           onChange(id, value);
         }}
+        aria-describedby={`answer-${id}-description`}
       />
       <label className="game__check" htmlFor={`answer-${id}`}>
         Select
