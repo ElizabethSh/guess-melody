@@ -7,6 +7,12 @@ import { Notification } from 'types/notification';
 
 import './toast.css';
 
+const NOTIFICATION_ICONS = {
+  error: circlePlus,
+  success: circleCheck,
+  info: infoIcon,
+} as const;
+
 export type ToastNotificationProps = {
   notification: Notification;
   index: number;
@@ -19,19 +25,17 @@ const ToastNotification: React.FC<ToastNotificationProps> = ({
   const dispatch = useAppDispatch();
   const { title, description, type } = notification;
 
-  const icon = {
-    error: circlePlus,
-    success: circleCheck,
-    info: infoIcon,
-  };
-
   const closeNotification = (index: number): void => {
     dispatch(removeNotification(index));
   };
 
   return (
-    <div className={`toast toast-${type}`} role="status">
-      {icon[type]}
+    <div
+      className={`toast toast-${type}`}
+      aria-live={type === 'error' ? 'assertive' : 'polite'}
+      role={type === 'error' ? 'alert' : 'status'}
+    >
+      {NOTIFICATION_ICONS[type]}
       <h6 className="toast-title">{title}</h6>
       <p className="toast-text">{description}</p>
       <button
