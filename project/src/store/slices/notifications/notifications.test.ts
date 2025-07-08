@@ -67,6 +67,27 @@ describe('notificationsSlice', () => {
     });
   });
 
+  it('should prevent duplicate notifications with same id', () => {
+    const notification: Notification = {
+      id: '1',
+      title: 'Test notification',
+      type: 'info',
+      description: 'This is a description',
+    };
+
+    // Add notification first time
+    let state = notificationsSlice.reducer(
+      initialState,
+      addNotification(notification),
+    );
+    expect(state.notifications).toHaveLength(1);
+
+    // Try to add same notification again (should be ignored)
+    state = notificationsSlice.reducer(state, addNotification(notification));
+    expect(state.notifications).toHaveLength(1);
+    expect(state.notifications[0]).toEqual(notification);
+  });
+
   describe('selectors', () => {
     let initialState: State;
     beforeEach(() => {

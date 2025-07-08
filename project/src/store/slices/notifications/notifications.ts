@@ -13,7 +13,15 @@ export const notificationsSlice = createSlice({
   initialState,
   reducers: {
     addNotification: (state, action) => {
-      state.notifications.push(action.payload);
+      // Check if notification with the same id already exists
+      const existingNotification = state.notifications.find(
+        (notification) => notification.id === action.payload.id,
+      );
+
+      // Only add if it doesn't already exist
+      if (!existingNotification) {
+        state.notifications.push(action.payload);
+      }
     },
     removeNotification: (state, action) => {
       state.notifications.splice(action.payload, 1);
