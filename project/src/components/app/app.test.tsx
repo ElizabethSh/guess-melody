@@ -18,7 +18,7 @@ const renderWithProvider = (storeState = {}, initialEntries?: string[]) => {
 };
 
 describe('App component', () => {
-  it('should render loader when autorisation status is unknown', () => {
+  it('should render loader when authorization status is unknown', () => {
     renderWithProvider();
     expect(screen.getByText('Loading...')).toBeVisible();
   });
