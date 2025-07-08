@@ -1,8 +1,6 @@
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { configureStore } from '@reduxjs/toolkit';
-import { AuthorizationStatus, NameSpace } from '@settings';
-import { rootReducer } from '@store/root-reducer';
+import { createMockStore } from '@test-utils/mock-store';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,33 +9,9 @@ import { Notification } from 'types/notification';
 import ToastNotification from '.';
 
 describe('Toast Notification', () => {
-  let store: ReturnType<typeof configureStore>;
-  beforeEach(() => {
-    const preloadedState = {
-      [NameSpace.Data]: {
-        questions: [],
-        isLoadingData: false,
-        isError: false,
-      },
-      [NameSpace.Game]: {
-        mistakes: 0,
-        step: 0,
-      },
-      [NameSpace.User]: {
-        authorizationStatus: AuthorizationStatus.Unknown,
-        email: null,
-      },
-      [NameSpace.Notifications]: {
-        notifications: [],
-        isHovered: false,
-      },
-    };
-    store = configureStore({ reducer: rootReducer, preloadedState });
-  });
-
   const renderToastNotification = (notification: Notification, index = 0) => {
     return render(
-      <Provider store={store}>
+      <Provider store={createMockStore()}>
         <MemoryRouter>
           <ToastNotification notification={notification} index={index} />
         </MemoryRouter>
