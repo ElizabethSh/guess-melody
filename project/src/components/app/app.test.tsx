@@ -1,54 +1,49 @@
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { configureMockStore } from '@jedmao/redux-mock-store';
-import { AuthorizationStatus } from '@settings';
+import { AuthorizationStatus, NameSpace } from '@settings';
+import { createMockStore } from '@test-utils/mock-store';
 import { render, screen } from '@testing-library/react';
 
 import App from './app';
 
-const mockStore = configureMockStore();
+const renderWithProvider = (storeState = {}, initialEntries?: string[]) => {
+  return render(
+    <Provider store={createMockStore(storeState)}>
+      <MemoryRouter initialEntries={initialEntries}>
+        <App />
+      </MemoryRouter>
+    </Provider>,
+  );
+};
 
 describe('App component', () => {
-  it('should render loader when autorisation status is unknown', () => {
-    const store = mockStore({
-      USER: { authorizationStatus: AuthorizationStatus.Unknown },
-      DATA: { isLoadingData: false, isError: false },
-    });
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </Provider>,
-    );
+  it('should render loader when authorization status is unknown', () => {
+    renderWithProvider();
     expect(screen.getByText('Loading...')).toBeVisible();
   });
   it('should render loader when data is loading', () => {
-    const store = mockStore({
-      USER: { authorizationStatus: AuthorizationStatus.Auth },
-      DATA: { isLoadingData: true, isError: false },
+    renderWithProvider({
+      [NameSpace.User]: {
+        authorizationStatus: AuthorizationStatus.Auth,
+        email: null,
+      },
+      [NameSpace.Data]: { questions: [], isLoadingData: true, isError: false },
     });
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </Provider>,
-    );
     expect(screen.getByText('Loading...')).toBeVisible();
   });
-  it('should render error page', () => {
-    const store = mockStore({
-      USER: { authorizationStatus: AuthorizationStatus.Auth },
-      DATA: { isLoadingData: false, isError: true },
-    });
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
-      </Provider>,
+  it('should render welcome screen on root path', async () => {
+    renderWithProvider(
+      {
+        [NameSpace.User]: {
+          authorizationStatus: AuthorizationStatus.Auth,
+          email: null,
+        },
+      },
+      ['/'],
     );
-    expect(screen.getByRole('heading', { name: 'Error' })).toBeVisible();
+    // Since WelcomeScreen is lazy loaded, we should see the Suspense fallback first
+    expect(screen.getByText('Loading...')).toBeVisible();
+    // After the lazy component loads, we should see the welcome screen
+    expect(await screen.findByText('The rules of the game')).toBeVisible();
   });
 });

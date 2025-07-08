@@ -30,12 +30,6 @@ const GameScreen: React.FC = () => {
     return <Navigate to={AppRoute.Lose} />;
   }
 
-  // Early return for no questions available
-  // TODO: add error handling if questions are loaded but empty
-  if (!questions.length) {
-    return <Navigate to={AppRoute.Root} />;
-  }
-
   // Early return for game completion
   if (step >= questions.length) {
     return <Navigate to={AppRoute.Result} />;

@@ -1,13 +1,7 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@hooks/use-store';
-import ErrorPage from '@pages/error';
-import { AppRoute, AuthorizationStatus } from '@settings';
-import { fetchQuestionAction } from '@store/api-actions';
-import {
-  selectLoadingDataError,
-  selectLoadingDataStatus,
-} from '@store/slices/data/data';
+import { useAppSelector } from '@hooks/use-store';
+import { AppRoute } from '@settings';
 import { selectAuthorizationStatus } from '@store/slices/user/user';
 
 import Loader from '../loader';
@@ -21,21 +15,7 @@ const WelcomeScreen = React.lazy(() => import('@pages/welcome-screen'));
 const WinScreen = React.lazy(() => import('@pages/result/win'));
 
 const App: React.FC = () => {
-  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const isLoadingData = useAppSelector(selectLoadingDataStatus);
-  const isLoadingDataError = useAppSelector(selectLoadingDataError);
-
-  if (
-    authorizationStatus === AuthorizationStatus.Unknown ||
-    (isLoadingData && !isLoadingDataError)
-  ) {
-    return <Loader />;
-  }
-
-  if (isLoadingDataError) {
-    return <ErrorPage onButtonClick={() => dispatch(fetchQuestionAction())} />;
-  }
 
   return (
     <Suspense fallback={<Loader />}>
@@ -55,8 +35,7 @@ const App: React.FC = () => {
           key="result-lose"
           element={<LoseScreen />}
         />
-        ,
-        <Route path={AppRoute.Game} key="game" element={<GameScreen />} />,
+        <Route path={AppRoute.Game} key="game" element={<GameScreen />} />
         <Route path="*" key="not-found" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
