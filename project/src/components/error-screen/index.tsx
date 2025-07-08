@@ -37,7 +37,6 @@ const ErrorScreen: React.FC<ErrorScreenProps> = ({
           label="Try Again"
           onClick={onRetry}
           type="button"
-          data-testid="retry-button"
         />
       )}
     </div>
