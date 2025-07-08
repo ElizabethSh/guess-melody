@@ -35,7 +35,7 @@ const App: React.FC = () => {
           key="result-lose"
           element={<LoseScreen />}
         />
-        <Route path={AppRoute.Game} key="game" element={<GameScreen />} />,
+        <Route path={AppRoute.Game} key="game" element={<GameScreen />} />
         <Route path="*" key="not-found" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
