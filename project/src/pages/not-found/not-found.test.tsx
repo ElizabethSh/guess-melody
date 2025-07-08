@@ -22,8 +22,12 @@ describe('Page: NotFound', () => {
         'Sorry, the page you are looking for doesn’t exist or has been moved.',
       ),
     ).toBeVisible();
-    expect(
-      screen.getByRole('link', { name: 'Go back to the main page' }),
-    ).toBeVisible();
+
+    // should have link to main page with correct href
+    const mainPageLink = screen.getByRole('link', {
+      name: 'Go back to the main page',
+    });
+    expect(mainPageLink).toBeVisible();
+    expect(mainPageLink).toHaveAttribute('href', '/');
   });
 });
