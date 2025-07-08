@@ -20,6 +20,7 @@
       "@pages/*": ["pages/*"],
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],
+      "@test-utils/*": ["test-utils/*"],
       "@icons": ["icons.tsx"],
       "@settings": ["settings.ts"],
       "@utils": ["utils.ts"],
