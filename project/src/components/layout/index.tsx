@@ -3,15 +3,29 @@ import Logo from '@components/logo/logo';
 
 import './layout.css';
 
-type LayoutProps = {
+type LayoutProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLElement>,
+  HTMLElement
+> & {
   children: React.ReactNode;
   showLogo?: boolean;
+  className?: string;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children, showLogo = true }) => (
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  className,
+  showLogo = true,
+  ...layoutProps
+}) => (
   <section className="game">
     <header className="game__header">{showLogo && <Logo />}</header>
-    <main className="game__screen">{children}</main>
+    <main
+      className={`game__screen${className ? ` ${className}` : ''}`}
+      {...layoutProps}
+    >
+      {children}
+    </main>
   </section>
 );
 
