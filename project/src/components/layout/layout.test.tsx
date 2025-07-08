@@ -50,4 +50,16 @@ describe('Layout', () => {
     expect(container.querySelector('.game__header')).toBeInTheDocument();
     expect(container.querySelector('.game__screen')).toBeInTheDocument();
   });
+
+  it('should apply additional className to main screen', () => {
+    const { container } = renderWithRouter(
+      <Layout className="custom-class">
+        <div>Content</div>
+      </Layout>,
+    );
+
+    expect(
+      container.querySelector('.game__screen.custom-class'),
+    ).toBeInTheDocument();
+  });
 });

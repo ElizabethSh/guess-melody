@@ -9,7 +9,6 @@ type LayoutProps = React.DetailedHTMLProps<
 > & {
   children: React.ReactNode;
   showLogo?: boolean;
-  className?: string;
 };
 
 const Layout: React.FC<LayoutProps> = ({
