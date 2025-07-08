@@ -5,7 +5,11 @@ import { AppRoute } from '@settings';
 
 import './logo.css';
 
-const Logo: React.FC = () => {
+type LogoProps = {
+  variant?: 'primary' | 'secondary';
+};
+
+const Logo: React.FC<LogoProps> = ({ variant = 'primary' }) => {
   const { pathname } = useLocation();
 
   if (pathname === AppRoute.Root) {
@@ -15,7 +19,7 @@ const Logo: React.FC = () => {
   return (
     <Link className="game__back" to={AppRoute.Root}>
       <span className="visually-hidden">Play again</span>
-      {logo}
+      <div className={variant}>{logo}</div>
     </Link>
   );
 };
