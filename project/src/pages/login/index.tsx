@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Layout from '@components/layout';
 import LoginForm from '@components/login-form';
-import Logo from '@components/logo/logo';
 import { useAppSelector } from '@hooks/use-store';
 import { AppRoute } from '@settings';
 import { selectQuestions } from '@store/slices/data/data';
@@ -21,27 +21,28 @@ const Login: React.FC = () => {
     } else if (email) {
       navigate(AppRoute.Root);
     }
-  }, [step, email]);
+  }, [step, email, navigate, questions.length]);
 
   return (
-    <section className="login">
-      <div className="login__logo">
-        <Logo />
-      </div>
-      <h2 className="login__text" style={{ marginTop: '3.75rem' }}>
-        Do you want to know your result? Introduce yourself!
-      </h2>
+    <Layout>
+      <section className="login" style={{ marginTop: '3rem' }}>
+        <h2 className="login__title">
+          Would you like to know your result?
+          <br />
+          Please introduce yourself!
+        </h2>
 
-      <LoginForm />
+        <LoginForm />
 
-      <button
-        className="replay"
-        onClick={() => navigate(AppRoute.Game)}
-        type="button"
-      >
-        Play again
-      </button>
-    </section>
+        <button
+          className="replay"
+          onClick={() => navigate(AppRoute.Game)}
+          type="button"
+        >
+          Play again
+        </button>
+      </section>
+    </Layout>
   );
 };
 
