@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import ErrorScreen from '@components/error-screen';
 import Loader from '@components/loader';
 import { useAppDispatch, useAppSelector } from '@hooks/use-store';
@@ -22,12 +22,16 @@ const AppInitializer: React.FC<AppInitializerProps> = ({ children }) => {
   const questions = useAppSelector(selectQuestions);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
+  const hasInitialized = useRef(false);
+
   // Fetch questions and check auth status on initial load
   useEffect(() => {
-    dispatch(fetchQuestionAction());
-    dispatch(checkAuthAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!hasInitialized.current) {
+      dispatch(fetchQuestionAction());
+      dispatch(checkAuthAction());
+      hasInitialized.current = true;
+    }
+  }, [dispatch]);
 
   const handleRetry = useCallback(() => {
     dispatch(fetchQuestionAction());
