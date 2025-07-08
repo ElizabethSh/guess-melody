@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import ErrorScreen from '@components/error-screen';
 import Loader from '@components/loader';
 import { useAppDispatch, useAppSelector } from '@hooks/use-store';
 import { AuthorizationStatus } from '@settings';
-import { fetchQuestionAction } from '@store/api-actions';
+import { checkAuthAction, fetchQuestionAction } from '@store/api-actions';
 import {
   selectLoadingDataError,
   selectLoadingDataStatus,
@@ -21,6 +21,13 @@ const AppInitializer: React.FC<AppInitializerProps> = ({ children }) => {
   const hasError = useAppSelector(selectLoadingDataError);
   const questions = useAppSelector(selectQuestions);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+
+  // Fetch questions and check auth status on initial load
+  useEffect(() => {
+    dispatch(fetchQuestionAction());
+    dispatch(checkAuthAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleRetry = useCallback(() => {
     dispatch(fetchQuestionAction());

@@ -24,11 +24,7 @@ vi.mock('@components/error-screen', () => ({
 // Mock the API action
 vi.mock('@store/api-actions', () => ({
   fetchQuestionAction: vi.fn(() => ({ type: 'fetchQuestionAction' })),
-  checkAuthAction: {
-    fulfilled: { type: 'checkAuthAction/fulfilled' },
-    pending: { type: 'checkAuthAction/pending' },
-    rejected: { type: 'checkAuthAction/rejected' },
-  },
+  checkAuthAction: vi.fn(() => ({ type: 'checkAuthAction' })),
 }));
 
 // Mock individual slices to avoid reducer issues
@@ -168,6 +164,9 @@ describe('AppInitializer', () => {
       const user = userEvent.setup();
 
       renderWithProvider();
+
+      // Clear the mock to only count calls from the retry button click
+      vi.clearAllMocks();
 
       const retryButton = screen.getByTestId('retry-button');
       await user.click(retryButton);
