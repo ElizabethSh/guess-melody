@@ -19,7 +19,7 @@ const Logo: React.FC<LogoProps> = ({ variant = 'primary' }) => {
   return (
     <Link className="game__back" to={AppRoute.Root}>
       <span className="visually-hidden">Play again</span>
-      <div className={variant}>{logo}</div>
+      <div className={`logo-${variant}`}>{logo}</div>
     </Link>
   );
 };
