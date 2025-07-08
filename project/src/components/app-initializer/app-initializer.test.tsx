@@ -10,11 +10,6 @@ import { State } from 'types/state';
 
 import AppInitializer from '.';
 
-// Mock the child components
-vi.mock('@components/loading-screen', () => ({
-  default: () => <div data-testid="loading-screen">Loading...</div>,
-}));
-
 vi.mock('@components/error-screen', () => ({
   default: ({ message, onRetry }: { message: string; onRetry: () => void }) => (
     <div data-testid="error-screen">
@@ -125,7 +120,7 @@ describe('AppInitializer', () => {
   });
 
   describe('loading state', () => {
-    it('should show loading screen when data is being fetched', () => {
+    it('should show loader when data is being fetched', () => {
       renderWithProvider({
         [NameSpace.Data]: {
           questions: [],
@@ -134,7 +129,7 @@ describe('AppInitializer', () => {
         },
       });
 
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      expect(screen.getByText('Loading...')).toBeVisible();
       expect(screen.queryByTestId('app-content')).not.toBeInTheDocument();
       expect(screen.queryByTestId('error-screen')).not.toBeInTheDocument();
     });
@@ -154,7 +149,7 @@ describe('AppInitializer', () => {
       expect(
         screen.getByText(/Failed to load game questions/),
       ).toBeInTheDocument();
-      expect(screen.queryByTestId('loading-screen')).not.toBeInTheDocument();
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
       expect(screen.queryByTestId('app-content')).not.toBeInTheDocument();
     });
 
@@ -165,7 +160,7 @@ describe('AppInitializer', () => {
       expect(
         screen.getByText(/No game questions available/),
       ).toBeInTheDocument();
-      expect(screen.queryByTestId('loading-screen')).not.toBeInTheDocument();
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
       expect(screen.queryByTestId('app-content')).not.toBeInTheDocument();
     });
 
@@ -198,7 +193,7 @@ describe('AppInitializer', () => {
       });
 
       expect(screen.getByTestId('app-content')).toBeInTheDocument();
-      expect(screen.queryByTestId('loading-screen')).not.toBeInTheDocument();
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
       expect(screen.queryByTestId('error-screen')).not.toBeInTheDocument();
     });
   });
