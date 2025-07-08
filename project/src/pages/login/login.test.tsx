@@ -43,10 +43,9 @@ describe('Login Page', () => {
       renderLogin();
 
       expect(
-        screen.getByRole('heading', {
-          name: /would you like to know your result\? please introduce yourself!/i,
-        }),
+        screen.getByText(/would you like to know your result\?/i),
       ).toBeVisible();
+      expect(screen.getByText(/please introduce yourself!/i)).toBeVisible();
 
       expect(screen.getByLabelText(/e-mail/i)).toBeVisible(); // Check for email input
       expect(screen.getByLabelText(/password/i)).toBeVisible(); // Check for password input
