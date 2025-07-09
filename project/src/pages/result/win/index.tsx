@@ -42,13 +42,8 @@ const WinScreen: React.FC = () => {
     }
 
     return (
-      <div className="result-logout__wrapper">
-        <Button
-          className="result__logout"
-          label="Log out"
-          onClick={onLogoutClick}
-          variant="secondary"
-        />
+      <div className="result__logout-wrapper">
+        <Button label="Log out" onClick={onLogoutClick} variant="secondary" />
       </div>
     );
   };
