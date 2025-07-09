@@ -1,0 +1,19 @@
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-logout__wrapper {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.result__total {
+  margin-top: 14rem;
+  font-size: 1.25rem;
+}
+.result__button {
+  margin-top: auto;
+}
