@@ -3,6 +3,7 @@
   align-self: end;
   display: flex;
   gap: 1rem;
+  height: 3.75rem;
 }
 
 .welcome__login {
@@ -18,9 +19,9 @@
 }
 
 .user {
-  border: 1px solid var(--orange);
+  border: 2px solid var(--color-button);
   border-radius: 50%;
-  fill: var(--orange);
+  fill: var(--color-button);
   height: 2rem;
   width: 2rem;
 }
