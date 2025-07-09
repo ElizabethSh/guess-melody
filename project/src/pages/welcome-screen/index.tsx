@@ -43,6 +43,7 @@ const WelcomeScreen: React.FC = () => {
       </div>
       <button
         className="welcome__button"
+        type="button"
         onClick={() => {
           dispatch(resetGame());
           navigate(AppRoute.Game);
