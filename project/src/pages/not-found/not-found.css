@@ -1,9 +1,5 @@
 .not-found {
-  align-items: center;
-  color: var(--text-color);
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .not-found__title {
@@ -20,4 +16,8 @@
 
 .not-found__description {
   margin-top: 6rem;
+}
+
+.not-found__link {
+  margin-top: auto;
 }
