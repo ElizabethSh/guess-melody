@@ -119,7 +119,7 @@ describe('ErrorScreen', () => {
     expect(errorScreen).toHaveClass('error-screen');
 
     const title = screen.getByText('Oops! Something went wrong');
-    expect(title).toHaveClass('game__title', 'error-screen__title');
+    expect(title).toHaveClass('main__title');
 
     const message = screen.getByText(
       'Something went wrong while loading the game.',

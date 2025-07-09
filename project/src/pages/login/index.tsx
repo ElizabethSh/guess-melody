@@ -25,8 +25,8 @@ const Login: React.FC = () => {
 
   return (
     <Layout>
-      <section className="login" style={{ marginTop: '3rem' }}>
-        <h2 className="login__title">
+      <section className="login">
+        <h2 className="main__title">
           Would you like to know your result?
           <br />
           Please introduce yourself!

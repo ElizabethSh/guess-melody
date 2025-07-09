@@ -9,6 +9,8 @@
   --green: #0b7005;
   --blue: #1e90ff;
 
+  --h2-font-size: 2rem;
+
   --background-color-primary-button: var(--beige);
 
   --text-color: var(--dark-gray);
@@ -37,4 +39,12 @@
 .link:focus {
   color: var(--color-button-hover);
   border: 3px solid var(--color-button-hover);
+}
+
+.main__title {
+  font-size: var(--h2-font-size);
+  margin: 0;
+  text-align: center;
+  font-style: italic;
+  font-weight: 400;
 }

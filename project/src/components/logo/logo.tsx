@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { logo } from '@icons';
 import { AppRoute } from '@settings';
 
@@ -9,19 +9,11 @@ type LogoProps = {
   variant?: 'primary' | 'secondary';
 };
 
-const Logo: React.FC<LogoProps> = ({ variant = 'primary' }) => {
-  const { pathname } = useLocation();
-
-  if (pathname === AppRoute.Root) {
-    return logo;
-  }
-
-  return (
-    <Link className="game__back" to={AppRoute.Root}>
-      <span className="visually-hidden">Play again</span>
-      <div className={`logo-${variant}`}>{logo}</div>
-    </Link>
-  );
-};
+const Logo: React.FC<LogoProps> = ({ variant = 'primary' }) => (
+  <Link className="game__back" to={AppRoute.Root}>
+    <span className="visually-hidden">Play again</span>
+    <div className={`logo-${variant}`}>{logo}</div>
+  </Link>
+);
 
 export default Logo;

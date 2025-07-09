@@ -1,12 +1,5 @@
 .error-screen {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-}
-
-.error-screen__title {
-  margin: 1rem 0 0;
+  gap: 3rem;
 }
 
 .error-screen__text {
@@ -14,13 +7,18 @@
 }
 
 .error-screen__rules {
-  margin-top: 5.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 4.5rem;
 }
 
 .error-screen__rules-list {
   display: grid;
   justify-items: start;
+  margin: 0;
+}
+
+.error-screen__button {
+  margin-top: auto;
 }
