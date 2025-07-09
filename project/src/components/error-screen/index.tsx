@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@components/button';
 import Layout from '@components/layout';
-import Logo from '@components/logo/logo';
 
 import './error-screen.css';
 
@@ -14,11 +13,8 @@ const ErrorScreen: React.FC<ErrorScreenProps> = ({
   message = 'Something went wrong while loading the game.',
   onRetry,
 }) => (
-  <Layout showLogo={false} className="error-screen" data-testid="error-screen">
-    <Logo />
-    <h1 className="game__title error-screen__title">
-      Oops! Something went wrong
-    </h1>
+  <Layout className="error-screen" data-testid="error-screen">
+    <h1 className="main__title">Oops! Something went wrong</h1>
     <p className="error-screen__text">{message}</p>
 
     <div className="error-screen__rules">
@@ -32,7 +28,7 @@ const ErrorScreen: React.FC<ErrorScreenProps> = ({
 
     {onRetry && (
       <Button
-        className="button"
+        className="error__button"
         label="Try Again"
         onClick={onRetry}
         type="button"
