@@ -1,5 +1,6 @@
 .error-screen {
   gap: 3rem;
+  align-items: center;
 }
 
 .error-screen__text {
