@@ -29,18 +29,23 @@ vi.mock('@store/api-actions', () => ({
 // Only mock the slices that have complex extraReducers to avoid async action issues
 vi.mock('@store/slices/data/data', () => ({
   gameQuestionsSlice: {
-    reducer: (state = { questions: [], isLoadingData: false, isError: false }) => state,
+    reducer: (
+      state = { questions: [], isLoadingData: false, isError: false },
+    ) => state,
   },
   selectQuestions: (state: State) => state[NameSpace.Data]?.questions || [],
-  selectLoadingDataStatus: (state: State) => state[NameSpace.Data]?.isLoadingData || false,
-  selectLoadingDataError: (state: State) => state[NameSpace.Data]?.isError || false,
+  selectLoadingDataStatus: (state: State) =>
+    state[NameSpace.Data]?.isLoadingData || false,
+  selectLoadingDataError: (state: State) =>
+    state[NameSpace.Data]?.isError || false,
 }));
 
 vi.mock('@store/slices/user/user', () => ({
   userProcessSlice: {
     reducer: (state = { authorizationStatus: 'AUTH', email: null }) => state,
   },
-  selectAuthorizationStatus: (state: State) => state[NameSpace.User]?.authorizationStatus || 'AUTH',
+  selectAuthorizationStatus: (state: State) =>
+    state[NameSpace.User]?.authorizationStatus || 'AUTH',
   selectUserEmail: (state: State) => state[NameSpace.User]?.email || null,
 }));
 
