@@ -5,7 +5,6 @@ import { AppRoute } from '@settings';
 import { createMockStore } from '@test-utils/mock-store';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
 
 import Login from './index';
 
