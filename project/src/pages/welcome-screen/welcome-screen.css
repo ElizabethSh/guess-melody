@@ -19,9 +19,9 @@
 }
 
 .user {
-  border: 1px solid var(--orange);
+  border: 2px solid var(--color-button);
   border-radius: 50%;
-  fill: var(--orange);
+  fill: var(--color-button);
   height: 2rem;
   width: 2rem;
 }
