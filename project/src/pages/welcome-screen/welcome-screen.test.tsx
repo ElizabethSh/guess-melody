@@ -89,6 +89,21 @@ describe('WelcomeScreen', () => {
       expect(loginLink).toHaveClass('welcome__login', 'link');
     });
 
+    it('should handle unknown authorization status (shows login link)', () => {
+      renderWelcomeScreen({
+        USER: {
+          email: null,
+          authorizationStatus: AuthorizationStatus.Unknown,
+        },
+      });
+
+      // Should show login link (default behavior for non-Auth status)
+      expect(screen.getByRole('link', { name: /login/i })).toBeVisible();
+      expect(
+        screen.queryByRole('button', { name: /log out/i }),
+      ).not.toBeInTheDocument();
+    });
+
     it('should show user info and logout button when user is authenticated', () => {
       renderWelcomeScreen({
         USER: {
@@ -229,38 +244,6 @@ describe('WelcomeScreen', () => {
 
       const listItems = screen.getAllByRole('listitem');
       expect(listItems).toHaveLength(2);
-    });
-  });
-
-  describe('Different Authentication States', () => {
-    it('should handle unknown authorization status', () => {
-      renderWelcomeScreen({
-        USER: {
-          email: null,
-          authorizationStatus: AuthorizationStatus.Unknown,
-        },
-      });
-
-      // Should show login link (default behavior for non-Auth status)
-      expect(screen.getByRole('link', { name: /login/i })).toBeVisible();
-      expect(
-        screen.queryByRole('button', { name: /log out/i }),
-      ).not.toBeInTheDocument();
-    });
-
-    it('should handle authenticated user with email', () => {
-      renderWelcomeScreen({
-        USER: {
-          email: 'authenticated@user.com',
-          authorizationStatus: AuthorizationStatus.Auth,
-        },
-      });
-
-      expect(screen.getByText('authenticated@user.com')).toBeVisible();
-      expect(screen.getByRole('button', { name: /log out/i })).toBeVisible();
-      expect(
-        screen.queryByRole('link', { name: /login/i }),
-      ).not.toBeInTheDocument();
     });
   });
 
