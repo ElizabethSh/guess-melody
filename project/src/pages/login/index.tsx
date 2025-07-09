@@ -3,14 +3,15 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@components/layout';
 import LoginForm from '@components/login-form';
-import { useAppSelector } from '@hooks/use-store';
+import { useAppDispatch, useAppSelector } from '@hooks/use-store';
 import { AppRoute } from '@settings';
 import { selectQuestions } from '@store/slices/data/data';
-import { selectStep } from '@store/slices/game-process/game-process';
+import { resetGame, selectStep } from '@store/slices/game-process/game-process';
 import { selectUserEmail } from '@store/slices/user/user';
 
-const Login: React.FC = () => {
+const LoginScreen: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const email = useAppSelector(selectUserEmail);
   const questions = useAppSelector(selectQuestions);
   const step = useAppSelector(selectStep);
@@ -23,6 +24,11 @@ const Login: React.FC = () => {
     }
   }, [step, email, navigate, questions.length]);
 
+  const onReplayClick = () => {
+    dispatch(resetGame());
+    navigate(AppRoute.Game);
+  };
+
   return (
     <Layout>
       <section className="login">
@@ -34,11 +40,7 @@ const Login: React.FC = () => {
 
         <LoginForm />
 
-        <button
-          className="replay"
-          onClick={() => navigate(AppRoute.Game)}
-          type="button"
-        >
+        <button className="replay" onClick={onReplayClick} type="button">
           Play again
         </button>
       </section>
@@ -46,4 +48,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginScreen;
