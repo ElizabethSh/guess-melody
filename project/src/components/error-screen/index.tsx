@@ -28,7 +28,7 @@ const ErrorScreen: React.FC<ErrorScreenProps> = ({
 
     {onRetry && (
       <Button
-        className="error__button"
+        className="error-screen__button"
         label="Try Again"
         onClick={onRetry}
         type="button"

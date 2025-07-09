@@ -38,7 +38,9 @@ const WelcomeScreen: React.FC = () => {
           Login
         </Link>
       )}
-      <div className="welcome__logo">{logo}</div>
+      <div className="welcome__logo" aria-label="App logo">
+        {logo}
+      </div>
       <button
         className="welcome__button"
         onClick={() => {
