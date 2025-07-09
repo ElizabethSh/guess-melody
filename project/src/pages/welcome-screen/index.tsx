@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@components/button';
-import Logo from '@components/logo/logo';
 import { useAppDispatch, useAppSelector } from '@hooks/use-store';
-import { user as userIcon } from '@icons';
+import { logo, user as userIcon } from '@icons';
 import { AppRoute, AuthorizationStatus, MAX_ERRORS_COUNT } from '@settings';
 import { logoutAction } from '@store/api-actions';
 import { resetGame } from '@store/slices/game-process/game-process';
@@ -39,9 +38,7 @@ const WelcomeScreen: React.FC = () => {
           Login
         </Link>
       )}
-      <div className="welcome__logo">
-        <Logo />
-      </div>
+      <div className="welcome__logo">{logo}</div>
       <button
         className="welcome__button"
         onClick={() => {
