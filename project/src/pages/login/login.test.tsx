@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { AppRoute } from '@settings';
+import { AppRoute, AuthorizationStatus } from '@settings';
 import { createMockStore } from '@test-utils/mock-store';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -175,26 +175,192 @@ describe('Login Page', () => {
   });
 
   describe('Navigation effects', () => {
-    it('should navigate to result page if step equals questions length', () => {
+    it('should navigate to result page when user has email and completed all questions', () => {
       renderLogin({
         DATA: {
           questions: Array(5).fill({}),
+          isLoadingData: false,
+          isError: false,
         },
         GAME: {
           step: 5,
+          mistakes: 0,
+        },
+        USER: {
+          email: 'test@mail.com',
+          authorizationStatus: AuthorizationStatus.Auth,
         },
       });
 
       expect(mockNavigate).toHaveBeenCalledWith(AppRoute.Result);
     });
 
-    it('should navigate to root page if user email is present', () => {
+    it('should navigate to root page when user has email but has not completed all questions', () => {
       renderLogin({
+        DATA: {
+          questions: Array(5).fill({}),
+          isLoadingData: false,
+          isError: false,
+        },
+        GAME: {
+          step: 3, // Not completed yet
+          mistakes: 1,
+        },
         USER: {
           email: 'test@mail.com',
+          authorizationStatus: AuthorizationStatus.Auth,
         },
       });
 
+      expect(mockNavigate).toHaveBeenCalledWith(AppRoute.Root);
+    });
+
+    it('should navigate to root page when user has email and no game progress', () => {
+      renderLogin({
+        DATA: {
+          questions: Array(5).fill({}),
+          isLoadingData: false,
+          isError: false,
+        },
+        GAME: {
+          step: 0,
+          mistakes: 0,
+        },
+        USER: {
+          email: 'test@mail.com',
+          authorizationStatus: AuthorizationStatus.Auth,
+        },
+      });
+
+      expect(mockNavigate).toHaveBeenCalledWith(AppRoute.Root);
+    });
+
+    it('should not navigate when user is not logged in (no email)', () => {
+      renderLogin({
+        DATA: {
+          questions: Array(5).fill({}),
+          isLoadingData: false,
+          isError: false,
+        },
+        GAME: {
+          step: 5,
+          mistakes: 0,
+        },
+        USER: {
+          email: null,
+          authorizationStatus: AuthorizationStatus.NoAuth,
+        },
+      });
+
+      expect(mockNavigate).not.toHaveBeenCalled();
+    });
+
+    it('should navigate to result page when user logs in after completing game', () => {
+      const { rerender } = renderLogin({
+        DATA: {
+          questions: Array(5).fill({}),
+          isLoadingData: false,
+          isError: false,
+        },
+        GAME: {
+          step: 5,
+          mistakes: 0,
+        },
+        USER: {
+          email: null, // Initially not logged in
+          authorizationStatus: AuthorizationStatus.NoAuth,
+        },
+      });
+
+      // Initially no navigation should happen
+      expect(mockNavigate).not.toHaveBeenCalled();
+
+      // Simulate user logging in
+      const storeWithEmail = createMockStore({
+        DATA: {
+          questions: Array(5).fill({}),
+          isLoadingData: false,
+          isError: false,
+        },
+        GAME: {
+          step: 5,
+          mistakes: 0,
+        },
+        USER: {
+          email: 'test@mail.com', // Now logged in
+          authorizationStatus: AuthorizationStatus.Auth,
+        },
+      });
+
+      rerender(
+        <Provider store={storeWithEmail}>
+          <MemoryRouter>
+            <LoginScreen />
+          </MemoryRouter>
+        </Provider>,
+      );
+
+      expect(mockNavigate).toHaveBeenCalledWith(AppRoute.Result);
+    });
+
+    it('should handle edge case when step is 0 and questions array is empty', () => {
+      renderLogin({
+        DATA: {
+          questions: [],
+          isLoadingData: false,
+          isError: false,
+        },
+        GAME: {
+          step: 0,
+          mistakes: 0,
+        },
+        USER: {
+          email: 'test@mail.com',
+          authorizationStatus: AuthorizationStatus.Auth,
+        },
+      });
+
+      expect(mockNavigate).toHaveBeenCalledWith(AppRoute.Root);
+    });
+
+    it('should handle case when step is truthy but less than questions length', () => {
+      renderLogin({
+        DATA: {
+          questions: Array(10).fill({}),
+          isLoadingData: false,
+          isError: false,
+        },
+        GAME: {
+          step: 7, // Less than 10
+          mistakes: 2,
+        },
+        USER: {
+          email: 'user@example.com',
+          authorizationStatus: AuthorizationStatus.Auth,
+        },
+      });
+
+      expect(mockNavigate).toHaveBeenCalledWith(AppRoute.Root);
+    });
+
+    it('should handle case when step is greater than questions length', () => {
+      renderLogin({
+        DATA: {
+          questions: Array(5).fill({}),
+          isLoadingData: false,
+          isError: false,
+        },
+        GAME: {
+          step: 7, // Greater than 5
+          mistakes: 1,
+        },
+        USER: {
+          email: 'user@example.com',
+          authorizationStatus: AuthorizationStatus.Auth,
+        },
+      });
+
+      // Should navigate to root since step !== questions.length (strict equality)
       expect(mockNavigate).toHaveBeenCalledWith(AppRoute.Root);
     });
   });
