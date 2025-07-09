@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({
   <section className="game">
     <header className="game__header">{showLogo && <Logo />}</header>
     <main
-      className={`game__screen${className ? ` ${className}` : ''}`}
+      className={`game__screen ${className ? `${className}` : ''}`}
       {...layoutProps}
     >
       {children}
