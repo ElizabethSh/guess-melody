@@ -17,10 +17,12 @@ const LoginScreen: React.FC = () => {
   const step = useAppSelector(selectStep);
 
   useEffect(() => {
-    if (step && step === questions.length) {
-      navigate(AppRoute.Result);
-    } else if (email) {
-      navigate(AppRoute.Root);
+    if (email) {
+      if (step && step === questions.length) {
+        navigate(AppRoute.Result);
+      } else {
+        navigate(AppRoute.Root);
+      }
     }
   }, [step, email, navigate, questions.length]);
 

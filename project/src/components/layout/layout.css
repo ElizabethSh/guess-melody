@@ -1,6 +1,7 @@
 .game__header {
   margin-bottom: 6rem;
   min-height: 11rem;
+  justify-content: space-between;
 }
 
 .game__screen {
