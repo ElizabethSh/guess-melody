@@ -9,16 +9,21 @@ type LayoutProps = React.DetailedHTMLProps<
 > & {
   children: React.ReactNode;
   showLogo?: boolean;
+  authSection?: React.ReactNode;
 };
 
 const Layout: React.FC<LayoutProps> = ({
   children,
   className,
+  authSection,
   showLogo = true,
   ...layoutProps
 }) => (
   <section className="game">
-    <header className="game__header">{showLogo && <Logo />}</header>
+    <header className="game__header">
+      {showLogo && <Logo />}
+      {authSection}
+    </header>
     <main
       className={`game__screen ${className ? `${className}` : ''}`}
       {...layoutProps}
