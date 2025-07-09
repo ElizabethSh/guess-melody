@@ -277,7 +277,7 @@ describe('WinScreen Component', () => {
         },
       });
 
-      const authSection = container.querySelector('.result-logout__wrapper');
+      const authSection = container.querySelector('.result__logout-wrapper');
       expect(authSection).toBeInTheDocument();
     });
   });
