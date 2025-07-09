@@ -4,7 +4,6 @@
 }
 
 .game__screen {
-  align-items: center;
   color: var(--text-color);
   display: flex;
   flex-direction: column;
