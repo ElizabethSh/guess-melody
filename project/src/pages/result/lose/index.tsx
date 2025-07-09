@@ -11,7 +11,7 @@ const LoseScreen: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const onReplyClick = () => {
+  const onReplayClick = () => {
     dispatch(resetGame());
     navigate(AppRoute.Game);
   };
@@ -19,14 +19,14 @@ const LoseScreen: React.FC = () => {
   return (
     <Layout className="result">
       <h2 className="main__title">What a pity!</h2>
-      <p className="result__total result__total--fail">
+      <p className="result__total">
         You&apos;ve run out of attempts. Never mind, you&apos;ll be lucky next
         time!
       </p>
       <button
         className="replay result__button"
         type="button"
-        onClick={onReplyClick}
+        onClick={onReplayClick}
       >
         Try again
       </button>

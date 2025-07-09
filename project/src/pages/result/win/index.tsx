@@ -18,7 +18,7 @@ const WinScreen: React.FC = () => {
   const questions = useAppSelector(selectQuestions);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
-  const onReplyClick = () => {
+  const onReplayClick = () => {
     dispatch(resetGame());
     navigate(AppRoute.Game);
   };
@@ -47,7 +47,7 @@ const WinScreen: React.FC = () => {
         You answered {questions.length - mistakesCount} questions correctly and
         made {mistakesCount} {mistakesCount === 1 ? 'mistake' : 'mistakes'}
       </p>
-      <button className="replay" onClick={onReplyClick} type="button">
+      <button className="replay" onClick={onReplayClick} type="button">
         Play again
       </button>
     </section>
