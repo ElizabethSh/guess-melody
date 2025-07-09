@@ -1,5 +1,6 @@
 .not-found {
   gap: 2rem;
+  align-items: center;
 }
 
 .not-found__title {
