@@ -18,8 +18,38 @@
   text-align: center;
 }
 
+.login__input-container {
+  position: relative;
+  width: 100%;
+}
+
 .login__input {
   width: 100%;
+  padding-right: 2.5rem; /* Make space for the toggle button */
+}
+
+.login__password-toggle {
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--gray);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color 0.2s ease;
+}
+
+.login__password-toggle:hover {
+  color: var(--text-color);
+}
+
+.login__password-toggle:focus {
+  outline: -webkit-focus-ring-color auto 5px;
 }
 
 .login__error {
