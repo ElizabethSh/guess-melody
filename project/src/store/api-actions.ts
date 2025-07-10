@@ -50,6 +50,7 @@ export const checkAuthAction = createAsyncThunk<
           title: 'Service Unavailable',
           description:
             'Authentication service not found. Please contact support.',
+          type: 'error',
         },
         ...getServerStatusMessages('Server error. Please try again later.'),
       },

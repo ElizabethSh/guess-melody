@@ -1,5 +1,6 @@
 import { addNotification } from '@store/slices/notifications/notifications';
 import { isAxiosError } from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 import { AppDispatch } from 'types/state';
 
@@ -40,7 +41,7 @@ export const handleApiError = (
 
   dispatch(
     addNotification({
-      id: `${action}-${crypto.randomUUID()}`,
+      id: `${action}-${uuidv4()}`,
       title,
       description,
       type,
