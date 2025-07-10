@@ -6,7 +6,7 @@ import { AxiosInstance } from 'axios';
 import { Questions } from 'types/question';
 import { AppDispatch, State } from 'types/state';
 import { AuthData, UserData } from 'types/user';
-import { CommonErrorMessages, handleApiError } from 'utils/error-handling';
+import { getServerStatusMessages, handleApiError } from 'utils/error-handling';
 
 export const fetchQuestionAction = createAsyncThunk<
   Questions,
@@ -30,17 +30,7 @@ export const fetchQuestionAction = createAsyncThunk<
           title: 'Questions Not Found',
           description: 'Questions not found. Please contact support.',
         },
-        ...Object.fromEntries(
-          Object.entries(CommonErrorMessages)
-            .filter(([status]) => parseInt(status) >= 500)
-            .map(([status, config]) => [
-              status,
-              {
-                ...config,
-                description: 'Server error. Please try again later.',
-              },
-            ]),
-        ),
+        ...getServerStatusMessages('Server error. Please try again later.'),
       },
     });
 
@@ -80,17 +70,7 @@ export const checkAuthAction = createAsyncThunk<
           description:
             'Authentication service not found. Please contact support.',
         },
-        ...Object.fromEntries(
-          Object.entries(CommonErrorMessages)
-            .filter(([status]) => parseInt(status) >= 500)
-            .map(([status, config]) => [
-              status,
-              {
-                ...config,
-                description: 'Server error. Please try again later.',
-              },
-            ]),
-        ),
+        ...getServerStatusMessages('Server error. Please try again later.'),
       },
     });
 
@@ -131,17 +111,7 @@ export const loginAction = createAsyncThunk<
             title: 'Service Unavailable',
             description: 'Login service not found. Please contact support.',
           },
-          ...Object.fromEntries(
-            Object.entries(CommonErrorMessages)
-              .filter(([status]) => parseInt(status) >= 500)
-              .map(([status, config]) => [
-                status,
-                {
-                  ...config,
-                  description: 'Server error. Please try again later.',
-                },
-              ]),
-          ),
+          ...getServerStatusMessages('Server error. Please try again later.'),
         },
       });
 
@@ -173,17 +143,7 @@ export const logoutAction = createAsyncThunk<
           title: 'Service Unavailable',
           description: 'Logout service not found. Please contact support.',
         },
-        ...Object.fromEntries(
-          Object.entries(CommonErrorMessages)
-            .filter(([status]) => parseInt(status) >= 500)
-            .map(([status, config]) => [
-              status,
-              {
-                ...config,
-                description: 'Server error. Please try again later.',
-              },
-            ]),
-        ),
+        ...getServerStatusMessages('Server error. Please try again later.'),
       },
     });
 
