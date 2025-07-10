@@ -12,7 +12,7 @@ import ToastNotification from './toast';
 
 import './toast-notifications.css';
 
-const ToastNotifications: React.FC = () => {
+const ToastNotifications: React.FC = (): React.ReactElement | null => {
   const notifications = useAppSelector(selectNotifications);
   const isHovered = useAppSelector(selectIsHovered);
   const dispatch = useAppDispatch();
@@ -20,8 +20,10 @@ const ToastNotifications: React.FC = () => {
   useEffect(() => {
     let timeoutID: ReturnType<typeof setTimeout> | null = null;
 
+    // Auto-dismiss the oldest notification if not hovered
     if (!isHovered && notifications.length) {
       timeoutID = setTimeout(() => {
+        // Always remove the first notification (oldest)
         dispatch(removeNotification(0));
       }, CLEAR_MESSAGE_TIMEOUT);
     }
@@ -33,6 +35,7 @@ const ToastNotifications: React.FC = () => {
     };
   }, [notifications, isHovered, dispatch]);
 
+  // Early return for better performance
   if (notifications.length === 0) {
     return null;
   }
@@ -41,6 +44,7 @@ const ToastNotifications: React.FC = () => {
     <div
       className="notifications-list"
       aria-label="Notifications"
+      aria-live="polite"
       onMouseEnter={() => dispatch(setIsHovered(true))}
       onMouseLeave={() => dispatch(setIsHovered(false))}
     >
