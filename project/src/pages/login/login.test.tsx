@@ -52,7 +52,9 @@ describe('Login Page', () => {
       expect(screen.getByText(/please introduce yourself!/i)).toBeVisible();
 
       expect(screen.getByLabelText(/e-mail/i)).toBeVisible(); // Check for email input
-      expect(screen.getByLabelText(/password/i)).toBeVisible(); // Check for password input
+      expect(
+        screen.getByLabelText(/password/i, { selector: 'input' }),
+      ).toBeVisible(); // Check for password input
       expect(screen.getByRole('button', { name: /log in/i })).toBeVisible();
       expect(screen.getByRole('button', { name: /play again/i })).toBeVisible();
     });
