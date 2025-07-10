@@ -12,31 +12,12 @@ export const fetchQuestionAction = createAsyncThunk<
   Questions,
   undefined,
   {
-    dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('data/fetchQuestions', async (_arg, { dispatch, extra: api }) => {
-  try {
-    const { data } = await api.get<Questions>(ApiRoute.Questions);
-    return data;
-  } catch (error) {
-    handleApiError(error, {
-      dispatch,
-      action: 'fetch-questions',
-      defaultMessage: 'Failed to load questions. Please try again.',
-      statusMessages: {
-        404: {
-          title: 'Questions Not Found',
-          description: 'Questions not found. Please contact support.',
-        },
-        ...getServerStatusMessages('Server error. Please try again later.'),
-      },
-    });
-
-    // Re-throw the error so it can still be caught by the component if needed
-    throw error;
-  }
+>('data/fetchQuestions', async (_arg, { extra: api }) => {
+  const { data } = await api.get<Questions>(ApiRoute.Questions);
+  return data;
 });
 
 export const checkAuthAction = createAsyncThunk<
