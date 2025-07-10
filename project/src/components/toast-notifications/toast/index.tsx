@@ -1,7 +1,12 @@
 import React from 'react';
 import { useAppDispatch } from '@hooks/use-store';
+import {
+  circleCheck,
+  circlePlus,
+  closingCross,
+  info as infoIcon,
+} from '@icons';
 import { removeNotification } from '@store/slices/notifications/notifications';
-import { circleCheck, circlePlus, closingCross, info as infoIcon } from 'icons';
 
 import { Notification } from 'types/notification';
 
