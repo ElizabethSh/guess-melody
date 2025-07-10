@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { addNotification } from 'store/slices/notifications/notifications';
-
-import { useAppDispatch } from 'hooks/use-store';
+import React, { useEffect, useRef, useState } from 'react';
+import { useAppDispatch } from '@hooks/use-store';
+import { addNotification } from '@store/slices/notifications/notifications';
 
 type AudioPlayerProps = {
   isPlaying: boolean;
@@ -89,11 +88,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     handlePlayback();
   }, [isPlaying, isLoading, hasError, dispatch]);
 
-  const getButtonLabel = useCallback(() => {
+  const getButtonLabel = () => {
     if (hasError) return 'Audio unavailable';
     if (isLoading) return 'Loading audio...';
     return isPlaying ? 'Pause audio' : 'Play audio';
-  }, [hasError, isLoading, isPlaying]);
+  };
 
   return (
     <>

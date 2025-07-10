@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
+import { createMockStore } from '@test-utils/mock-store';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createMockStore } from 'test-utils/mock-store';
 
 import AudioPlayer from '.';
 
