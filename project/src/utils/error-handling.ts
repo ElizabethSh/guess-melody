@@ -84,3 +84,22 @@ export const CommonErrorMessages = {
  * Creates error messages for status codes >= 500
  */
 export const getServerErrorMessage = () => CommonErrorMessages[500];
+
+/**
+ * Helper to get server status messages (≥500) with optional custom description
+ * @param customDescription - Optional custom description for server errors
+ * @returns Object with server status codes and their messages
+ */
+export const getServerStatusMessages = (customDescription?: string) => {
+  return Object.fromEntries(
+    Object.entries(CommonErrorMessages)
+      .filter(([status]) => parseInt(status) >= 500)
+      .map(([status, config]) => [
+        status,
+        {
+          ...config,
+          description: customDescription || config.description,
+        },
+      ]),
+  );
+};
