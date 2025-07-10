@@ -65,14 +65,44 @@ export const loginAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/login', async ({ login: email, password }, { extra: api }) => {
-  const { data } = await api.post<UserData>(ApiRoute.Login, {
-    email,
-    password,
-  });
-  setToken(data.token);
-  return data.email;
-});
+>(
+  'user/login',
+  async ({ login: email, password }, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.post<UserData>(ApiRoute.Login, {
+        email,
+        password,
+      });
+      setToken(data.token);
+      return data.email;
+    } catch (error) {
+      if (isAxiosError(error)) {
+        let description = 'An error occurs. Please try again.';
+
+        if (error.response?.status === 401) {
+          description =
+            'Invalid credentials. Please check your email and password.';
+        } else if (error.response?.status === 404) {
+          description = 'Login service not found. Please contact support.';
+        } else if (error.response && error.response.status >= 500) {
+          description = 'Server error. Please try again later.';
+        }
+
+        dispatch(
+          addNotification({
+            id: `login-error-${Date.now()}`,
+            title: 'Login Failed',
+            description,
+            type: 'error' as const,
+          }),
+        );
+      }
+
+      // Re-throw the error so it can still be caught by the component if needed
+      throw error;
+    }
+  },
+);
 
 export const logoutAction = createAsyncThunk<
   void,
