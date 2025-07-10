@@ -1,19 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { dropToken, setToken } from '@services/token';
 import { ApiRoute, AuthorizationStatus } from '@settings';
-import { AxiosInstance, isAxiosError } from 'axios';
+import { AxiosInstance } from 'axios';
 
 import { Questions } from 'types/question';
 import { AppDispatch, State } from 'types/state';
 import { AuthData, UserData } from 'types/user';
-
-import { addNotification } from './slices/notifications/notifications';
+import { getServerStatusMessages, handleApiError } from 'utils/error-handling';
 
 export const fetchQuestionAction = createAsyncThunk<
   Questions,
   undefined,
   {
-    dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
@@ -26,6 +24,7 @@ export const checkAuthAction = createAsyncThunk<
   { status: AuthorizationStatus; email: string | null },
   undefined,
   {
+    dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
@@ -37,23 +36,26 @@ export const checkAuthAction = createAsyncThunk<
       email: data.email,
     };
   } catch (error) {
-    if (isAxiosError(error)) {
-      let notification = {
-        id: error.code || 'unknown_error',
-        title: 'An error occurred',
-        description: 'Please try again later.',
-        type: 'error',
-      };
-      if (error.response?.status === 401) {
-        notification = {
-          id: error.code || 'unauthorized',
+    handleApiError(error, {
+      dispatch,
+      action: 'check-auth',
+      defaultMessage: 'Authentication check failed. Please try again.',
+      statusMessages: {
+        401: {
           title: 'Unauthorized',
-          description: "Only authorized users can view the game's results.",
+          description: 'Only authorized users can view the game results.',
           type: 'info',
-        };
-      }
-      dispatch(addNotification(notification));
-    }
+        },
+        404: {
+          title: 'Service Unavailable',
+          description:
+            'Authentication service not found. Please contact support.',
+          type: 'error',
+        },
+        ...getServerStatusMessages('Server error. Please try again later.'),
+      },
+    });
+
     return { status: AuthorizationStatus.NoAuth, email: null };
   }
 });
@@ -62,26 +64,75 @@ export const loginAction = createAsyncThunk<
   string,
   AuthData,
   {
+    dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('user/login', async ({ login: email, password }, { extra: api }) => {
-  const { data } = await api.post<UserData>(ApiRoute.Login, {
-    email,
-    password,
-  });
-  setToken(data.token);
-  return data.email;
-});
+>(
+  'user/login',
+  async ({ login: email, password }, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.post<UserData>(ApiRoute.Login, {
+        email,
+        password,
+      });
+      setToken(data.token);
+      return data.email;
+    } catch (error) {
+      handleApiError(error, {
+        dispatch,
+        action: 'login',
+        defaultMessage: 'Login failed. Please try again.',
+        statusMessages: {
+          401: {
+            title: 'Login Failed',
+            description:
+              'Invalid credentials. Please check your email and password.',
+          },
+          404: {
+            title: 'Service Unavailable',
+            description: 'Login service not found. Please contact support.',
+          },
+          ...getServerStatusMessages('Server error. Please try again later.'),
+        },
+      });
+
+      // Re-throw the error so it can still be caught by the component if needed
+      throw error;
+    }
+  },
+);
 
 export const logoutAction = createAsyncThunk<
   void,
   undefined,
   {
+    dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('user/logout', async (_arg, { extra: api }) => {
-  await api.delete(ApiRoute.Logout);
-  dropToken();
+>('user/logout', async (_arg, { dispatch, extra: api }) => {
+  try {
+    await api.delete(ApiRoute.Logout);
+    dropToken();
+  } catch (error) {
+    handleApiError(error, {
+      dispatch,
+      action: 'logout',
+      defaultMessage: 'Logout failed. Please try again.',
+      statusMessages: {
+        404: {
+          title: 'Service Unavailable',
+          description: 'Logout service not found. Please contact support.',
+        },
+        ...getServerStatusMessages('Server error. Please try again later.'),
+      },
+    });
+
+    // Even if logout fails on server, we should still drop the token locally
+    dropToken();
+
+    // Re-throw the error so it can still be caught by the component if needed
+    throw error;
+  }
 });

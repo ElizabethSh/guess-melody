@@ -178,3 +178,73 @@ export const info = (
     />
   </svg>
 );
+
+export const eyeOpen = (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="eye-open"
+  >
+    <path
+      d="M1 10C1 10 4 4 10 4C16 4 19 10 19 10C19 10 16 16 10 16C4 16 1 10 1 10Z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <circle
+      cx="10"
+      cy="10"
+      r="3"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const eyeClosed = (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="eye-closed"
+  >
+    <path
+      d="M14.12 14.12C12.8 15.14 11.44 15.5 10 15.5C4 15.5 1 10 1 10C2.24 7.87 4.07 6.18 6.38 5.27"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8.21 8.21C8.41 7.73 8.76 7.31 9.21 7.01C9.66 6.71 10.19 6.55 10.73 6.55C11.27 6.55 11.8 6.71 12.25 7.01C12.7 7.31 13.05 7.73 13.25 8.21"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M19 10C18.18 11.65 16.69 13.05 14.12 14.12"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <line
+      x1="1"
+      y1="1"
+      x2="19"
+      y2="19"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
