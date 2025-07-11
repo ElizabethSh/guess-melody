@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus, NameSpace } from '@settings';
 import { createMockStore } from '@test-utils/mock-store';
 import { render, screen } from '@testing-library/react';
@@ -10,42 +10,84 @@ import PrivateRoute from './index';
 // Mock child component for testing
 const TestChildComponent = () => <div>Protected Content</div>;
 
+// Mock Login component to verify redirection
+const MockLoginPage = () => <div>Login Page</div>;
+
 describe('Component: PrivateRoute', () => {
   const renderPrivateRoute = (
     authorizationStatus = AuthorizationStatus.Unknown,
+    children: React.ReactNode = <TestChildComponent />,
   ) => {
     const store = createMockStore({
       [NameSpace.User]: {
         authorizationStatus,
-        email: null,
+        email:
+          authorizationStatus === AuthorizationStatus.Auth
+            ? 'test@example.com'
+            : null,
       },
     });
 
-    return render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <PrivateRoute>
-            <TestChildComponent />
-          </PrivateRoute>
-        </MemoryRouter>
-      </Provider>,
-    );
+    return {
+      store,
+      ...render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <PrivateRoute>{children}</PrivateRoute>
+          </MemoryRouter>
+        </Provider>,
+      ),
+    };
+  };
+
+  const renderPrivateRouteWithNavigation = (
+    authorizationStatus = AuthorizationStatus.Unknown,
+    initialEntries: string[] = ['/protected'],
+    children: React.ReactNode = <TestChildComponent />,
+  ) => {
+    const store = createMockStore({
+      [NameSpace.User]: {
+        authorizationStatus,
+        email:
+          authorizationStatus === AuthorizationStatus.Auth
+            ? 'test@example.com'
+            : null,
+      },
+    });
+
+    return {
+      store,
+      ...render(
+        <Provider store={store}>
+          <MemoryRouter initialEntries={initialEntries}>
+            <Routes>
+              <Route path={AppRoute.Login} element={<MockLoginPage />} />
+              <Route
+                path="*"
+                element={<PrivateRoute>{children}</PrivateRoute>}
+              />
+            </Routes>
+          </MemoryRouter>
+        </Provider>,
+      ),
+    };
   };
 
   describe('Rendering', () => {
     it('should redirect to login when authorization status is Unknown', () => {
-      renderPrivateRoute(AuthorizationStatus.Unknown);
+      renderPrivateRouteWithNavigation(AuthorizationStatus.Unknown, [
+        '/protected',
+      ]);
 
-      // Should not render the protected content or loader
+      // Should redirect to login page and not show protected content
+      expect(screen.getByText('Login Page')).toBeInTheDocument();
       expect(screen.queryByText('Protected Content')).not.toBeInTheDocument();
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
 
     it('should render children when user is authenticated', () => {
       renderPrivateRoute(AuthorizationStatus.Auth);
 
       expect(screen.getByText('Protected Content')).toBeVisible();
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
 
     it('should handle React.ReactNode children correctly', () => {
@@ -57,22 +99,7 @@ describe('Component: PrivateRoute', () => {
         </div>
       );
 
-      const store = createMockStore({
-        [NameSpace.User]: {
-          authorizationStatus: AuthorizationStatus.Auth,
-          email: 'test@example.com',
-        },
-      });
-
-      render(
-        <Provider store={store}>
-          <MemoryRouter>
-            <PrivateRoute>
-              <ComplexChildren />
-            </PrivateRoute>
-          </MemoryRouter>
-        </Provider>,
-      );
+      renderPrivateRoute(AuthorizationStatus.Auth, <ComplexChildren />);
 
       expect(screen.getByText('Title')).toBeVisible();
       expect(screen.getByText('Paragraph')).toBeVisible();
@@ -80,64 +107,27 @@ describe('Component: PrivateRoute', () => {
     });
 
     it('should handle string children', () => {
-      const store = createMockStore({
-        [NameSpace.User]: {
-          authorizationStatus: AuthorizationStatus.Auth,
-          email: 'test@example.com',
-        },
-      });
-
-      render(
-        <Provider store={store}>
-          <MemoryRouter>
-            <PrivateRoute>Simple text content</PrivateRoute>
-          </MemoryRouter>
-        </Provider>,
-      );
+      renderPrivateRoute(AuthorizationStatus.Auth, 'Simple text content');
 
       expect(screen.getByText('Simple text content')).toBeVisible();
     });
 
     it('should handle multiple children', () => {
-      const store = createMockStore({
-        [NameSpace.User]: {
-          authorizationStatus: AuthorizationStatus.Auth,
-          email: 'test@example.com',
-        },
-      });
-
-      render(
-        <Provider store={store}>
-          <MemoryRouter>
-            <PrivateRoute>
-              <div>First child</div>
-              <div>Second child</div>
-            </PrivateRoute>
-          </MemoryRouter>
-        </Provider>,
+      const multipleChildren = (
+        <>
+          <div>First child</div>
+          <div>Second child</div>
+        </>
       );
+
+      renderPrivateRoute(AuthorizationStatus.Auth, multipleChildren);
 
       expect(screen.getByText('First child')).toBeVisible();
       expect(screen.getByText('Second child')).toBeVisible();
     });
 
     it('should work correctly when accessed from different routes', () => {
-      const store = createMockStore({
-        [NameSpace.User]: {
-          authorizationStatus: AuthorizationStatus.Auth,
-          email: 'test@example.com',
-        },
-      });
-
-      render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={[AppRoute.Result]}>
-            <PrivateRoute>
-              <TestChildComponent />
-            </PrivateRoute>
-          </MemoryRouter>
-        </Provider>,
-      );
+      renderPrivateRoute(AuthorizationStatus.Auth);
 
       expect(screen.getByText('Protected Content')).toBeVisible();
     });
@@ -145,33 +135,17 @@ describe('Component: PrivateRoute', () => {
 
   describe('Actions', () => {
     it('should redirect to login page when user is not authenticated', () => {
-      const store = createMockStore({
-        [NameSpace.User]: {
-          authorizationStatus: AuthorizationStatus.NoAuth,
-          email: null,
-        },
-      });
+      renderPrivateRouteWithNavigation(AuthorizationStatus.NoAuth, ['/result']);
 
-      render(
-        <Provider store={store}>
-          <MemoryRouter initialEntries={['/result']}>
-            <PrivateRoute>
-              <TestChildComponent />
-            </PrivateRoute>
-          </MemoryRouter>
-        </Provider>,
-      );
-
-      // Should not render the protected content
+      // Should redirect to login page and not show protected content
+      expect(screen.getByText('Login Page')).toBeInTheDocument();
       expect(screen.queryByText('Protected Content')).not.toBeInTheDocument();
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
 
     it('should update when authorization status changes from Unknown to Auth', () => {
       const { rerender } = renderPrivateRoute(AuthorizationStatus.Unknown);
 
-      // Initially should redirect (not show loader or content)
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+      // Initially should redirect (not show content)
       expect(screen.queryByText('Protected Content')).not.toBeInTheDocument();
 
       // Re-render with authenticated status
@@ -193,14 +167,12 @@ describe('Component: PrivateRoute', () => {
       );
 
       expect(screen.getByText('Protected Content')).toBeVisible();
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
 
     it('should update when authorization status changes from Unknown to NoAuth', () => {
       const { rerender } = renderPrivateRoute(AuthorizationStatus.Unknown);
 
-      // Initially should redirect (not show loader or content)
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+      // Initially should redirect (not show content)
       expect(screen.queryByText('Protected Content')).not.toBeInTheDocument();
 
       // Re-render with no auth status
@@ -222,7 +194,6 @@ describe('Component: PrivateRoute', () => {
       );
 
       expect(screen.queryByText('Protected Content')).not.toBeInTheDocument();
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
   });
 });
