@@ -14,11 +14,8 @@ const TestChildComponent = () => <div>Protected Content</div>;
 const MockLoginPage = () => <div>Login Page</div>;
 
 describe('Component: PrivateRoute', () => {
-  const renderPrivateRoute = (
-    authorizationStatus = AuthorizationStatus.Unknown,
-    children: React.ReactNode = <TestChildComponent />,
-  ) => {
-    const store = createMockStore({
+  const createTestStore = (authorizationStatus: AuthorizationStatus) => {
+    return createMockStore({
       [NameSpace.User]: {
         authorizationStatus,
         email:
@@ -27,6 +24,13 @@ describe('Component: PrivateRoute', () => {
             : null,
       },
     });
+  };
+
+  const renderPrivateRoute = (
+    authorizationStatus = AuthorizationStatus.Unknown,
+    children: React.ReactNode = <TestChildComponent />,
+  ) => {
+    const store = createTestStore(authorizationStatus);
 
     return {
       store,
@@ -45,15 +49,7 @@ describe('Component: PrivateRoute', () => {
     initialEntries: string[] = ['/protected'],
     children: React.ReactNode = <TestChildComponent />,
   ) => {
-    const store = createMockStore({
-      [NameSpace.User]: {
-        authorizationStatus,
-        email:
-          authorizationStatus === AuthorizationStatus.Auth
-            ? 'test@example.com'
-            : null,
-      },
-    });
+    const store = createTestStore(authorizationStatus);
 
     return {
       store,
@@ -149,12 +145,7 @@ describe('Component: PrivateRoute', () => {
       expect(screen.queryByText('Protected Content')).not.toBeInTheDocument();
 
       // Re-render with authenticated status
-      const storeAuth = createMockStore({
-        [NameSpace.User]: {
-          authorizationStatus: AuthorizationStatus.Auth,
-          email: 'test@example.com',
-        },
-      });
+      const storeAuth = createTestStore(AuthorizationStatus.Auth);
 
       rerender(
         <Provider store={storeAuth}>
@@ -176,12 +167,7 @@ describe('Component: PrivateRoute', () => {
       expect(screen.queryByText('Protected Content')).not.toBeInTheDocument();
 
       // Re-render with no auth status
-      const storeNoAuth = createMockStore({
-        [NameSpace.User]: {
-          authorizationStatus: AuthorizationStatus.NoAuth,
-          email: null,
-        },
-      });
+      const storeNoAuth = createTestStore(AuthorizationStatus.NoAuth);
 
       rerender(
         <Provider store={storeNoAuth}>
