@@ -5,7 +5,7 @@ import { AppRoute, AuthorizationStatus } from '@settings';
 import { selectAuthorizationStatus } from '@store/slices/user/user';
 
 type PrivateRouteProps = {
-  children: JSX.Element;
+  children: React.ReactNode;
 };
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
