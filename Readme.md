@@ -13,7 +13,7 @@ A fun and interactive game where players guess melodies based on short audio cli
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/yourusername/guess_melody_10.git
+git clone https://git@github.com:ElizabethSh/guess-melody.git
 cd guess_melody_10
 ```
 
