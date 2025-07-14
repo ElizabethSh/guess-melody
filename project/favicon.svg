@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="16" fill="#fff6e5"/>
+  <g>
+    <!-- Main note stem -->
+    <rect x="36" y="14" width="4" height="28" rx="2" fill="#ff8800"/>
+    <!-- Main note head -->
+    <ellipse cx="38" cy="46" rx="8" ry="7" fill="#ff8800"/>
+    <!-- Second note head (eighth note) -->
+    <ellipse cx="50" cy="40" rx="7" ry="6" fill="#ff8800"/>
+    <!-- Note flag -->
+    <path d="M40 14 Q60 18 50 40" stroke="#ff8800" stroke-width="3" fill="none"/>
+  </g>
+</svg>
