@@ -1,23 +1,27 @@
 import { ChangeEvent } from 'react';
 
-import { ArtistQuestion, UserArtistQuestionAnswer } from 'types/question';
+import {
+  ArtistQuestion,
+  RenderPlayer,
+  UserArtistQuestionAnswer,
+} from 'types/question';
 
 import PageHeader from '../page-header';
 
-type ArtistQuestionScreenProps = {
+export type ArtistQuestionScreenProps = {
   question: ArtistQuestion;
-  renderPlayer: (src: string, idx: number) => JSX.Element;
+  renderPlayer: RenderPlayer;
   onAnswer: (
     question: ArtistQuestion,
     userAnswer: UserArtistQuestionAnswer,
   ) => void;
 };
 
-const ArtistQuestionScreen = ({
+const ArtistQuestionScreen: React.FC<ArtistQuestionScreenProps> = ({
   onAnswer,
   question,
   renderPlayer,
-}: ArtistQuestionScreenProps): JSX.Element => {
+}) => {
   const { answers, song } = question;
 
   return (
@@ -33,19 +37,18 @@ const ArtistQuestionScreen = ({
         </div>
 
         <form className="game__artist">
-          {answers.map((answer) => {
-            const { artist, picture } = answer;
+          {answers.map(({ artist, picture }, index) => {
             const id = `answer-${artist.split(' ').join('-')}`;
 
             return (
-              <div className="artist" key={artist}>
+              <div className="artist" key={`${artist}-${index}`}>
                 <input
                   className="artist__input visually-hidden"
                   id={id}
                   name="answer"
                   onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                     evt.preventDefault();
-                    onAnswer(question, answer.artist);
+                    onAnswer(question, artist);
                   }}
                   type="radio"
                   value={artist}

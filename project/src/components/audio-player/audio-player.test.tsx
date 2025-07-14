@@ -3,7 +3,7 @@ import { createMockStore } from '@test-utils/mock-store';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import AudioPlayer from '.';
+import AudioPlayer, { AudioPlayerProps } from '.';
 
 // Mock HTML5 Audio API
 const mockPlay = vi.fn();
@@ -78,14 +78,17 @@ const clearEventListeners = () => {
   currentAudioElement = null;
 };
 
-const defaultProps = {
+const defaultProps: AudioPlayerProps = {
   isPlaying: false,
   onPlayAudioClick: vi.fn(),
   src: 'test-audio.mp3',
 };
 
 // Helper to render with Redux Provider
-const renderWithProvider = (props = {}, storeState = {}) => {
+const renderWithProvider = (
+  props: Partial<AudioPlayerProps> = {},
+  storeState = {},
+) => {
   const store = createMockStore(storeState);
   const componentProps = { ...defaultProps, ...props };
   return {

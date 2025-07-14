@@ -1,7 +1,4 @@
-import {
-  makeFakeArtistQuestion,
-  makeFakeGenreQuestion,
-} from '../../../mocks/mocks';
+import { makeFakeArtistQuestion, makeFakeGenreQuestion } from '@mocks/mocks';
 
 import {
   checkUserAnswer,

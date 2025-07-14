@@ -2,12 +2,12 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import ErrorScreen from './index';
+import ErrorScreen, { ErrorScreenProps } from './index';
 
 describe('ErrorScreen', () => {
   const user = userEvent.setup();
 
-  const renderErrorScreen = (props = {}) => {
+  const renderErrorScreen = (props: Partial<ErrorScreenProps> = {}) => {
     return render(
       <MemoryRouter>
         <ErrorScreen {...props} />

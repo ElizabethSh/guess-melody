@@ -1,23 +1,23 @@
+import { makeFakeGenreQuestion } from '@mocks/mocks';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { GenreQuestionAnswer } from 'types/question';
+import { GenreQuestionAnswer, RenderPlayer } from 'types/question';
 
 import GenreQuestionItem from '.';
 
 describe('Genre Question Item', () => {
-  const mockAnswer: GenreQuestionAnswer = {
-    genre: 'Rock',
-    src: 'path/to/song.mp3',
-  };
+  const fakeQuestion = makeFakeGenreQuestion();
+  const mockAnswer: GenreQuestionAnswer = fakeQuestion.answers[0];
 
-  const renderPlayer = (path: string, playerIndex: number) => (
+  const renderPlayer: RenderPlayer = (path: string, playerIndex: number) => (
     <audio src={path} data-testid={`player-${playerIndex}`}>
       <track kind="captions" src="" label="No captions available" />
     </audio>
   );
 
   const defaultProps = {
+    id: 1,
     answer: mockAnswer,
     renderPlayer,
     onChange: vi.fn(),
@@ -26,12 +26,7 @@ describe('Genre Question Item', () => {
 
   describe('rendering', () => {
     it('should render checkbox input with correct attributes', () => {
-      const props = {
-        ...defaultProps,
-        id: 1,
-      };
-
-      render(<GenreQuestionItem {...props} />);
+      render(<GenreQuestionItem {...defaultProps} />);
 
       const checkbox = screen.getByRole('checkbox');
       expect(checkbox).toBeInTheDocument();
@@ -49,10 +44,8 @@ describe('Genre Question Item', () => {
     it('should render checkbox as checked when userAnswer is true', () => {
       const props = {
         ...defaultProps,
-        id: 1,
         userAnswer: true,
       };
-
       render(<GenreQuestionItem {...props} />);
 
       const checkbox = screen.getByRole('checkbox');
@@ -60,15 +53,10 @@ describe('Genre Question Item', () => {
     });
 
     it('should render description element with correct content', () => {
-      const props = {
-        ...defaultProps,
-        id: 1,
-      };
-
-      render(<GenreQuestionItem {...props} />);
+      render(<GenreQuestionItem {...defaultProps} />);
 
       const description = screen.getByText(
-        'Rock music track for genre question',
+        `${mockAnswer.genre} music track for genre question`,
       );
       expect(description).toBeInTheDocument();
       expect(description).toHaveAttribute('id', 'answer-1-description');

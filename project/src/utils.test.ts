@@ -1,4 +1,5 @@
-import { makeFakeArtistQuestion, makeFakeGenreQuestion } from './mocks/mocks';
+import { makeFakeArtistQuestion, makeFakeGenreQuestion } from '@mocks/mocks';
+
 import { isArtistAnswerCorrect, isGenreAnswerCorrect } from './utils';
 
 const mockArtistQuestion = makeFakeArtistQuestion();

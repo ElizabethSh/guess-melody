@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '@hooks/use-store';
 import { addNotification } from '@store/slices/notifications/notifications';
 
-type AudioPlayerProps = {
+export type AudioPlayerProps = {
   isPlaying: boolean;
   onPlayAudioClick: () => void;
   src: string;
