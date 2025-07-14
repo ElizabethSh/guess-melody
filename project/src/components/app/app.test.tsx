@@ -1,10 +1,9 @@
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { makeFakeArtistQuestion, makeFakeGenreQuestion } from '@mocks/mocks';
 import { AuthorizationStatus, NameSpace } from '@settings';
 import { createMockStore } from '@test-utils/mock-store';
 import { render, screen } from '@testing-library/react';
-
-import { questions } from '../../mocks/questions';
 
 import App from './app';
 
@@ -65,13 +64,16 @@ describe('App component', () => {
   });
 
   it('should render game screen on game path', async () => {
+    // Generate mock questions using the mock utility functions
+    const mockQuestions = [makeFakeGenreQuestion(), makeFakeArtistQuestion()];
+
     renderWithProvider(['/game'], {
       [NameSpace.User]: {
         authorizationStatus: AuthorizationStatus.Auth,
         email: 'test@example.com',
       },
       [NameSpace.Data]: {
-        questions, // Use the imported mock questions
+        questions: mockQuestions,
       },
     });
 
@@ -80,7 +82,7 @@ describe('App component', () => {
 
     // After lazy loading, should show game screen with genre question (first question in mock)
     expect(
-      await screen.findByRole('heading', { name: 'Select reggae tracks' }),
+      await screen.findByRole('heading', { name: /Select .* tracks/i }),
     ).toBeVisible();
   });
 
