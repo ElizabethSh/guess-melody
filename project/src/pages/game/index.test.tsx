@@ -49,18 +49,16 @@ vi.mock('../../hocs/with-audio-player', () => {
 const getRealInitialState = () =>
   configureStore({ reducer: rootReducer }).getState();
 
-const renderGameScreen = (stateOverrides = {}) => {
+const renderGameScreen = (stateOverrides: Record<string, any> = {}) => {
   const realInitialState = getRealInitialState();
 
   // Deep merge real initial state with overrides
   const mergedState = { ...realInitialState };
   Object.keys(stateOverrides).forEach((key) => {
     const namespaceKey = key as keyof typeof stateOverrides;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     (mergedState as any)[namespaceKey] = {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ...(mergedState as any)[namespaceKey],
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ...(stateOverrides as any)[namespaceKey],
     };
   });

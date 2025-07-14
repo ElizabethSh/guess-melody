@@ -53,10 +53,6 @@ export const createAPI = (): AxiosInstance => {
     (error: AxiosError<DetailMessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = error.response.data;
-        // FIXME: handle it better. Add better error message
-        if (error.response.status === StatusCodes.UNAUTHORIZED) {
-          detailMessage.message = 'Unauthorized';
-        }
         store.dispatch(setError(detailMessage.message));
       }
       throw error;
