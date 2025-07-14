@@ -7,6 +7,8 @@ import { rootReducer } from '@store/root-reducer';
 import { createMockStore } from '@test-utils/mock-store';
 import { render, screen } from '@testing-library/react';
 
+import { RenderPlayer } from 'types/question';
+
 import {
   makeFakeArtistQuestion,
   makeFakeGenreQuestion,
@@ -31,9 +33,9 @@ vi.mock('react-router-dom', async () => {
 vi.mock('../../hocs/with-audio-player', () => {
   return {
     default: (
-      Component: React.ComponentType<{ renderPlayer?: () => JSX.Element }>,
+      Component: React.ComponentType<{ renderPlayer?: RenderPlayer }>,
     ) => {
-      const MockedComponent = (props: { renderPlayer?: () => JSX.Element }) => (
+      const MockedComponent = (props: { renderPlayer?: RenderPlayer }) => (
         <div data-testid="mocked-audio-player">
           <Component
             {...props}
