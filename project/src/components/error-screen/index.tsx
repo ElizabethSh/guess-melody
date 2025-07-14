@@ -4,7 +4,7 @@ import Layout from '@components/layout';
 
 import './error-screen.css';
 
-type ErrorScreenProps = {
+export type ErrorScreenProps = {
   message?: string;
   onRetry?: () => void;
 };
