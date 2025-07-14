@@ -9,7 +9,7 @@ import {
 
 import PageHeader from '../page-header';
 
-type GenreQuestionProps = {
+export type GenreQuestionProps = {
   onAnswer: (
     question: GenreQuestion,
     userAnswer: UserGenreQuestionAnswer,
