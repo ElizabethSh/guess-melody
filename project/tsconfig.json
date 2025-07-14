@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "target": "es2020",
+    "target": "es2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -11,8 +11,16 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
-    "outDir": "./dist",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    // Enhanced type checking (more practical settings)
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+
+    // Path mapping
     "paths": {
       "@components/*": ["components/*"],
       "@context/*": ["context/*"],
@@ -22,17 +30,22 @@
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],
       "@test-utils/*": ["test-utils/*"],
+      "@types/*": ["types/*"],
+      "@hocs/*": ["hocs/*"],
+      "@utils/*": ["utils/*"],
       "@icons": ["icons.tsx"],
       "@settings": ["settings.ts"],
-      "@utils": ["utils.ts"],
-      "types/*": ["types/*"]
-      // add more aliases here
+      "@utils": ["utils.ts"]
     },
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "vite.config.ts"]
+  "include": [
+    "src",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "eslint.config.js"
+  ]
 }

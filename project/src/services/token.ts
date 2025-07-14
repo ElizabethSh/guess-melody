@@ -14,6 +14,7 @@ export const getToken = (): Token => {
       const token = localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN);
       return token ? JSON.parse(token) : undefined;
     }
+    return undefined;
   } catch {
     return undefined;
   }
