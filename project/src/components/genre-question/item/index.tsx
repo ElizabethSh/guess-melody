@@ -1,12 +1,12 @@
 import React, { ChangeEvent } from 'react';
 
-import { GenreQuestionAnswer } from 'types/question';
+import { GenreQuestionAnswer, RenderPlayer } from 'types/question';
 
 type GenreQuestionItemProps = {
   answer: GenreQuestionAnswer;
   id: number;
   onChange: (id: number, value: boolean) => void;
-  renderPlayer: (path: string, playerIndex: number) => JSX.Element;
+  renderPlayer: RenderPlayer;
   userAnswer: boolean;
 };
 

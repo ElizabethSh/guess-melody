@@ -1,3 +1,5 @@
+import React from 'react';
+
 type ArtistQuestionAnswer = {
   artist: string;
   picture: string;
@@ -30,3 +32,8 @@ export type Questions = Question[];
 export type UserArtistQuestionAnswer = string;
 export type UserGenreQuestionAnswer = readonly (boolean | string)[];
 export type UserAnswer = UserArtistQuestionAnswer | UserGenreQuestionAnswer;
+
+export type RenderPlayer = (
+  src: string,
+  playerIndex: number,
+) => React.ReactNode;

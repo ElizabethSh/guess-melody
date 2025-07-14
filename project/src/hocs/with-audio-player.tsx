@@ -2,8 +2,10 @@ import React from 'react';
 import { ComponentType, useState } from 'react';
 import AudioPlayer from '@components/audio-player';
 
+import { RenderPlayer } from 'types/question';
+
 type withAudioPlayerProps = {
-  renderPlayer: (src: string, idx: number) => void;
+  renderPlayer: RenderPlayer;
 };
 
 const withAudioPlayer = <T extends object>(

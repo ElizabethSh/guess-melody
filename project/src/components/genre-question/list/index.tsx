@@ -2,14 +2,14 @@ import React, { FormEvent, useMemo } from 'react';
 import Button from '@components/button';
 import { useUserAnswers } from '@hooks/use-user-answers';
 
-import { GenreQuestion } from 'types/question';
+import { GenreQuestion, RenderPlayer } from 'types/question';
 
 import GenreQuestionItem from '../item';
 
 type GenreQuestionListProps = {
   question: GenreQuestion;
   onAnswer: (question: GenreQuestion, answers: boolean[]) => void;
-  renderPlayer: (src: string, playerIndex: number) => JSX.Element;
+  renderPlayer: RenderPlayer;
 };
 
 const GenreQuestionList: React.FC<GenreQuestionListProps> = ({

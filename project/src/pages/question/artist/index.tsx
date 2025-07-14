@@ -1,23 +1,27 @@
 import { ChangeEvent } from 'react';
 
-import { ArtistQuestion, UserArtistQuestionAnswer } from 'types/question';
+import {
+  ArtistQuestion,
+  RenderPlayer,
+  UserArtistQuestionAnswer,
+} from 'types/question';
 
 import PageHeader from '../page-header';
 
 type ArtistQuestionScreenProps = {
   question: ArtistQuestion;
-  renderPlayer: (src: string, idx: number) => JSX.Element;
+  renderPlayer: RenderPlayer;
   onAnswer: (
     question: ArtistQuestion,
     userAnswer: UserArtistQuestionAnswer,
   ) => void;
 };
 
-const ArtistQuestionScreen = ({
+const ArtistQuestionScreen: React.FC<ArtistQuestionScreenProps> = ({
   onAnswer,
   question,
   renderPlayer,
-}: ArtistQuestionScreenProps): JSX.Element => {
+}) => {
   const { answers, song } = question;
 
   return (
