@@ -1,11 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { makeFakeGenreQuestion } from '@mocks/mocks';
 import { createMockStore } from '@test-utils/mock-store';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import { makeFakeGenreQuestion } from '../../../mocks/mocks';
 
 import GenreQuestionScreen, { GenreQuestionProps } from './index';
 

@@ -17,6 +17,7 @@
       "@components/*": ["components/*"],
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
+      "@mocks/*": ["mocks/*"],
       "@pages/*": ["pages/*"],
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],

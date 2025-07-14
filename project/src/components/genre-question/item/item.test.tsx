@@ -1,6 +1,6 @@
+import { makeFakeGenreQuestion } from '@mocks/mocks';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { makeFakeGenreQuestion } from 'mocks/mocks';
 
 import { GenreQuestionAnswer, RenderPlayer } from 'types/question';
 

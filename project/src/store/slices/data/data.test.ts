@@ -1,7 +1,5 @@
-import {
-  makeFakeArtistQuestion,
-  makeFakeGenreQuestion,
-} from '../../../mocks/mocks';
+import { makeFakeArtistQuestion, makeFakeGenreQuestion } from '@mocks/mocks';
+
 import { fetchQuestionAction } from '../../api-actions';
 
 import { gameQuestionsSlice } from './data';

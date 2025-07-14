@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { makeFakeArtistQuestion, makeFakeGenreQuestion } from '@mocks/mocks';
 import { configureStore } from '@reduxjs/toolkit';
 import { MAX_ERRORS_COUNT, NameSpace } from '@settings';
 import { rootReducer } from '@store/root-reducer';
@@ -8,11 +9,6 @@ import { createMockStore } from '@test-utils/mock-store';
 import { render, screen } from '@testing-library/react';
 
 import { RenderPlayer } from 'types/question';
-
-import {
-  makeFakeArtistQuestion,
-  makeFakeGenreQuestion,
-} from '../../mocks/mocks';
 
 import GameScreen from './index';
 
