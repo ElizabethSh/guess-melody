@@ -8,7 +8,7 @@ import {
 
 import PageHeader from '../page-header';
 
-type ArtistQuestionScreenProps = {
+export type ArtistQuestionScreenProps = {
   question: ArtistQuestion;
   renderPlayer: RenderPlayer;
   onAnswer: (
@@ -37,19 +37,18 @@ const ArtistQuestionScreen: React.FC<ArtistQuestionScreenProps> = ({
         </div>
 
         <form className="game__artist">
-          {answers.map((answer) => {
-            const { artist, picture } = answer;
+          {answers.map(({ artist, picture }, index) => {
             const id = `answer-${artist.split(' ').join('-')}`;
 
             return (
-              <div className="artist" key={artist}>
+              <div className="artist" key={`${artist}-${index}`}>
                 <input
                   className="artist__input visually-hidden"
                   id={id}
                   name="answer"
                   onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                     evt.preventDefault();
-                    onAnswer(question, answer.artist);
+                    onAnswer(question, artist);
                   }}
                   type="radio"
                   value={artist}
