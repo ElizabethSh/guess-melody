@@ -1,0 +1,58 @@
+name: Create issue from Dependabot alert
+
+on:
+  dependabot_alert:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create issue from alert
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const alert = context.payload.alert;
+
+            if (!alert) {
+              core.info('No dependabot alert payload found.');
+              return;
+            }
+
+            const advisory = alert.security_advisory || {};
+            const vulnerability = alert.security_vulnerability || {};
+            const dependency = alert.dependency || {};
+            const packageInfo = dependency.package || {};
+            const packageName = packageInfo.name || 'unknown package';
+            const ecosystem = packageInfo.ecosystem;
+            const title = `Dependabot alert: ${packageName} - ${advisory.summary || 'security update'}`;
+
+            const bodyLines = [
+              'A new Dependabot alert has been created.',
+              '',
+              `**Package:** ${packageName}`,
+              ecosystem ? `**Ecosystem:** ${ecosystem}` : null,
+              advisory.severity ? `**Severity:** ${advisory.severity}` : null,
+              advisory.summary ? `**Summary:** ${advisory.summary}` : null,
+              vulnerability.vulnerable_version_range
+                ? `**Vulnerable versions:** ${vulnerability.vulnerable_version_range}`
+                : null,
+              vulnerability.first_patched_version?.identifier
+                ? `**First patched version:** ${vulnerability.first_patched_version.identifier}`
+                : null,
+              alert.html_url ? `**Alert URL:** ${alert.html_url}` : null,
+              advisory.references?.[0]?.url
+                ? `**Advisory:** ${advisory.references[0].url}`
+                : null,
+            ].filter(Boolean);
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body: bodyLines.join('\n'),
+            });
